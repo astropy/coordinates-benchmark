@@ -55,13 +55,11 @@ def make_comparison(tool_1, tool_2, system):
 
     diff = vicenty_dist_deg(lon1, lat1, lon2, lat2) * 3600.
 
-    md = diff.max()
-
     # Plot initial
 
     fig = plt.figure()
     ax = fig.add_subplot(1,1,1, projection='aitoff')
-    s = ax.scatter(np.radians(ra_j2000), np.radians(dec_j2000), s=5, c=np.log10(diff), vmin=-2., vmax=2., lw=0)
+    s = ax.scatter(np.radians(ra_j2000), np.radians(dec_j2000), s=5, c=np.log10(diff), vmin=-6., vmax=1., lw=0)
     ax.grid()
     axc = fig.add_axes([0.925, 0.25, 0.025, 0.5])
     cb = fig.colorbar(s, cax=axc)

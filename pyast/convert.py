@@ -4,7 +4,7 @@ import numpy as np
 import starlink.Ast as Ast
 
 # Read in initial coordinates as J2000 coordinates
-data_j2000 = np.loadtxt('../initial_coords.txt')
+data_j2000 = np.radians(np.loadtxt('../initial_coords.txt'))
 ra_j2000_fk5, dec_j2000_fk5 = data_j2000[:,0], data_j2000[:,1]
 
 #  Create a Frame to describe J2000 FK5 coordinates, and another that
