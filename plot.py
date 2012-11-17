@@ -23,18 +23,6 @@ def vicenty_dist_deg(lon1, lat1, lon2, lat2):
 if not os.path.exists('plots'):
     os.mkdir('plots')
 
-initial = np.loadtxt('initial_coords.txt')
-ra_j2000, dec_j2000 = initial[:,0], initial[:,1]
-ra_j2000[ra_j2000 > 180.] -= 360.
-
-# Plot initial
-
-fig = plt.figure()
-ax = fig.add_subplot(1,1,1, projection='aitoff')
-ax.scatter(np.radians(ra_j2000), np.radians(dec_j2000), s=2)
-ax.grid()
-fig.savefig('plots/initial.png')
-
 def make_comparison(tool_1, tool_2, system):
 
     try:
@@ -59,14 +47,14 @@ def make_comparison(tool_1, tool_2, system):
 
     fig = plt.figure()
     ax = fig.add_subplot(1,1,1, projection='aitoff')
-    s = ax.scatter(np.radians(ra_j2000), np.radians(dec_j2000), s=5, c=np.log10(diff), vmin=-6., vmax=1., lw=0)
+    s = ax.scatter(np.radians(ra_j2000), np.radians(dec_j2000), s=5, c=np.log10(diff), vmin=-3., vmax=1., lw=0)
     ax.grid()
     axc = fig.add_axes([0.925, 0.25, 0.025, 0.5])
     cb = fig.colorbar(s, cax=axc)
     axc.set_yticklabels('')
-    cb.set_ticks([-2,-1,0,1,2])
+    cb.set_ticks([-3, -2, -1, 0, 1])
     cb.set_label('Difference in arcsec')
-    axc.set_yticklabels(["0.01", "0.1", "1", "10", "100"])
+    axc.set_yticklabels(["0.001", "0.01", "0.1", "1", "10"])
     ax.set_title("{tool_1} vs {tool_2} for system={system}".format(tool_1=tool_1, tool_2=tool_2, system=system), y=1.1)
     fig.savefig('plots/{tool_1}_vs_{tool_2}_for_{system}.png'.format(tool_1=tool_1, tool_2=tool_2, system=system), bbox_inches='tight')
 
