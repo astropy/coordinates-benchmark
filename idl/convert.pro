@@ -1,7 +1,7 @@
 pro writecol, file, c1, c2
   openw, lun, file, /get
   for i = 0, n_elements(c1) - 1, 1 do begin
-     printf, lun, c1[i], c2[i], format='(d, ", ", d)'
+     printf, lun, c1[i], c2[i], format='(f20.15, " ", f20.15)'
   endfor
   free_lun, lun
 end
