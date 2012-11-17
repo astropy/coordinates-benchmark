@@ -51,7 +51,7 @@ def make_comparison(tool_1, tool_2, system):
 
     fig = plt.figure()
     ax = fig.add_subplot(1,1,1, projection='aitoff')
-    s = ax.scatter(np.radians(ra_j2000), np.radians(dec_j2000), s=5, c=np.log10(diff), vmin=-3., vmax=1., lw=0)
+    s = ax.scatter(np.radians(ra_j2000), np.radians(dec_j2000), s=5, c=np.log10(diff), vmin=-3., vmax=1., lw=0, cmap=plt.cm.RdYlGn_r)
     ax.grid()
     axc = fig.add_axes([0.925, 0.25, 0.025, 0.5])
     cb = fig.colorbar(s, cax=axc)
