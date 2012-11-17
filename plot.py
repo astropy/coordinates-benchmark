@@ -23,6 +23,10 @@ def vicenty_dist_deg(lon1, lat1, lon2, lat2):
 if not os.path.exists('plots'):
     os.mkdir('plots')
 
+initial = np.loadtxt('initial_coords.txt')
+ra_j2000, dec_j2000 = initial[:,0], initial[:,1]
+ra_j2000[ra_j2000 > 180.] -= 360.
+
 def make_comparison(tool_1, tool_2, system):
 
     try:
