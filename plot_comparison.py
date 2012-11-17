@@ -2,6 +2,23 @@ import os
 
 import numpy as np
 from matplotlib import pyplot as plt
+from astropy.coordinates.angle_utilities import vicenty_dist
+
+def vicenty_dist_deg(lon1, lat1, lon2, lat2):
+
+    lon1 = np.radians(lon1)
+    lat1 = np.radians(lat1)
+    lon2 = np.radians(lon2)
+    lat2 = np.radians(lat2)
+
+    sdlon = np.sin(lon2 - lon1)
+    cdlon = np.cos(lon2 - lon1)
+
+    num1 = np.cos(lat2) * sdlon
+    num2 = np.cos(lat1) * np.sin(lat2) - np.sin(lat1) * np.cos(lat2) * cdlon
+    denominator = np.sin(lat1) * np.sin(lat2) + np.cos(lat1) * np.cos(lat2) * cdlon
+
+    return np.degrees(np.arctan2((num1 ** 2 + num2 ** 2) ** 0.5, denominator))
 
 if not os.path.exists('plots'):
     os.mkdir('plots')
@@ -21,27 +38,25 @@ fig.savefig('plots/initial.png')
 def make_comparison(tool_1, tool_2, system):
 
     try:
-        
+
         coords = np.loadtxt('{tool}/coords_{system}.txt'.format(tool=tool_1,
-                                                            system=system), delimiter="," if tool_1 == 'idl' else None)
+                                                                system=system))
         lon1, lat1 = coords[:,0], coords[:,1]
         lon1[lon1 > 180.] -= 360.
 
         coords = np.loadtxt('{tool}/coords_{system}.txt'.format(tool=tool_2,
-                                                            system=system), delimiter="," if tool_2 == 'idl' else None)
+                                                                system=system))
         lon2, lat2 = coords[:,0], coords[:,1]
         lon2[lon2 > 280.] -= 360.
-    
+
     except IOError:
-    
+
         return
 
-    dlon = (lon1 - lon2) * np.cos(0.5 * (lat1 + lat2))
-    dlat = (lat1 - lat2)
-    diff = np.sqrt(dlon**2 + dlat**2) * 3600.
-    
+    diff = vicenty_dist_deg(lon1, lat1, lon2, lat2) * 3600.
+
     md = diff.max()
-    
+
     # Plot initial
 
     fig = plt.figure()
@@ -56,13 +71,12 @@ def make_comparison(tool_1, tool_2, system):
     axc.set_yticklabels(["0.01", "0.1", "1", "10", "100"])
     ax.set_title("{tool_1} vs {tool_2} for system={system}".format(tool_1=tool_1, tool_2=tool_2, system=system), y=1.1)
     fig.savefig('plots/{tool_1}_vs_{tool_2}_for_{system}.png'.format(tool_1=tool_1, tool_2=tool_2, system=system), bbox_inches='tight')
-    
+
 
 TOOLS = ['astropy', 'pyast', 'idl']
 for tool_1 in TOOLS:
     for tool_2 in TOOLS:
         if tool_1 == tool_2:
             continue
-        for system in ['galactic', 'fk4', 'fk5', 'ecliptic']:
+        for system in ['galactic', 'b1950', 'j2000', 'ecliptic']:
             make_comparison(tool_1, tool_2, system)
-            
