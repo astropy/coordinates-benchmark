@@ -63,7 +63,7 @@ def make_comparison(tool_1, tool_2, system):
     fig.savefig('plots/{tool_1}_vs_{tool_2}_for_{system}.png'.format(tool_1=tool_1, tool_2=tool_2, system=system), bbox_inches='tight')
 
 
-TOOLS = ['astropy', 'pyast', 'idl']
+TOOLS = ['astropy', 'pyast', 'idl', 'aplpy']
 for tool_1 in TOOLS:
     for tool_2 in TOOLS:
         if tool_1 == tool_2:
