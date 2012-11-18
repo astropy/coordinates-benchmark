@@ -1,8 +1,11 @@
 """Print summary table for sky distance distributions
 for different tools / systems."""
+
 import os
+import sys
 
 import numpy as np
+from matplotlib import pyplot as plt
 from astropy.coordinates.angle_utilities import vicenty_dist
 
 def vicenty_dist_deg(lon1, lat1, lon2, lat2):
@@ -21,11 +24,16 @@ def vicenty_dist_deg(lon1, lat1, lon2, lat2):
 
     return np.degrees(np.arctan2((num1 ** 2 + num2 ** 2) ** 0.5, denominator))
 
+if not os.path.exists('plots'):
+    os.mkdir('plots')
+
+f_out = open('summary.txt', 'wb')
+
 initial = np.loadtxt('initial_coords.txt')
 ra_j2000, dec_j2000 = initial[:,0], initial[:,1]
 ra_j2000[ra_j2000 > 180.] -= 360.
 
-def make_comparison(tool_1, tool_2, system):
+def compare(tool_1, tool_2, system, plot=False):
 
     try:
 
@@ -45,6 +53,8 @@ def make_comparison(tool_1, tool_2, system):
 
     diff = vicenty_dist_deg(lon1, lat1, lon2, lat2) * 3600.
 
+    # Print out stats
+
     median = np.median(diff)
     mean = np.mean(diff)
     max = np.max(diff)
@@ -52,8 +62,24 @@ def make_comparison(tool_1, tool_2, system):
     fmt = ('{tool_1:10s} {tool_2:10s} {system:10s} '
            '{median:12.6f} {mean:12.6f} {max:12.6f} {std:12.6f}')
     print(fmt.format(**locals()))
+    f_out.write(fmt.format(**locals()) + "\n")
 
-    fmt3 = '{median:12s} {mean:12s} {max:12s} {std:12s}'
+    # Make plot
+
+    if plot:
+        
+        fig = plt.figure()
+        ax = fig.add_subplot(1,1,1, projection='aitoff')
+        s = ax.scatter(np.radians(ra_j2000), np.radians(dec_j2000), s=5, c=np.log10(diff), vmin=-3., vmax=1., lw=0, cmap=plt.cm.RdYlGn_r)
+        ax.grid()
+        axc = fig.add_axes([0.925, 0.25, 0.025, 0.5])
+        cb = fig.colorbar(s, cax=axc)
+        axc.set_yticklabels('')
+        cb.set_ticks([-3, -2, -1, 0, 1])
+        cb.set_label('Difference in arcsec')
+        axc.set_yticklabels(["0.001", "0.01", "0.1", "1", "10"])
+        ax.set_title("{tool_1} vs {tool_2} for system={system}".format(tool_1=tool_1, tool_2=tool_2, system=system), y=1.1)
+        fig.savefig('plots/{tool_1}_vs_{tool_2}_for_{system}.png'.format(tool_1=tool_1, tool_2=tool_2, system=system), bbox_inches='tight')
 
 fmt = ('{tool_1:10s} {tool_2:10s} {system:10s} '
        '{median:12s} {mean:12s} {max:12s} {std:12s}')
@@ -65,10 +91,15 @@ print('')
 print(fmt.format(**labels))
 print('-' * 84)
 
-TOOLS = ['astropy', 'pyast', 'idl', 'aplpy']
+f_out.write(fmt.format(**labels) + "\n")
+f_out.write('-' * 84 + "\n")
+
+plot = '--plot' in sys.argv[1:]
+
+TOOLS = ['astropy', 'pyast', 'idl', 'aplpy', 'tpm']
 for tool_1 in TOOLS:
     for tool_2 in TOOLS:
         if tool_1 == tool_2:
             continue
         for system in ['galactic', 'b1950', 'j2000', 'ecliptic']:
-            make_comparison(tool_1, tool_2, system)
+            compare(tool_1, tool_2, system, plot)
