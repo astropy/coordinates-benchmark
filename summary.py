@@ -78,7 +78,7 @@ def compare(tool_1, tool_2, system, plot=False):
 
     if mean > 1.:
         color='red'
-    elif mean > 0.001:
+    elif mean > 0.01:
         color='orange'
     else:
         color='green'
@@ -140,6 +140,8 @@ f_html.write("      <link href='style.css' rel='stylesheet' type='text/css'\n")
 f_html.write("   </head>\n")
 
 f_html.write("   <body>\n")
+
+f_html.write("<p align='center'>Differences are given in arcseconds</p>\n")
 
 f_html.write("<table align='center'>\n")
 
