@@ -1,5 +1,11 @@
-"""Print summary table for sky distance distributions
-for different tools / systems."""
+"""
+Print summary table for sky distance distributions for different tools and
+systems. This script can also produce plots of the differences as a function
+of position on the sky, by running::
+
+    python summary.py --plot
+
+"""
 
 import os
 import sys
@@ -67,7 +73,7 @@ def compare(tool_1, tool_2, system, plot=False):
     # Make plot
 
     if plot:
-        
+
         fig = plt.figure()
         ax = fig.add_subplot(1,1,1, projection='aitoff')
         s = ax.scatter(np.radians(ra_j2000), np.radians(dec_j2000), s=5, c=np.log10(diff), vmin=-3., vmax=1., lw=0, cmap=plt.cm.RdYlGn_r)
