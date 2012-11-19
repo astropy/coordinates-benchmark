@@ -142,7 +142,7 @@ f_html.write("   <body>\n")
 
 f_html.write("<p align='center'>Differences are given in arcseconds</p>\n")
 
-TOOLS = ['astropy', 'pyast', 'idl', 'aplpy', 'tpm', 'kapteyn']
+TOOLS = ['astropy', 'pyast', 'idl', 'tpm', 'kapteyn']
 SYSTEMS = ['galactic', 'b1950', 'ecliptic']
 
 for system in SYSTEMS:
