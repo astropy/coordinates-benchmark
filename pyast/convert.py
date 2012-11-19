@@ -18,7 +18,7 @@ out_frame = Ast.SkyFrame('Format(1)=hms.5,Format(2)=dms.5,Epoch=2000.0')
 #  Loop round each output coordinate system, modifying "out_frame" to
 #  describe each one.
 vals = {}
-for system in 'FK4', 'Ecliptic', 'Galactic', 'ICRS':
+for system in 'FK4', 'Ecliptic', 'Galactic':
 
    out_frame.System = system
 
@@ -43,10 +43,5 @@ elon = vals['Ecliptic'][0]
 elat = vals['Ecliptic'][1]
 np.savetxt('coords_ecliptic.txt', zip(np.degrees(elon),
                                        np.degrees(elat)), fmt="%20.15f")
-
-ra_fk5 = vals['ICRS'][0]
-dec_fk5 = vals['ICRS'][1]
-np.savetxt('coords_j2000.txt', zip(np.degrees(ra_fk5),
-                                    np.degrees(dec_fk5)), fmt="%20.15f")
 
 
