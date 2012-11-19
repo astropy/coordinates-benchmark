@@ -14,7 +14,6 @@ import sys
 
 import numpy as np
 from matplotlib import pyplot as plt
-from astropy.coordinates.angle_utilities import vicenty_dist
 
 plot = '--plot' in sys.argv[1:]
 html = '--html' in sys.argv[1:]
@@ -143,27 +142,32 @@ f_html.write("   <body>\n")
 
 f_html.write("<p align='center'>Differences are given in arcseconds</p>\n")
 
-f_html.write("<table align='center'>\n")
-
-f_html.write("  <tr>\n")
-f_html.write("    <th width=80>Tool 1</th>\n")
-f_html.write("    <th width=80>Tool 2</th>\n")
-f_html.write("    <th width=80>System</th>\n")
-f_html.write("    <th width=80>Median</th>\n")
-f_html.write("    <th width=80>Mean</th>\n")
-f_html.write("    <th width=80>Max</th>\n")
-f_html.write("    <th width=80>Std. Dev.</th>\n")
-if plot:
-    f_html.write("    <th width=80>Plot</th>\n")
-f_html.write("  </tr>\n")
-
 TOOLS = ['astropy', 'pyast', 'idl', 'aplpy', 'tpm', 'kapteyn']
-for tool_1 in TOOLS:
-    for tool_2 in TOOLS:
-        if tool_1 == tool_2:
-            continue
-        for system in ['galactic', 'b1950', 'j2000', 'ecliptic']:
+SYSTEMS = ['galactic', 'b1950', 'ecliptic']
+
+for system in SYSTEMS:
+
+    f_html.write("<h2>J2000 to {system}</h2>".format(system=system))
+    f_html.write("<table align='center'>\n")
+    f_html.write("  <tr>\n")
+    f_html.write("    <th width=80>Tool 1</th>\n")
+    f_html.write("    <th width=80>Tool 2</th>\n")
+    f_html.write("    <th width=80>System</th>\n")
+    f_html.write("    <th width=80>Median</th>\n")
+    f_html.write("    <th width=80>Mean</th>\n")
+    f_html.write("    <th width=80>Max</th>\n")
+    f_html.write("    <th width=80>Std. Dev.</th>\n")
+    if plot:
+        f_html.write("    <th width=80>Plot</th>\n")
+    f_html.write("  </tr>\n")
+
+    for tool_1 in TOOLS:
+        for tool_2 in TOOLS:
+            if tool_1 == tool_2:
+                continue
             compare(tool_1, tool_2, system, plot)
+
+    f_html.write("   </table>\n")
 
 f_html.write("   </body>\n")
 f_html.write("</html>\n")
