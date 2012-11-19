@@ -157,7 +157,7 @@ if plot:
     f_html.write("    <th width=80>Plot</th>\n")
 f_html.write("  </tr>\n")
 
-TOOLS = ['astropy', 'pyast', 'idl', 'aplpy', 'tpm']
+TOOLS = ['astropy', 'pyast', 'idl', 'aplpy', 'tpm', 'kapteyn']
 for tool_1 in TOOLS:
     for tool_2 in TOOLS:
         if tool_1 == tool_2:
