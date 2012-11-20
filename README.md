@@ -1,3 +1,9 @@
+History
+-------
+
+- Fixed kapteyn transforms to explicitly specify the epoch of observation for
+  the B1950 conversion, and the equinox for the ecliptic conversion
+
 Notes
 -----
 

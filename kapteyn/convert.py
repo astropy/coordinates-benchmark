@@ -24,5 +24,5 @@ def transform_to(skyout, tag):
     np.savetxt('coords_{tag}.txt'.format(tag=tag), output, fmt="%20.15f")
 
 transform_to(skyout='galactic', tag='galactic')
-transform_to(skyout='fk4', tag='b1950')
-transform_to(skyout='ecliptic', tag='ecliptic')
+transform_to(skyout='fk4,J2000_OBS', tag='b1950')
+transform_to(skyout='ecliptic,J2000', tag='ecliptic')
