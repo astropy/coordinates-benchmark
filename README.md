@@ -4,6 +4,8 @@ History
 - Fixed kapteyn transforms to explicitly specify the epoch of observation for
   the B1950 conversion, and the equinox for the ecliptic conversion
 
+- Explicitly precess astropy.coordinates fk4 result to B1950
+
 Notes
 -----
 
