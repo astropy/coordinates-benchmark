@@ -52,5 +52,3 @@ ra_fk5 = vals['ICRS'][0]
 dec_fk5 = vals['ICRS'][1]
 np.savetxt('coords_j2000.txt', zip(np.degrees(ra_fk5),
                                     np.degrees(dec_fk5)), fmt="%20.15f")
-
-

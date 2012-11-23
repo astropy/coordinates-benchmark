@@ -43,5 +43,3 @@ elon = vals['Ecliptic'][0]
 elat = vals['Ecliptic'][1]
 np.savetxt('coords_ecliptic.txt', zip(np.degrees(elon),
                                        np.degrees(elat)), fmt="%20.15f")
-
-
