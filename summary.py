@@ -18,6 +18,17 @@ from matplotlib import pyplot as plt
 plot = '--plot' in sys.argv[1:]
 html = '--html' in sys.argv[1:]
 
+def accuracy_color(mean):
+    """Accuracy color for a given mean difference in arcsec"""
+    if mean > 1.:
+        color='red'
+    elif mean > 0.01:
+        color='orange'
+    else:
+        color='green'
+    return color
+
+
 def vicenty_dist_deg(lon1, lat1, lon2, lat2):
 
     lon1 = np.radians(lon1)
@@ -74,13 +85,7 @@ def compare(tool_1, tool_2, system, plot=False):
     f_txt.write(fmt.format(**locals()) + "\n")
 
     # Write out to HTML
-
-    if mean > 1.:
-        color='red'
-    elif mean > 0.01:
-        color='orange'
-    else:
-        color='green'
+    color = accuracy_color(mean)
 
     f_html.write("  <tr>\n")
     f_html.write("    <td align='center'>{tool_1:10s}</td>\n".format(tool_1=tool_1))
@@ -118,7 +123,8 @@ fmt = ('{tool_1:10s} {tool_2:10s} {system:10s} '
 labels = dict(tool_1="Tool 1", tool_2="Tool 2", system='System',
               median='Median', mean='Mean', max='Max', std='Std.Dev.')
 print('')
-print('Summary of differences in arcseconds.')
+print('Summary of differences in arcseconds')
+print('Green means < 10 milli-arcsec, orange < 1 arcsec and red > 1 arcsec')
 print('')
 print(fmt.format(**labels))
 print('-' * 84)
@@ -140,9 +146,10 @@ f_html.write("   </head>\n")
 
 f_html.write("   <body>\n")
 
-f_html.write("<p align='center'>Differences are given in arcseconds</p>\n")
+f_html.write("<p align='center'>Summary of differences in arcseconds</p>\n")
+f_html.write("<p align='center'>Green means < 10 milli-arcsec, orange < 1 arcsec and red > 1 arcsec</p>\n")
 
-TOOLS = ['astropy', 'pyast', 'idl', 'tpm', 'kapteyn', 'pyslalib']
+TOOLS = ['astropy', 'pyast', 'idl', 'tpm', 'kapteyn', 'pyslalib', 'pyephem']
 SYSTEMS = ['galactic', 'b1950', 'ecliptic']
 
 for system in SYSTEMS:
