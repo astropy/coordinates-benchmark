@@ -28,7 +28,7 @@ lat = np.degrees(np.arcsin(np.random.uniform(-1., 1., N)))
 altitude = np.array([6e3, 10e3], dtype='int')
 
 # Sample of UTC times
-time = ['1900-01-01', '1950-01-01', '1990-01-01', '2000-01-01', '2010-01-01', '2020-01-01']
+time = ['1970-01-01', '1980-01-01', '1990-01-01', '2000-01-01', '2010-01-01']
 
 # Some coordinate packages need time input on another scale
 # We use astropy.time to do the conversion and store several times in the ascii file.
