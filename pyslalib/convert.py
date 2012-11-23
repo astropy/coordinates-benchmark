@@ -1,7 +1,8 @@
-#!/usr/bin/env python
+"""
+Coordinate conversions with the pyslalib Python package.
 
-# pyslalib is available:  https://github.com/scottransom/pyslalib
-
+https://github.com/scottransom/pyslalib
+"""
 import numpy as np
 from pyslalib import slalib as S
 

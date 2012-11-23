@@ -1,5 +1,9 @@
-#!/usr/bin/env python
+"""
+Coordinate conversions with the pyast Python package.
 
+https://github.com/timj/starlink-pyast
+http://dsberry.github.com/starlink/pyast.html
+"""
 import numpy as np
 import starlink.Ast as Ast
 

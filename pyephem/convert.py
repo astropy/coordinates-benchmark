@@ -1,5 +1,10 @@
-import numpy as np
+"""
+Coordinate conversions with the pyephem Python package.
 
+http://rhodesmill.org/pyephem/
+https://github.com/brandon-rhodes/pyephem
+"""
+import numpy as np
 import ephem
 
 # Read in initial coordinates as J2000 coordinates
