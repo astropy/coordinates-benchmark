@@ -1,5 +1,9 @@
-#!/usr/bin/env python
+"""
+Coordinate conversions with the pyast Python package.
 
+https://github.com/timj/starlink-pyast
+http://dsberry.github.com/starlink/pyast.html
+"""
 import numpy as np
 import starlink.Ast as Ast
 
@@ -43,5 +47,3 @@ elon = vals['Ecliptic'][0]
 elat = vals['Ecliptic'][1]
 np.savetxt('coords_ecliptic.txt', zip(np.degrees(elon),
                                        np.degrees(elat)), fmt="%20.15f")
-
-
