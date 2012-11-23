@@ -1,5 +1,10 @@
-import numpy as np
+"""
+Coordinate conversions with the astropy Python package.
 
+https://github.com/astropy/astropy
+http://www.astropy.org
+"""
+import numpy as np
 from astropy import coordinates as coord
 from astropy.time import Time
 

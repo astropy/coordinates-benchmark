@@ -1,5 +1,16 @@
-import numpy as np
+"""
+Coordinate conversions with the astrolib coords package.
+astrolib coords is a Python wrapper around the TPM C library [2].
 
+I couldn't find a repository for TPM, but there is another
+Python wrapper for it called pytpm which has TPM bundled
+and is on github, so you can look at the code there.
+
+[1] http://www.scipy.org/AstroLibCoordsHome
+[2] http://www.sal.wisc.edu/~jwp/astro/tpm/tpm.html
+[3] https://github.com/phn/pytpm/tree/master/src/tpm
+"""
+import numpy as np
 import coords
 
 # Read in initial coordinates as J2000 coordinates
