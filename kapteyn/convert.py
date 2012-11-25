@@ -29,4 +29,5 @@ def convert(coords, systems):
     # Use kapteyn package specific specifiers for in- and out-systems
     skyin, skyout = system_spec(systems['in']), system_spec(systems['out'])
     coords = celestial.sky2sky(skyin, skyout, coords['lon'], coords['lat'])
+    coords = np.array(coords)
     return dict(lon=coords[:,0], lat=coords[:,1])
