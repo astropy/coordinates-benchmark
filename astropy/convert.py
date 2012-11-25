@@ -8,35 +8,42 @@ import numpy as np
 from astropy import coordinates as coord
 from astropy.time import Time
 
-# Read in initial coordinates as J2000 coordinates
-data_j2000 = np.loadtxt('../initial_coords.txt')
+def get_system(system):
+    """Convert generic system specification tags to astropy specific class."""
+    d = dict()
+    d['fk5'] = coord.FK5Coordinates
+    d['fk4'] = coord.FK4Coordinates
+    d['galactic'] = coord.GalacticCoordinates
+    d['icrs'] = coord.ICRSCoordinates
+    return d[system]
 
-f = {}
-f['galactic'] = open('coords_galactic.txt', 'wb')
-f['b1950'] = open('coords_b1950.txt', 'wb')
+def convert(coords, systems):
+    # Skip currently unsupported systems
+    if 'ecliptic' in systems.values():
+        return None
 
-for i in range(len(data_j2000)):
+    skyin, skyout = get_system(systems['in']), get_system(systems['out'])
 
-    ra_j2000, dec_j2000 = data_j2000[i,0], data_j2000[i,1]
-    fk5 = coord.FK5Coordinates(ra_j2000, dec_j2000, unit='degree')
+    out_coords = dict(lon=np.zeros_like(coords['lon']),
+                      lat=np.zeros_like(coords['lat']))
 
-    # Convert to Galactic coordinates
-    galactic = fk5.galactic
-    l, b = galactic.l, galactic.b
-    # Wrap longitude to range 0 to 360
-    l = coord.Angle(l, bounds=(0, 360))
-    f['galactic'].write("%20.15f %20.15f\n" % (l.degrees, b.degrees))
+    for ii, (lon, lat) in enumerate(zip(coords['lon'], coords['lat'])):
+        in_coord = skyin(lon, lat, unit='deg')
+    
+        #if (systems['in'] == 'fk5' and systems['out'] == 'fk4'):
+        if systems['in'] == 'fk4':
+            in_coord.precess_to(Time('B1950', scale='utc'))
+    
+        out_coord = in_coord.transform_to(skyout)
+    
+        if systems['out'] == 'fk4':
+            out_coord.precess_to(Time('B1950', scale='utc'))
+        
+        lon, lat = out_coord.longangle.degrees, out_coord.latangle.degrees
+        # Wrap longitude to range 0 to 360
+        lon = np.where(lon < 0, lon + 360, lon) 
 
-    # Convert to B1950
-    fk4 = fk5.fk4.precess_to(Time('B1950', scale='utc'))
-    ra_b1950, dec_b1950 = fk4.ra, fk4.dec
-    # Wrap longitude to range 0 to 360
-    ra_b1950 = coord.Angle(ra_b1950, bounds=(0, 360))
-    f['b1950'].write("%20.15f %20.15f\n" % (ra_b1950.degrees,
-                                            dec_b1950.degrees))
+        out_coords['lon'][ii] = lon
+        out_coords['lat'][ii] = lat
 
-    # Convert to ecliptic
-    # Not implemented yet
-
-for system in f:
-    f[system].close()
+    return out_coords
