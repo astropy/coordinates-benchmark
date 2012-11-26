@@ -7,6 +7,8 @@ http://dsberry.github.com/starlink/pyast.html
 import numpy as np
 import starlink.Ast as Ast
 
+SUPPORTED_SYSTEMS = 'fk5 fk4 icrs galactic ecliptic'.split()
+
 def get_frame(system):
     """Convert generic system specification tags to pyast.SkyFrame"""
     #  Create a Frame to describe J2000 FK5 coordinates, and another that
@@ -24,7 +26,10 @@ def get_frame(system):
 
 def convert(coords, systems):
     """Convert an array of in_coords from in_system to out_system"""
-    # Use kapteyn package specific specifiers for in- and out-systems
+
+    if not set(systems.values()).issubset(SUPPORTED_SYSTEMS):
+        return None
+
     in_frame, out_frame = get_frame(systems['in']), get_frame(systems['out'])
     frameset = in_frame.convert(out_frame)
     lon, lat = np.radians(coords['lon']), np.radians(coords['lat'])

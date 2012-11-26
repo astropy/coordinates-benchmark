@@ -8,18 +8,20 @@ import numpy as np
 from astropy import coordinates as coord
 from astropy.time import Time
 
+SUPPORTED_SYSTEMS = 'fk5 fk4 icrs galactic'.split()
+
 def get_system(system):
     """Convert generic system specification tags to astropy specific class."""
     d = dict()
     d['fk5'] = coord.FK5Coordinates
     d['fk4'] = coord.FK4Coordinates
-    d['galactic'] = coord.GalacticCoordinates
     d['icrs'] = coord.ICRSCoordinates
+    d['galactic'] = coord.GalacticCoordinates
     return d[system]
 
 def convert(coords, systems):
-    # Skip currently unsupported systems
-    if 'ecliptic' in systems.values():
+
+    if not set(systems.values()).issubset(SUPPORTED_SYSTEMS):
         return None
 
     skyin, skyout = get_system(systems['in']), get_system(systems['out'])
