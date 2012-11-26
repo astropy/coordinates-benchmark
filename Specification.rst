@@ -1,11 +1,6 @@
 Astropy Coordinates Benchmark
 =============================
 
-Here we compare astropy coordinate conversion results against other Python packages.
-
-This was proposed and discussed here:
-https://groups.google.com/forum/?fromgroups=#!topic/astropy-dev/tbcpMQ1rOcY
-
 Introduction
 ------------
 
