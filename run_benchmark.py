@@ -183,7 +183,8 @@ class CoordinatesBenchmark():
                 CoordinatesBenchmark._compare_celestial(tool1, tool2, systems['in'], systems['out'],
                                                         f_txt, f_html)
 
-        f_html.write("   </table>\n")
+            f_html.write("   </table>\n")
+
         f_html.write("   </body>\n")
         f_html.write("</html>\n")
         logging.info('Writing %s' % txt_filename)
