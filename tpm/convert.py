@@ -11,32 +11,44 @@ and is on github, so you can look at the code there.
 [3] https://github.com/phn/pytpm/tree/master/src/tpm
 """
 import numpy as np
-import coords
+from coords import Position 
 
-# Read in initial coordinates as J2000 coordinates
-data_j2000 = np.loadtxt('../initial_coords.txt')
+SUPPORTED_SYSTEMS = 'fk5 fk4 galactic ecliptic'.split()
 
-f = {}
-f['galactic'] = open('coords_galactic.txt', 'wb')
-f['b1950'] = open('coords_b1950.txt', 'wb')
-f['ecliptic'] = open('coords_ecliptic.txt', 'wb')
+def convert(coords, systems):
+    
+    if not set(systems.values()).issubset(SUPPORTED_SYSTEMS):
+        return None
 
-for i in range(len(data_j2000)):
+    lons = np.zeros_like(coords['lon'])
+    lats = np.zeros_like(coords['lat'])
 
-    ra_j2000, dec_j2000 = data_j2000[i,0], data_j2000[i,1]
-    j2000 = coords.Position((ra_j2000, dec_j2000))
+    for ii, (lon, lat) in enumerate(zip(coords['lon'], coords['lat'])):
 
-    # Convert to Galactic coordinates
-    l, b = j2000.galactic()
-    f['galactic'].write("%20.15f %20.15f\n" % (l, b))
+        # Create coordinate in input system
+        if systems['in'] == 'fk5':
+            coord = Position((lon, lat))
+        elif systems['in'] == 'fk4':
+            coord = Position((lon, lat), system='celestial', equinox='B1950')
+        elif systems['in'] == 'galactic':
+            coord = Position((lon, lat), system='galactic')
+        elif systems['in'] == 'ecliptic':
+            coord = Position((lon, lat), system='ecliptic')
+        else:
+            raise ValueError()
+        
+        # Convert to appropriate output system
+        if systems['out'] == 'fk5':
+            lon, lat = coord.j2000()
+        elif systems['out'] == 'fk4':
+            lon, lat = coord.b1950()
+        elif systems['out'] == 'galactic':
+            lon, lat = coord.galactic()
+        elif systems['out'] == 'ecliptic':
+            lon, lat = coord.ecliptic()
+        else:
+            raise ValueError()
 
-    # Convert to B1950
-    ra_b1950, dec_b1950 = j2000.b1950()
-    f['b1950'].write("%20.15f %20.15f\n" % (ra_b1950, dec_b1950))
+        lons[ii], lats[ii] = lon, lat
 
-    # Convert to ecliptic
-    elon, elat = j2000.ecliptic()
-    f['ecliptic'].write("%20.15f %20.15f\n" % (elon, elat))
-
-for system in f:
-    f[system].close()
+    return dict(lon=lons, lat=lats)
