@@ -1,116 +1,90 @@
-Tool 1     Tool 2     System     Median       Mean         Max          Std.Dev.    
+Tool 1     Tool 2     System 1   System 2  Median       Mean         Max          Std.Dev.    
 ------------------------------------------------------------------------------------
-astropy    pyast      galactic       0.349473     0.315815     0.404028     0.091816
-astropy    idl        galactic       0.350212     0.315151     0.403089     0.091718
-astropy    tpm        galactic       0.236550     0.215741     0.279218     0.062711
-astropy    kapteyn    galactic       0.349018     0.315269     0.403352     0.091704
-astropy    pyslalib   galactic       0.349473     0.315815     0.404028     0.091816
-astropy    pyephem    galactic       0.350211     0.315151     0.403089     0.091718
-pyast      astropy    galactic       0.349473     0.315815     0.404028     0.091816
-pyast      idl        galactic       0.008613     0.007779     0.009984     0.002286
-pyast      tpm        galactic       0.217783     0.196115     0.249066     0.055749
-pyast      kapteyn    galactic       0.001235     0.001110     0.001414     0.000319
-pyast      pyslalib   galactic       0.000000     0.000000     0.000000     0.000000
-pyast      pyephem    galactic       0.008617     0.007782     0.009988     0.002287
-idl        astropy    galactic       0.350212     0.315151     0.403089     0.091718
-idl        pyast      galactic       0.008613     0.007779     0.009984     0.002286
-idl        tpm        galactic       0.222740     0.200756     0.254949     0.057059
-idl        kapteyn    galactic       0.007898     0.007149     0.009158     0.002085
-idl        pyslalib   galactic       0.008613     0.007779     0.009984     0.002286
-idl        pyephem    galactic       0.000004     0.000004     0.000026     0.000001
-tpm        astropy    galactic       0.236550     0.215741     0.279218     0.062711
-tpm        pyast      galactic       0.217783     0.196115     0.249066     0.055749
-tpm        idl        galactic       0.222740     0.200756     0.254949     0.057059
-tpm        kapteyn    galactic       0.217646     0.196028     0.248968     0.055728
-tpm        pyslalib   galactic       0.217783     0.196115     0.249066     0.055749
-tpm        pyephem    galactic       0.222743     0.200759     0.254952     0.057060
-kapteyn    astropy    galactic       0.349018     0.315269     0.403352     0.091704
-kapteyn    pyast      galactic       0.001235     0.001110     0.001414     0.000319
-kapteyn    idl        galactic       0.007898     0.007149     0.009158     0.002085
-kapteyn    tpm        galactic       0.217646     0.196028     0.248968     0.055728
-kapteyn    pyslalib   galactic       0.001235     0.001110     0.001414     0.000319
-kapteyn    pyephem    galactic       0.007901     0.007152     0.009162     0.002086
-pyslalib   astropy    galactic       0.349473     0.315815     0.404028     0.091816
-pyslalib   pyast      galactic       0.000000     0.000000     0.000000     0.000000
-pyslalib   idl        galactic       0.008613     0.007779     0.009984     0.002286
-pyslalib   tpm        galactic       0.217783     0.196115     0.249066     0.055749
-pyslalib   kapteyn    galactic       0.001235     0.001110     0.001414     0.000319
-pyslalib   pyephem    galactic       0.008617     0.007782     0.009988     0.002287
-pyephem    astropy    galactic       0.350211     0.315151     0.403089     0.091718
-pyephem    pyast      galactic       0.008617     0.007782     0.009988     0.002287
-pyephem    idl        galactic       0.000004     0.000004     0.000026     0.000001
-pyephem    tpm        galactic       0.222743     0.200759     0.254952     0.057060
-pyephem    kapteyn    galactic       0.007901     0.007152     0.009162     0.002086
-pyephem    pyslalib   galactic       0.008617     0.007782     0.009988     0.002287
-astropy    pyast      b1950          0.295830     0.270563     0.368431     0.078504
-astropy    idl        b1950          0.295831     0.270564     0.368433     0.078504
-astropy    tpm        b1950          0.295835     0.270563     0.368426     0.078503
-astropy    kapteyn    b1950          0.295948     0.270620     0.368473     0.078536
-astropy    pyslalib   b1950          0.295831     0.270563     0.368432     0.078504
-astropy    pyephem    b1950          0.609480     0.553051     0.699393     0.153167
-pyast      astropy    b1950          0.295830     0.270563     0.368431     0.078504
-pyast      idl        b1950          0.000006     0.000005     0.000007     0.000002
-pyast      tpm        b1950          0.000007     0.000007     0.000014     0.000003
-pyast      kapteyn    b1950          0.004450     0.004216     0.006194     0.001322
-pyast      pyslalib   b1950          0.000006     0.000005     0.000007     0.000001
-pyast      pyephem    b1950          0.564797     0.574896     1.019420     0.254471
-idl        astropy    b1950          0.295831     0.270564     0.368433     0.078504
-idl        pyast      b1950          0.000006     0.000005     0.000007     0.000002
-idl        tpm        b1950          0.000011     0.000011     0.000019     0.000004
-idl        kapteyn    b1950          0.004448     0.004216     0.006192     0.001322
-idl        pyslalib   b1950          0.000001     0.000001     0.000001     0.000000
-idl        pyephem    b1950          0.564793     0.574892     1.019416     0.254470
-tpm        astropy    b1950          0.295835     0.270563     0.368426     0.078503
-tpm        pyast      b1950          0.000007     0.000007     0.000014     0.000003
-tpm        idl        b1950          0.000011     0.000011     0.000019     0.000004
-tpm        kapteyn    b1950          0.004450     0.004217     0.006189     0.001322
-tpm        pyslalib   b1950          0.000011     0.000011     0.000019     0.000004
-tpm        pyephem    b1950          0.564799     0.574899     1.019430     0.254471
-kapteyn    astropy    b1950          0.295948     0.270620     0.368473     0.078536
-kapteyn    pyast      b1950          0.004450     0.004216     0.006194     0.001322
-kapteyn    idl        b1950          0.004448     0.004216     0.006192     0.001322
-kapteyn    tpm        b1950          0.004450     0.004217     0.006189     0.001322
-kapteyn    pyslalib   b1950          0.004448     0.004216     0.006193     0.001322
-kapteyn    pyephem    b1950          0.564712     0.574623     1.020032     0.254971
-pyslalib   astropy    b1950          0.295831     0.270563     0.368432     0.078504
-pyslalib   pyast      b1950          0.000006     0.000005     0.000007     0.000001
-pyslalib   idl        b1950          0.000001     0.000001     0.000001     0.000000
-pyslalib   tpm        b1950          0.000011     0.000011     0.000019     0.000004
-pyslalib   kapteyn    b1950          0.004448     0.004216     0.006193     0.001322
-pyslalib   pyephem    b1950          0.564793     0.574892     1.019415     0.254470
-pyephem    astropy    b1950          0.609480     0.553051     0.699393     0.153167
-pyephem    pyast      b1950          0.564797     0.574896     1.019420     0.254471
-pyephem    idl        b1950          0.564793     0.574892     1.019416     0.254470
-pyephem    tpm        b1950          0.564799     0.574899     1.019430     0.254471
-pyephem    kapteyn    b1950          0.564712     0.574623     1.020032     0.254971
-pyephem    pyslalib   b1950          0.564793     0.574892     1.019415     0.254470
-pyast      idl        ecliptic       0.036441     0.033079     0.041557     0.008934
-pyast      tpm        ecliptic       5.228124     4.710012     5.995284     1.358779
-pyast      kapteyn    ecliptic       0.036442     0.033079     0.041557     0.008934
-pyast      pyslalib   ecliptic       0.075274     0.068358     0.086278     0.018900
-pyast      pyephem    ecliptic       0.036900     0.033479     0.042067     0.009054
-idl        pyast      ecliptic       0.036441     0.033079     0.041557     0.008934
-idl        tpm        ecliptic       5.257875     4.737949     6.030426     1.366580
-idl        kapteyn    ecliptic       0.000000     0.000000     0.000000     0.000000
-idl        pyslalib   ecliptic       0.059455     0.053652     0.068848     0.015781
-idl        pyephem    ecliptic       0.000524     0.000472     0.000601     0.000136
-tpm        pyast      ecliptic       5.228124     4.710012     5.995284     1.358779
-tpm        idl        ecliptic       5.257875     4.737949     6.030426     1.366580
-tpm        kapteyn    ecliptic       5.257875     4.737950     6.030426     1.366581
-tpm        pyslalib   ecliptic       5.279676     4.739977     6.031458     1.366082
-tpm        pyephem    ecliptic       5.258399     4.738422     6.031027     1.366717
-kapteyn    pyast      ecliptic       0.036442     0.033079     0.041557     0.008934
-kapteyn    idl        ecliptic       0.000000     0.000000     0.000000     0.000000
-kapteyn    tpm        ecliptic       5.257875     4.737950     6.030426     1.366581
-kapteyn    pyslalib   ecliptic       0.059455     0.053652     0.068848     0.015781
-kapteyn    pyephem    ecliptic       0.000524     0.000472     0.000601     0.000136
-pyslalib   pyast      ecliptic       0.075274     0.068358     0.086278     0.018900
-pyslalib   idl        ecliptic       0.059455     0.053652     0.068848     0.015781
-pyslalib   tpm        ecliptic       5.279676     4.739977     6.031458     1.366082
-pyslalib   kapteyn    ecliptic       0.059455     0.053652     0.068848     0.015781
-pyslalib   pyephem    ecliptic       0.059412     0.053642     0.068845     0.015776
-pyephem    pyast      ecliptic       0.036900     0.033479     0.042067     0.009054
-pyephem    idl        ecliptic       0.000524     0.000472     0.000601     0.000136
-pyephem    tpm        ecliptic       5.258399     4.738422     6.031027     1.366717
-pyephem    kapteyn    ecliptic       0.000524     0.000472     0.000601     0.000136
-pyephem    pyslalib   ecliptic       0.059412     0.053642     0.068845     0.015776
+astropy    kapteyn    fk5        fk4            0.602793     0.544051     0.698268     0.160005
+astropy    pyast      fk5        fk4            0.602793     0.544051     0.698268     0.160005
+kapteyn    astropy    fk5        fk4            0.602793     0.544051     0.698268     0.160005
+kapteyn    pyast      fk5        fk4            0.000001     0.000001     0.000002     0.000000
+pyast      astropy    fk5        fk4            0.602793     0.544051     0.698268     0.160005
+pyast      kapteyn    fk5        fk4            0.000001     0.000001     0.000002     0.000000
+astropy    kapteyn    fk5        icrs           0.000000     0.000000     0.000000     0.000000
+astropy    pyast      fk5        icrs           0.000000     0.000000     0.000000     0.000000
+kapteyn    astropy    fk5        icrs           0.000000     0.000000     0.000000     0.000000
+kapteyn    pyast      fk5        icrs           0.000000     0.000000     0.000000     0.000000
+pyast      astropy    fk5        icrs           0.000000     0.000000     0.000000     0.000000
+pyast      kapteyn    fk5        icrs           0.000000     0.000000     0.000000     0.000000
+astropy    kapteyn    fk5        galactic       0.000097     0.000088     0.000112     0.000025
+astropy    pyast      fk5        galactic       0.000097     0.000088     0.000112     0.000026
+kapteyn    astropy    fk5        galactic       0.000097     0.000088     0.000112     0.000025
+kapteyn    pyast      fk5        galactic       0.000000     0.000000     0.000000     0.000000
+pyast      astropy    fk5        galactic       0.000097     0.000088     0.000112     0.000026
+pyast      kapteyn    fk5        galactic       0.000000     0.000000     0.000000     0.000000
+kapteyn    pyast      fk5        ecliptic       0.000010     0.000009     0.000012     0.000002
+pyast      kapteyn    fk5        ecliptic       0.000010     0.000009     0.000012     0.000002
+astropy    kapteyn    fk4        fk5            0.000084     0.000086     0.000162     0.000043
+astropy    pyast      fk4        fk5            0.000084     0.000086     0.000162     0.000042
+kapteyn    astropy    fk4        fk5            0.000084     0.000086     0.000162     0.000043
+kapteyn    pyast      fk4        fk5            0.000001     0.000001     0.000002     0.000000
+pyast      astropy    fk4        fk5            0.000084     0.000086     0.000162     0.000042
+pyast      kapteyn    fk4        fk5            0.000001     0.000001     0.000002     0.000000
+astropy    kapteyn    fk4        icrs           0.000084     0.000086     0.000162     0.000043
+astropy    pyast      fk4        icrs           0.000084     0.000086     0.000162     0.000042
+kapteyn    astropy    fk4        icrs           0.000084     0.000086     0.000162     0.000043
+kapteyn    pyast      fk4        icrs           0.000001     0.000001     0.000002     0.000000
+pyast      astropy    fk4        icrs           0.000084     0.000086     0.000162     0.000042
+pyast      kapteyn    fk4        icrs           0.000001     0.000001     0.000002     0.000000
+astropy    kapteyn    fk4        galactic       0.000083     0.000075     0.000095     0.000021
+astropy    pyast      fk4        galactic       0.000085     0.000086     0.000163     0.000044
+kapteyn    astropy    fk4        galactic       0.000083     0.000075     0.000095     0.000021
+kapteyn    pyast      fk4        galactic       0.000061     0.000054     0.000069     0.000015
+pyast      astropy    fk4        galactic       0.000085     0.000086     0.000163     0.000044
+pyast      kapteyn    fk4        galactic       0.000061     0.000054     0.000069     0.000015
+kapteyn    pyast      fk4        ecliptic       0.000067     0.000060     0.000076     0.000017
+pyast      kapteyn    fk4        ecliptic       0.000067     0.000060     0.000076     0.000017
+astropy    kapteyn    icrs       fk5            0.000000     0.000000     0.000000     0.000000
+astropy    pyast      icrs       fk5            0.000000     0.000000     0.000000     0.000000
+kapteyn    astropy    icrs       fk5            0.000000     0.000000     0.000000     0.000000
+kapteyn    pyast      icrs       fk5            0.000000     0.000000     0.000000     0.000000
+pyast      astropy    icrs       fk5            0.000000     0.000000     0.000000     0.000000
+pyast      kapteyn    icrs       fk5            0.000000     0.000000     0.000000     0.000000
+astropy    kapteyn    icrs       fk4            0.602793     0.544051     0.698268     0.160005
+astropy    pyast      icrs       fk4            0.602793     0.544051     0.698268     0.160005
+kapteyn    astropy    icrs       fk4            0.602793     0.544051     0.698268     0.160005
+kapteyn    pyast      icrs       fk4            0.000001     0.000001     0.000002     0.000000
+pyast      astropy    icrs       fk4            0.602793     0.544051     0.698268     0.160005
+pyast      kapteyn    icrs       fk4            0.000001     0.000001     0.000002     0.000000
+astropy    kapteyn    icrs       galactic       0.000097     0.000088     0.000112     0.000025
+astropy    pyast      icrs       galactic       0.000097     0.000088     0.000112     0.000026
+kapteyn    astropy    icrs       galactic       0.000097     0.000088     0.000112     0.000025
+kapteyn    pyast      icrs       galactic       0.000000     0.000000     0.000000     0.000000
+pyast      astropy    icrs       galactic       0.000097     0.000088     0.000112     0.000026
+pyast      kapteyn    icrs       galactic       0.000000     0.000000     0.000000     0.000000
+kapteyn    pyast      icrs       ecliptic       0.000010     0.000009     0.000012     0.000002
+pyast      kapteyn    icrs       ecliptic       0.000010     0.000009     0.000012     0.000002
+astropy    kapteyn    galactic   fk5            0.000098     0.000090     0.000112     0.000024
+astropy    pyast      galactic   fk5            0.000098     0.000090     0.000112     0.000024
+kapteyn    astropy    galactic   fk5            0.000098     0.000090     0.000112     0.000024
+kapteyn    pyast      galactic   fk5            0.000000     0.000000     0.000000     0.000000
+pyast      astropy    galactic   fk5            0.000098     0.000090     0.000112     0.000024
+pyast      kapteyn    galactic   fk5            0.000000     0.000000     0.000000     0.000000
+astropy    kapteyn    galactic   fk4            0.000082     0.000075     0.000095     0.000022
+astropy    pyast      galactic   fk4            0.000080     0.000085     0.000163     0.000043
+kapteyn    astropy    galactic   fk4            0.000082     0.000075     0.000095     0.000022
+kapteyn    pyast      galactic   fk4            0.000060     0.000054     0.000069     0.000016
+pyast      astropy    galactic   fk4            0.000080     0.000085     0.000163     0.000043
+pyast      kapteyn    galactic   fk4            0.000060     0.000054     0.000069     0.000016
+astropy    kapteyn    galactic   icrs           0.000098     0.000090     0.000112     0.000024
+astropy    pyast      galactic   icrs           0.000098     0.000090     0.000112     0.000024
+kapteyn    astropy    galactic   icrs           0.000098     0.000090     0.000112     0.000024
+kapteyn    pyast      galactic   icrs           0.000000     0.000000     0.000000     0.000000
+pyast      astropy    galactic   icrs           0.000098     0.000090     0.000112     0.000024
+pyast      kapteyn    galactic   icrs           0.000000     0.000000     0.000000     0.000000
+kapteyn    pyast      galactic   ecliptic       0.000010     0.000009     0.000011     0.000002
+pyast      kapteyn    galactic   ecliptic       0.000010     0.000009     0.000011     0.000002
+kapteyn    pyast      ecliptic   fk5            0.000010     0.000009     0.000012     0.000002
+pyast      kapteyn    ecliptic   fk5            0.000010     0.000009     0.000012     0.000002
+kapteyn    pyast      ecliptic   fk4            0.000066     0.000059     0.000076     0.000017
+pyast      kapteyn    ecliptic   fk4            0.000066     0.000059     0.000076     0.000017
+kapteyn    pyast      ecliptic   icrs           0.000010     0.000009     0.000012     0.000002
+pyast      kapteyn    ecliptic   icrs           0.000010     0.000009     0.000012     0.000002
+kapteyn    pyast      ecliptic   galactic       0.000010     0.000009     0.000011     0.000002
+pyast      kapteyn    ecliptic   galactic       0.000010     0.000009     0.000011     0.000002
