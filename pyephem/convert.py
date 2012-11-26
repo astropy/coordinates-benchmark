@@ -7,34 +7,47 @@ https://github.com/brandon-rhodes/pyephem
 import numpy as np
 import ephem
 
-# Read in initial coordinates as J2000 coordinates
-data_j2000 = np.loadtxt('../initial_coords.txt')
+SUPPORTED_SYSTEMS = 'fk5 fk4 galactic ecliptic'.split()
 
-f = {}
-f['galactic'] = open('coords_galactic.txt', 'wb')
-f['b1950'] = open('coords_b1950.txt', 'wb')
-f['ecliptic'] = open('coords_ecliptic.txt', 'wb')
+def convert(coords, systems):
+    
+    if not set(systems.values()).issubset(SUPPORTED_SYSTEMS):
+        return None
 
-for i in range(len(data_j2000)):
+    lons, lats = np.radians(coords['lon']), np.radians(coords['lat'])
 
-    ra_j2000, dec_j2000 = np.radians((data_j2000[i,0], data_j2000[i,1]))
+    for ii, (lon, lat) in enumerate(zip(lons, lats)):
+        # Create coordinate in input system
+        if systems['in'] == 'fk5':
+            coord = ephem.Equatorial(lon, lat)
+        elif systems['in'] == 'fk4':
+            coord = ephem.Equatorial(lon, lat, epoch=ephem.B1950)
+        elif systems['in'] == 'galactic':
+            coord = ephem.Galactic(lon, lat)
+        elif systems['in'] == 'ecliptic':
+            coord = ephem.Ecliptic(lon, lat)
+        else:
+            raise ValueError()
 
-    j2000 = ephem.Equatorial(ra_j2000, dec_j2000)
+        # Convert to appropriate output system
+        # Retrieving output system coordinates is system specific
+        # because the attribute names depend on the system
+        if systems['out'] == 'fk5':
+            coord = ephem.Equatorial(coord, epoch=ephem.J2000)
+            lon, lat = coord.ra, coord.dec
+        elif systems['out'] == 'fk4':
+            coord = ephem.Equatorial(coord, epoch=ephem.B1950)
+            lon, lat = coord.ra, coord.dec
+        elif systems['out'] == 'galactic':
+            coord = ephem.Galactic(coord)
+            lon, lat = coord.lon, coord.lat
+        elif systems['out'] == 'ecliptic':
+            coord = ephem.Ecliptic(coord)
+            lon, lat = coord.lon, coord.lat
+        else:
+            raise ValueError()
+        
+        lons[ii] = lon
+        lats[ii] = lat
 
-    # Convert to Galactic coordinates
-    galactic = ephem.Galactic(j2000)
-    l, b = np.degrees((galactic.lon, galactic.lat))
-    f['galactic'].write("%20.15f %20.15f\n" % (l, b))
-
-    # Convert to B1950
-    b1950 = ephem.Equatorial(j2000, epoch=ephem.B1950)
-    ra_b1950, dec_b1950 = np.degrees((b1950.ra, b1950.dec))
-    f['b1950'].write("%20.15f %20.15f\n" % (ra_b1950, dec_b1950))
-
-    # Convert to ecliptic
-    ecliptic = ephem.Ecliptic(j2000)
-    elon, elat = np.degrees((ecliptic.lon, ecliptic.lat))
-    f['ecliptic'].write("%20.15f %20.15f\n" % (elon, elat))
-
-for system in f:
-    f[system].close()
+    return dict(lon=np.degrees(lons), lat=np.degrees(lats))
