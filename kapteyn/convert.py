@@ -14,15 +14,26 @@ http://www.astro.rug.nl/software/kapteyn/celestialbackground.html#composing-othe
 import numpy as np
 from kapteyn import celestial
 
-# Read in initial coordinates as J2000 coordinates
-initial_coords = np.loadtxt('../initial_coords.txt')
+SUPPORTED_SYSTEMS = 'fk5 fk4 icrs galactic ecliptic'.split()
 
-def transform_to(skyout, tag):
-    """Convert the test input coordinates to a given output system and save to text file"""
-    skyin = 'fk5'
-    output = celestial.sky2sky(skyin, skyout, initial_coords[:,0], initial_coords[:,1])
-    np.savetxt('coords_{tag}.txt'.format(tag=tag), output, fmt="%20.15f")
+def system_spec(system):
+    """Convert generic system specification tags to Kapteyn specific specification strings."""
+    d = dict()
+    d['fk5'] = 'fk5'
+    d['fk4'] = 'fk4,J2000_OBS'
+    d['icrs'] = 'icrs'
+    d['galactic'] = 'galactic'
+    d['ecliptic'] = 'ecliptic,J2000'
+    return d[system]
 
-transform_to(skyout='galactic', tag='galactic')
-transform_to(skyout='fk4,J2000_OBS', tag='b1950')
-transform_to(skyout='ecliptic,J2000', tag='ecliptic')
+def convert(coords, systems):
+    """Convert an array of in_coords from in_system to out_system"""
+
+    if not set(systems.values()).issubset(SUPPORTED_SYSTEMS):
+        return None
+
+    # Use kapteyn package specific specifiers for in- and out-systems
+    skyin, skyout = system_spec(systems['in']), system_spec(systems['out'])
+    coords = celestial.sky2sky(skyin, skyout, coords['lon'], coords['lat'])
+    coords = np.array(coords)
+    return dict(lon=coords[:,0], lat=coords[:,1])
