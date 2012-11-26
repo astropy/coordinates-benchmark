@@ -12,7 +12,8 @@ The following Python packages for astronomy coordinate calculations are compared
 * `pytpm <http://phn.github.com/pytpm/>`_: A `Cython <http://cython.org>`_ interface to the `TPM <http://www.sal.wisc.edu/~jwp/astro/tpm/tpm.html>`_ C library with a high-level `convert.convertv6` function interface. Unmaintained. We are using the version from github master.
 * `idl euler <http://idlastro.gsfc.nasa.gov/ftp/pro/astro/euler.pro>`_: Part of the `IDL Astronomy User's Library <http://idlastro.gsfc.nasa.gov>`_.
 
-Let's compare a few features of these packages:
+Licenses and Features
+---------------------
 
 * Package -- Package name
 * License -- License of the Python package
@@ -26,13 +27,17 @@ Package           License       Lib License   Array Alt/Az
 astropy           BSD           ---           No    No
 astrolib.coords   BSD           ???           No    No
 kapteyn.celestial BSD           ---           Yes   No
-pyast             ???           ???           Yes   Yes
+pyast             GPL           GPL           Yes   Yes
 pyephem           ???           ???           No    Yes
-pyslalib          ???           ???           No    Yes
+pyslalib          GPL           GPL           No    Yes
 pytpm             BSD           ???           No    Yes
 idl               Public Domain Commercial    ???   ???
 ================= ============= ============= ===== ======
 
-    
 Please report any inaccuracies, especially concerning the license status.
-I've used http://www.what-license.com to check the license of some packages.
+
+Methods
+-------
+
+TODO: Give details on the methods used, e.g. for Earth obliquity, precession, nutation, time, ...
+Probably best to first collect this info in a bullet list and then try to summarize it in a table.
