@@ -26,8 +26,8 @@ def convert(coords, systems):
 
     skyin, skyout = get_system(systems['in']), get_system(systems['out'])
 
-    out_coords = dict(lon=np.zeros_like(coords['lon']),
-                      lat=np.zeros_like(coords['lat']))
+    lons = np.zeros_like(coords['lon'])
+    lats = np.zeros_like(coords['lat'])
 
     for ii, (lon, lat) in enumerate(zip(coords['lon'], coords['lat'])):
         in_coord = skyin(lon, lat, unit='deg')
@@ -45,7 +45,6 @@ def convert(coords, systems):
         # Wrap longitude to range 0 to 360
         lon = np.where(lon < 0, lon + 360, lon) 
 
-        out_coords['lon'][ii] = lon
-        out_coords['lat'][ii] = lat
+        lons[ii], lats[ii] = lon, lat
 
-    return out_coords
+    return dict(lon=lons, lat=lats)

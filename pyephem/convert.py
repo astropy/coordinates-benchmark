@@ -47,7 +47,6 @@ def convert(coords, systems):
         else:
             raise ValueError()
         
-        lons[ii] = lon
-        lats[ii] = lat
+        lons[ii], lats[ii] = lon, lat
 
     return dict(lon=np.degrees(lons), lat=np.degrees(lats))
