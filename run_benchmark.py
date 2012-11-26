@@ -20,7 +20,7 @@ CELESTIAL_CONVERSIONS = [dict(zip(['in', 'out'], _))
 
 TOOLS = 'astropy kapteyn pyast pyephem pyslalib tpm idl'.split()
 TOOL_PAIRS = [_ for _ in itertools.product(TOOLS, TOOLS)
-              if _[0] != _[1]]
+              if _[0] < _[1]]
 
 def _vicenty_dist_deg(lon1, lat1, lon2, lat2):
     """Compute distance on the sky. Input and output in deg"""
@@ -145,14 +145,14 @@ class CoordinatesBenchmark():
         f_txt = open(txt_filename, 'wb')
         f_html = open(html_filename, 'wb')
 
-        fmt = ('{tool1:10s} {tool2:10s} {system1:10s} {system2:10s}'
-               '{median:12s} {mean:12s} {max:12s} {std:12s}')
+        fmt = ('{tool1:10s} {tool2:10s} {system1:10s} {system2:10s} '
+               '{median:>12s} {mean:>12s} {max:>12s} {std:>12s}')
         
         labels = dict(tool1="Tool 1", tool2="Tool 2", system1='System 1', system2='System 2',
                       median='Median', mean='Mean', max='Max', std='Std.Dev.')
 
         f_txt.write(fmt.format(**labels) + "\n")
-        f_txt.write('-' * 84 + "\n")
+        f_txt.write('-' * 94 + "\n")
         
         f_html.write("<html>\n")
         f_html.write("   <head>\n")
