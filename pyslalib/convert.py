@@ -4,52 +4,44 @@ Coordinate conversions with the pyslalib Python package.
 https://github.com/scottransom/pyslalib
 """
 import numpy as np
-from pyslalib import slalib as S
+from pyslalib import slalib
 
-# Read in initial coordinates as J2000 coordinates
-data_j2000 = np.radians(np.loadtxt('../initial_coords.txt'))
-ra_j2000_fk5, dec_j2000_fk5 = data_j2000[:,0], data_j2000[:,1]
+SUPPORTED_SYSTEMS = 'fk5 fk4 icrs galactic ecliptic'.split()
 
-vals = {}
-for system in 'FK4', 'Ecliptic', 'Galactic', 'ICRS':
-   vals[system] = [np.zeros_like(ra_j2000_fk5), np.zeros_like(dec_j2000_fk5)]
+def convert(coords, systems):
+    
+    if not set(systems.values()).issubset(SUPPORTED_SYSTEMS):
+        return None
 
-for ii, (raj, decj) in enumerate(zip(ra_j2000_fk5, dec_j2000_fk5)):
+    lons, lats = np.radians(coords['lon']), np.radians(coords['lat'])
 
-   # FK5 -> FK4 at BEPOCH 2000.0 assuming no proper motion or parallax
-   r1950, d1950, dr1950, dd1950 = S.sla_fk54z (raj, decj, 2000.0)
-   vals['FK4'][0][ii],vals['FK4'][1][ii] = r1950, d1950
+    for ii, (lon, lat) in enumerate(zip(lons, lats)):
 
-   # FK5 -> Ecliptic at TDB (MJD) 51544.0 (i.e. J2000)
-   dl, db = S.sla_eqecl(raj, decj, 51544.0)
-   vals['Ecliptic'][0][ii],vals['Ecliptic'][1][ii] = dl, db
+        # First convert to FK5 J2000 in all cases
+        if systems['in'] == 'fk4':
+            lon, lat = slalib.sla_fk45z(lon, lat, 1950)
+        elif systems['in'] == 'icrs':
+            lon, lat = slalib.sla_hfk5z(lon, lat, 2000)[:2]
+        elif systems['in'] == 'galactic':
+            lon, lat = slalib.sla_galeq(lon, lat)
+        elif systems['in'] == 'ecliptic':
+            lon, lat = slalib.sla_ecleq(lon, lat, 51544)
+        
+        # Now convert from FK5 J2000 to out system    
+        if systems['out'] == 'fk4':
+            # FK5 -> FK4 at BEPOCH 2000 assuming no proper motion or parallax
+            lon, lat = slalib.sla_fk54z (lon, lat, 2000)[:2]
+        elif systems['out'] == 'icrs':
+            # FK5 -> Hipparcos (i.e. ICRF, which is as close as SLALIB
+            # gets to ICRS) at epoch 2000 and with no proper motion
+            lon, lat = slalib.sla_fk5hz(lon, lat, 2000)
+        elif systems['out'] == 'galactic':
+            # FK5 -> Galactic
+            lon, lat = slalib.sla_eqgal(lon, lat)
+        elif systems['out'] == 'ecliptic':
+            # FK5 -> Ecliptic at TDB (MJD) 51544 (i.e. J2000)
+            lon, lat = slalib.sla_eqecl(lon, lat, 51544)
 
-   # FK5 -> Galactic
-   dl, db = S.sla_eqgal(raj, decj)
-   vals['Galactic'][0][ii],vals['Galactic'][1][ii] = dl, db
+        lons[ii], lats[ii] = lon, lat
 
-   # FK5 -> Hipparcos (i.e. ICRF, which is as close as SLALIB
-   # gets to ICRS) at epoch 2000.0 and with no proper motion
-   rh, dh = S.sla_fk5hz(raj, decj, 2000.0)
-   vals['ICRS'][0][ii],vals['ICRS'][1][ii] = rh, dh
-
-
-glon = vals['Galactic'][0]
-glat = vals['Galactic'][1]
-np.savetxt('coords_galactic.txt', zip(np.degrees(glon), 
-                                       np.degrees(glat)), fmt="%20.15f")
-
-ra_fk4 = vals['FK4'][0]
-dec_fk4 = vals['FK4'][1]
-np.savetxt('coords_b1950.txt', zip(np.degrees(ra_fk4),
-                                    np.degrees(dec_fk4)), fmt="%20.15f")
-
-elon = vals['Ecliptic'][0]
-elat = vals['Ecliptic'][1]
-np.savetxt('coords_ecliptic.txt', zip(np.degrees(elon),
-                                       np.degrees(elat)), fmt="%20.15f")
-
-ra_fk5 = vals['ICRS'][0]
-dec_fk5 = vals['ICRS'][1]
-np.savetxt('coords_j2000.txt', zip(np.degrees(ra_fk5),
-                                    np.degrees(dec_fk5)), fmt="%20.15f")
+    return dict(lon=np.degrees(lons), lat=np.degrees(lats))
