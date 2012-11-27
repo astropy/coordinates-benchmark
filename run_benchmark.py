@@ -50,7 +50,7 @@ class CoordinatesBenchmark():
     def __init__(self):
         self._data_cache = {}
 
-    def run_celestial_conversions(self, tool):
+    def run_celestial_conversions(self, tool, report_speed):
         """Run celestial conversion benchmark for one given tool"""
         try:
             tool_module = imp.load_source('dummy', 'tools/%s/convert.py' % tool)
@@ -59,17 +59,20 @@ class CoordinatesBenchmark():
             return
         logging.info('Running celestial conversions using %s' % tool)
         coords = self._read_coords('input/initial_coords.txt')
+
         for systems in CELESTIAL_CONVERSIONS:
             timestamp = time.time()
             out_coords = tool_module.convert(coords, systems)
+            duration = time.time() - timestamp
             if out_coords == None:
                 logging.info('Skipping %s -> %s. Not supported.' %
                              (systems['in'], systems['out']))
                 continue
-            duration = time.time() - timestamp
-            # TODO: print execution time to an ascii file (one for each tool)
-            filename = 'tools/%s/%s_to_%s.txt' % (tool, systems['in'], systems['out'])
-            CoordinatesBenchmark._write_coords(filename, out_coords)
+            if report_speed:
+                f_speed.write('%15s %10s %10s %10.6f\n' %
+                              (tool, systems['in'], systems['out'], duration))
+            filename = '%s/%s_to_%s.txt' % (tool, systems['in'], systems['out'])
+            self._write_coords(filename, out_coords)
 
     @staticmethod
     def _accuracy_color(mean):
@@ -321,9 +324,11 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description='Run the coordinates benchmark')
     parser.add_argument('--tasks', nargs='+', default='',
-                        help='List of tasks to run.')
+                        help='List of tasks to run.\n'
+                        'Available tasks:\n%s' % TASKS)
     parser.add_argument('--tools', nargs='+', default='',
-                        help='List tools to run. Available tools: %s' % ', '.join(TOOLS))
+                        help='List tools to run.\n'
+                        'Available tools: %s' % ', '.join(TOOLS))
     args = parser.parse_args()
 
     if not args.tasks:
@@ -347,9 +352,13 @@ if __name__ == '__main__':
     benchmark = CoordinatesBenchmark()
 
     if 'celestial' in args.tasks:
-        for tool in args.tools:
-            benchmark.run_celestial_conversions(tool)
+        report_speed = True
+        if report_speed:
+            f_speed = open('speed.txt', 'wb')
 
+        for tool in args.tools:
+            benchmark.run_celestial_conversions(tool, report_speed=report_speed)
+        
     if 'horizontal' in args.tasks:
         raise NotImplementedError()
 
@@ -366,3 +375,4 @@ if __name__ == '__main__':
             for tool2 in other_tools:
                 for systems in CELESTIAL_CONVERSIONS:
                     benchmark.make_plot(tool, tool2, systems['in'], systems['out'])
+
