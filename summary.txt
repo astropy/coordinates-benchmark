@@ -1,16 +1,16 @@
 Tool 1     Tool 2     System 1   System 2         Median         Mean          Max     Std.Dev.
 ----------------------------------------------------------------------------------------------
-astropy    kapteyn    fk5        fk4            0.602793     0.544051     0.698268     0.160005
-astropy    pyast      fk5        fk4            0.602793     0.544051     0.698268     0.160005
-astropy    pyephem    fk5        fk4            0.602614     0.543938     0.698107     0.159976
-astropy    pyslalib   fk5        fk4            0.602793     0.544051     0.698268     0.160005
+astropy    kapteyn    fk5        fk4            0.000082     0.000075     0.000102     0.000022
+astropy    pyast      fk5        fk4            0.000082     0.000075     0.000102     0.000022
+astropy    pyephem    fk5        fk4            0.000169     0.000154     0.000194     0.000043
+astropy    pyslalib   fk5        fk4            0.000082     0.000075     0.000102     0.000022
 kapteyn    pyast      fk5        fk4            0.000001     0.000001     0.000002     0.000000
 kapteyn    pyephem    fk5        fk4            0.000157     0.000160     0.000283     0.000071
 kapteyn    pyslalib   fk5        fk4            0.000001     0.000001     0.000002     0.000000
 pyast      pyephem    fk5        fk4            0.000157     0.000160     0.000283     0.000071
 pyast      pyslalib   fk5        fk4            0.000000     0.000000     0.000000     0.000000
 pyephem    pyslalib   fk5        fk4            0.000157     0.000160     0.000283     0.000071
-astrolib   astropy    fk5        fk4            0.602793     0.544051     0.698268     0.160005
+astrolib   astropy    fk5        fk4            0.000082     0.000075     0.000102     0.000022
 astrolib   kapteyn    fk5        fk4            0.000001     0.000001     0.000002     0.000000
 astrolib   pyast      fk5        fk4            0.000000     0.000000     0.000000     0.000000
 astrolib   pyephem    fk5        fk4            0.000157     0.000160     0.000283     0.000071
@@ -98,15 +98,15 @@ astropy    pyslalib   icrs       fk5            0.000000     0.000000     0.0000
 kapteyn    pyast      icrs       fk5            0.000000     0.000000     0.000000     0.000000
 kapteyn    pyslalib   icrs       fk5            0.000000     0.000000     0.000000     0.000000
 pyast      pyslalib   icrs       fk5            0.000000     0.000000     0.000000     0.000000
-astropy    kapteyn    icrs       fk4            0.602793     0.544051     0.698268     0.160005
-astropy    pyast      icrs       fk4            0.602793     0.544051     0.698268     0.160005
-astropy    pyslalib   icrs       fk4            0.602793     0.544051     0.698268     0.160005
+astropy    kapteyn    icrs       fk4            0.000082     0.000075     0.000102     0.000022
+astropy    pyast      icrs       fk4            0.000082     0.000075     0.000102     0.000022
+astropy    pyslalib   icrs       fk4            0.000082     0.000075     0.000102     0.000022
 kapteyn    pyast      icrs       fk4            0.000001     0.000001     0.000002     0.000000
 kapteyn    pyslalib   icrs       fk4            0.000001     0.000001     0.000002     0.000000
 pyast      pyslalib   icrs       fk4            0.000000     0.000000     0.000000     0.000000
-astropy    kapteyn    icrs       galactic       0.000097     0.000088     0.000112     0.000025
-astropy    pyast      icrs       galactic       0.000097     0.000088     0.000112     0.000026
-astropy    pyslalib   icrs       galactic       0.000097     0.000088     0.000112     0.000026
+astropy    kapteyn    icrs       galactic       0.000062     0.000056     0.000070     0.000016
+astropy    pyast      icrs       galactic       0.000062     0.000056     0.000070     0.000016
+astropy    pyslalib   icrs       galactic       0.000062     0.000056     0.000070     0.000016
 kapteyn    pyast      icrs       galactic       0.000000     0.000000     0.000000     0.000000
 kapteyn    pyslalib   icrs       galactic       0.000000     0.000000     0.000000     0.000000
 pyast      pyslalib   icrs       galactic       0.000000     0.000000     0.000000     0.000000
@@ -143,9 +143,9 @@ astrolib   kapteyn    galactic   fk4            0.000000     0.000000     0.0000
 astrolib   pyast      galactic   fk4            0.000060     0.000054     0.000069     0.000016
 astrolib   pyephem    galactic   fk4            0.000125     0.000125     0.000239     0.000063
 astrolib   pyslalib   galactic   fk4            0.000060     0.000054     0.000069     0.000016
-astropy    kapteyn    galactic   icrs           0.000098     0.000090     0.000112     0.000024
-astropy    pyast      galactic   icrs           0.000098     0.000090     0.000112     0.000024
-astropy    pyslalib   galactic   icrs           0.000098     0.000090     0.000112     0.000024
+astropy    kapteyn    galactic   icrs           0.000008     0.000007     0.000009     0.000002
+astropy    pyast      galactic   icrs           0.000007     0.000007     0.000009     0.000002
+astropy    pyslalib   galactic   icrs           0.000007     0.000007     0.000009     0.000002
 kapteyn    pyast      galactic   icrs           0.000000     0.000000     0.000000     0.000000
 kapteyn    pyslalib   galactic   icrs           0.000000     0.000000     0.000000     0.000000
 pyast      pyslalib   galactic   icrs           0.000000     0.000000     0.000000     0.000000
