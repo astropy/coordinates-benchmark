@@ -7,6 +7,7 @@ http://www.astropy.org
 import numpy as np
 from astropy import coordinates as coord
 from astropy.time import Time
+from astropy import units as u
 
 SUPPORTED_SYSTEMS = 'fk5 fk4 icrs galactic'.split()
 
@@ -30,18 +31,11 @@ def convert(coords, systems):
     lats = np.zeros_like(coords['lat'])
 
     for ii, (lon, lat) in enumerate(zip(coords['lon'], coords['lat'])):
-        in_coord = skyin(lon, lat, unit='deg')
-    
-        #if (systems['in'] == 'fk5' and systems['out'] == 'fk4'):
-        if systems['in'] == 'fk4':
-            in_coord.precess_to(Time('B1950', scale='utc'))
-    
+        in_coord = skyin(lon, lat, unit=u.degree)
+
         out_coord = in_coord.transform_to(skyout)
-    
-        if systems['out'] == 'fk4':
-            out_coord.precess_to(Time('B1950', scale='utc'))
-        
-        lon, lat = out_coord.longangle.degrees, out_coord.latangle.degrees
+
+        lon, lat = out_coord.lonangle.degrees, out_coord.latangle.degrees
         # Wrap longitude to range 0 to 360
         lon = np.where(lon < 0, lon + 360, lon) 
 
