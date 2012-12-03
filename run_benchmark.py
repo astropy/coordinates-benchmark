@@ -22,8 +22,8 @@ TOOLS = 'astropy kapteyn pyast pyephem pyslalib astrolib idl'.split()
 TOOL_PAIRS = [_ for _ in itertools.product(TOOLS, TOOLS)
               if _[0] < _[1]]
 
-def _vicenty_dist_deg(lon1, lat1, lon2, lat2):
-    """Compute distance on the sky. Input and output in deg"""
+def _vicenty_dist_arcsec(lon1, lat1, lon2, lat2):
+    """Compute distance on the sky. Input and output in arcsec"""
 
     lon1 = np.radians(lon1)
     lat1 = np.radians(lat1)
@@ -37,7 +37,9 @@ def _vicenty_dist_deg(lon1, lat1, lon2, lat2):
     num2 = np.cos(lat1) * np.sin(lat2) - np.sin(lat1) * np.cos(lat2) * cdlon
     denominator = np.sin(lat1) * np.sin(lat2) + np.cos(lat1) * np.cos(lat2) * cdlon
 
-    return np.degrees(np.arctan2((num1 ** 2 + num2 ** 2) ** 0.5, denominator))
+    dist_in_radians = np.arctan2((num1 ** 2 + num2 ** 2) ** 0.5, denominator)
+    deg_to_arcsec = 3600.
+    return deg_to_arcsec * np.degrees(dist_in_radians)
 
 class CoordinatesBenchmark():
     """Summarize all available benchmark results in a txt and html file"""
@@ -85,8 +87,8 @@ class CoordinatesBenchmark():
             coords1 = CoordinatesBenchmark._read_coords(filename1, symmetric=True)
             filename2 = CoordinatesBenchmark._celestial_filename(tool2, system1, system2)
             coords2 = CoordinatesBenchmark._read_coords(filename2, symmetric=True)
-            diff = _vicenty_dist_deg(coords1['lon'], coords1['lat'],
-                                     coords2['lon'], coords2['lat'])
+            diff = _vicenty_dist_arcsec(coords1['lon'], coords1['lat'],
+                                        coords2['lon'], coords2['lat'])
         except IOError:
             return
 
@@ -198,8 +200,8 @@ class CoordinatesBenchmark():
             coords1 = CoordinatesBenchmark._read_coords(filename1, symmetric=True)
             filename2 = CoordinatesBenchmark._celestial_filename(tool2, system1, system2)
             coords2 = CoordinatesBenchmark._read_coords(filename2, symmetric=True)
-            diff = _vicenty_dist_deg(coords1['lon'], coords1['lat'],
-                                     coords2['lon'], coords2['lat'])
+            diff = _vicenty_dist_arcsec(coords1['lon'], coords1['lat'],
+                                        coords2['lon'], coords2['lat'])
         except IOError:
             return
     
