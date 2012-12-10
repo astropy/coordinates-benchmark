@@ -31,7 +31,7 @@ def convert(coords, systems):
     lats = np.zeros_like(coords['lat'])
 
     for ii, (lon, lat) in enumerate(zip(coords['lon'], coords['lat'])):
-        in_coord = skyin(lon, lat, unit=(u.degree, u.degree))
+        in_coord = skyin(lon, lat, unit=(u.degree, u.degree), obstime=Time('J2000', scale='utc'))
 
         out_coord = in_coord.transform_to(skyout)
 
