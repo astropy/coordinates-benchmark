@@ -10,6 +10,7 @@ The following Python packages for astronomy coordinate calculations are compared
 * `pyast <http://dsberry.github.com/starlink/pyast.html>`_: A Python interface to the `Starlink AST <http://starlink.jach.hawaii.edu/starlink/AST>`_ C library.
 * `pyephem <http://rhodesmill.org/pyephem/>`_: A Python astrometry package based on the `xephem <http://www.clearskyinstitute.com/xephem/>`_ coordinate routines, which are interfaced as C extensions. Currently a re-write using Cython is underway in the `version4` branch on github.
 * `pyslalib <https://github.com/scottransom/pyslalib>`_: `f2py <http://www.scipy.org/F2py>`_ and `numpy <http://numpy.scipy.org/>`_ wrappers of the fortran version of the astro library `SLALIB <http://www.starlink.rl.ac.uk/docs/sun67.htx/sun67.html>`_
+* `pysofa <http://pypi.python.org/pypi/pysofa>`_ is a `ctypes <http://docs.python.org/library/ctypes.html>`_ wrapper for the `SOFA <http://www.iausofa.org>`_ `C library <http://www.iausofa.org/current_C.html>`_. It does use numpy for 3x3 matrices, but it does not support input numpy arrays of coordinates for it's functions.
 * `pytpm <http://phn.github.com/pytpm/>`_: A `Cython <http://cython.org>`_ interface to the `TPM <http://www.sal.wisc.edu/~jwp/astro/tpm/tpm.html>`_ C library with a high-level `convert.convertv6` function interface. Unmaintained. We are using the version from github master.
 * `idl euler <http://idlastro.gsfc.nasa.gov/ftp/pro/astro/euler.pro>`_: Part of the `IDL Astronomy User's Library <http://idlastro.gsfc.nasa.gov>`_.
 
@@ -32,9 +33,14 @@ novas             Public Domain Public Domain No    Yes
 pyast             GPL           GPL           Yes   Yes
 pyephem           ???           ???           No    Yes
 pyslalib          GPL           GPL           No    Yes
+pysofa            MIT           SOFA          No    Yes
 pytpm             BSD           ???           No    Yes
 idl               Public Domain Commercial    ???   ???
 ================= ============= ============= ===== ======
+
+Notes:
+
+* The `SOFA License <http://www.iausofa.org/tandc.html>`_ is considered non-free (see discussion `here <https://groups.google.com/forum/?fromgroups=#!topic/astropy-dev/QVpMZFlsQUo>`_).
 
 Please report any inaccuracies, especially concerning the license status.
 
