@@ -35,7 +35,7 @@ def convert(coords, systems):
 
         out_coord = in_coord.transform_to(skyout)
 
-        lon, lat = out_coord.lonangle.degrees, out_coord.latangle.degrees
+        lon, lat = out_coord.lonangle.degree, out_coord.latangle.degree
         # Wrap longitude to range 0 to 360
         lon = np.where(lon < 0, lon + 360, lon) 
 
