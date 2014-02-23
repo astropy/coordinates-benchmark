@@ -2,6 +2,11 @@ HOWTO
 =====
 
 * First install the coordinate packages you'd like to benchmark.
+  You can install all of the supported Python packages
+  with the single command::
+
+      pip install -r requirements.txt
+
 * The top-level `./run_benchmark.py` script is used to run the benchmark.
 * `./run_benchmark.py -h` to show help.
 * `./run_benchmark.py --tasks celestial` to run the celestial coordinate conversion benchmark for all tools. This generates `*.txt` files in the tool sub-folders.

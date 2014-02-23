@@ -11,7 +11,7 @@ and is on github, so you can look at the code there.
 [3] https://github.com/phn/pytpm/tree/master/src/tpm
 """
 import numpy as np
-from coords import Position 
+from astrolib.coords import Position
 
 SUPPORTED_SYSTEMS = 'fk5 fk4 galactic ecliptic'.split()
 
