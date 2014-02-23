@@ -255,8 +255,7 @@ if __name__ == '__main__':
     
     if not 'summary' in args.tasks:
         if not args.tools:
-            parser.error('You must choose at least one tool. '
-                         'Available tools: %s' % TOOLS)
+            args.tools = TOOLS
 
     for task in args.tasks:
         if not task in [_[0] for _ in TASKS]:
