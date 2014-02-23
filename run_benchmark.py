@@ -45,14 +45,13 @@ class CoordinatesBenchmark():
     """Summarize all available benchmark results in a txt and html file"""
 
     def __init__(self):
-        pass
+        self._data_cache = {}
 
-    @staticmethod
-    def run_celestial_conversions(tool):
+    def run_celestial_conversions(self, tool):
         """Run celestial conversion benchmark for one given tool"""
         tool_module = imp.load_source('dummy', '%s/convert.py' % tool)
         logging.info('Running celestial conversions using %s' % tool)    
-        coords = CoordinatesBenchmark._read_coords('initial_coords.txt')
+        coords = self._read_coords('initial_coords.txt')
         for systems in CELESTIAL_CONVERSIONS:
             timestamp = time.time()
             out_coords = tool_module.convert(coords, systems)
@@ -84,9 +83,9 @@ class CoordinatesBenchmark():
         try:
             filename1 = CoordinatesBenchmark._celestial_filename(tool1, system1, system2)
             # For plotting we need longitudes in the symmetric range -180 to +180
-            coords1 = CoordinatesBenchmark._read_coords(filename1, symmetric=True)
+            coords1 = self._read_coords(filename1, symmetric=True)
             filename2 = CoordinatesBenchmark._celestial_filename(tool2, system1, system2)
-            coords2 = CoordinatesBenchmark._read_coords(filename2, symmetric=True)
+            coords2 = self._read_coords(filename2, symmetric=True)
             diff = _vicenty_dist_arcsec(coords1['lon'], coords1['lat'],
                                         coords2['lon'], coords2['lat'])
         except IOError:
@@ -120,16 +119,23 @@ class CoordinatesBenchmark():
     def _celestial_filename(tool, in_system, out_system):
         return '%s/%s_to_%s.txt' % (tool, in_system, out_system)
 
-    @staticmethod
-    def _read_coords(filename, symmetric=False):
+    def _read_coords(self, filename, symmetric=False):
         """Read ascii coordinates file.
         If symmetric = True, convert longitudes to range -180 .. +180"""
-        try:
-            data = np.loadtxt(filename)
+        data = self._data_cache.get(filename)
+        if data is None:
+            try:
+                data = np.loadtxt(filename)
+            except IOError:
+                logging.warning('File not found: {0}'.format(filename))
+                self._data_cache[filename] = 'not found'
+                raise
             logging.info('Reading {0}'.format(filename))
-        except IOError:
-            logging.warning('File not found: {0}'.format(filename))
-            raise
+            self._data_cache[filename] = data.copy()
+        elif data == 'not found':
+            raise IOError('file not found')
+        else:
+            data = data.copy()
         lon = data[:, 0]
         lat = data[:, 1]
         if symmetric:
@@ -182,8 +188,8 @@ class CoordinatesBenchmark():
             f_html.write("  </tr>\n")
         
             for tool1, tool2 in TOOL_PAIRS:
-                CoordinatesBenchmark._compare_celestial(tool1, tool2, systems['in'], systems['out'],
-                                                        f_txt, f_html)
+                self._compare_celestial(tool1, tool2, systems['in'],
+                                        systems['out'], f_txt, f_html)
 
             f_html.write("   </table>\n")
 
@@ -192,14 +198,13 @@ class CoordinatesBenchmark():
         logging.info('Writing %s' % txt_filename)
         logging.info('Writing %s' % html_filename)
 
-    @staticmethod
-    def _compare_celestial(tool1, tool2, system1, system2, f_txt, f_html):
+    def _compare_celestial(self, tool1, tool2, system1, system2, f_txt, f_html):
         try:
             filename1 = CoordinatesBenchmark._celestial_filename(tool1, system1, system2)
             # For plotting we need longitudes in the symmetric range -180 to +180
-            coords1 = CoordinatesBenchmark._read_coords(filename1, symmetric=True)
+            coords1 = self._read_coords(filename1, symmetric=True)
             filename2 = CoordinatesBenchmark._celestial_filename(tool2, system1, system2)
-            coords2 = CoordinatesBenchmark._read_coords(filename2, symmetric=True)
+            coords2 = self._read_coords(filename2, symmetric=True)
             diff = _vicenty_dist_arcsec(coords1['lon'], coords1['lat'],
                                         coords2['lon'], coords2['lat'])
         except IOError:
