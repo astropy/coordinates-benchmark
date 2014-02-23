@@ -1,6 +1,7 @@
 astrolib.coords
 astropy
 http://www.astro.rug.nl/software/kapteyn/kapteyn-2.2.tar.gz
+novas
 pyephem
 https://github.com/scottransom/pyslalib/archive/master.zip
 starlink-pyast
