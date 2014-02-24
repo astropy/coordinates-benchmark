@@ -157,8 +157,8 @@ class CoordinatesBenchmark():
 
     def summary(self, txt_filename='summary.txt', html_filename='summary.html', html_matrix_filename='summary_matrix.html'):
         """Write txt and html summary"""
-        f_txt = open(txt_filename, 'wb')
-        f_html = open(html_filename, 'wb')
+        f_txt = open(os.path.join('output', txt_filename), 'w')
+        f_html = open(os.path.join('output', html_filename), 'w')
 
         fmt = ('{tool1:10s} {tool2:10s} {system1:10s} {system2:10s} '
                '{median:>12s} {mean:>12s} {max:>12s} {std:>12s}')
@@ -201,12 +201,12 @@ class CoordinatesBenchmark():
         f_html.close()
         f_txt.close()
 
-        logging.info('Writing %s' % txt_filename)
-        logging.info('Writing %s' % html_filename)
+        logging.info('Writing output/%s' % txt_filename)
+        logging.info('Writing output/%s' % html_filename)
 
         # Write comparison matrix
 
-        f_matrix_html = open(html_matrix_filename, 'wb')
+        f_matrix_html = open(os.path.join('output', html_matrix_filename), 'wb')
 
         self._html_header(f_matrix_html)
 
@@ -220,7 +220,7 @@ class CoordinatesBenchmark():
 
         f_matrix_html.close()
 
-        logging.info('Writing %s' % html_matrix_filename)
+        logging.info('Writing output/%s' % html_matrix_filename)
 
     def _html_header(self, file_handle):
         file_handle.write("<html>\n")

@@ -5,6 +5,21 @@ Here we compare astropy coordinate conversion results against other Python packa
 
 For now we only compare precision, in the future we also want to compare speed.
 
+Running
+-------
+
+To run the benchmarks:
+
+    python run_benchmarks --tasks celestial
+
+To generate the summary:
+
+    python run_benchmarks --tasks summary
+
+To generate the plots:
+
+    python run_benchmarks --tasks plots
+
 Links
 -----
 
