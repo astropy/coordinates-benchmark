@@ -12,8 +12,8 @@ import numpy as np
 # Make a list of celestial conversions to check
 # We simply list all possible combinations here,
 # systems not supported by certain tools are simply skipped later
-CELESTIAL_SYTEMS = 'fk5 fk4 icrs galactic ecliptic'.split()
-CELESTIAL_CONVERSIONS = itertools.product(CELESTIAL_SYTEMS, CELESTIAL_SYTEMS)
+CELESTIAL_SYSTEMS = 'fk5 fk4 icrs galactic ecliptic'.split()
+CELESTIAL_CONVERSIONS = itertools.product(CELESTIAL_SYSTEMS, CELESTIAL_SYSTEMS)
 CELESTIAL_CONVERSIONS = [dict(zip(['in', 'out'], _))
                          for _ in CELESTIAL_CONVERSIONS
                          if _[0] != _[1]]
@@ -170,6 +170,10 @@ class CoordinatesBenchmark():
         f_html.write("<p align='center'>Summary of differences in arcseconds</p>\n")
         f_html.write("<p align='center'>Green means < 10 milli-arcsec, orange < 1 arcsec and red > 1 arcsec</p>\n")
 
+        for tool in sorted(TOOLS):
+            for line in self.tool_comparison_table(tool):
+                f_html.write(line)
+
         for systems in CELESTIAL_CONVERSIONS:
             logging.info('Summarizing celestial conversions: %s -> %s' % (systems['in'], systems['out']))
 
@@ -236,6 +240,41 @@ class CoordinatesBenchmark():
         f_html.write("    <td align='right' class='{color}'>{std:12.6f}</td>\n".format(color=color, std=std))
         f_html.write("    <td align='center'><a href='{plot_filename}'>PNG</a></td>\n".format(plot_filename=plot_filename))
         f_html.write("  </tr>\n")
+
+    def tool_comparison_table(self, tool):
+        other_tools = sorted(t for t in TOOLS if t != tool)
+
+        yield '<h2>{}</h2>'.format(tool)
+        yield '<table align="center">'
+        yield '<tr><th>'
+        for t in other_tools:
+            yield '<th>{}'.format(t)
+        pairs = itertools.permutations(CELESTIAL_SYSTEMS, 2)
+        for in_system, out_system in pairs:
+            filename = self._celestial_filename(tool, in_system, out_system)
+            try:
+                c = self._read_coords(filename)
+            except IOError:
+                continue
+            yield '<tr><th>{} &#8594; {}'.format(in_system, out_system)
+            for t in other_tools:
+                filename = self._celestial_filename(t, in_system, out_system)
+                try:
+                    d = self._read_coords(filename)
+                except IOError:
+                    yield '<td> &mdash;'
+                    continue
+                diff = _vicenty_dist_arcsec(c['lon'], c['lat'],
+                                            d['lon'], d['lat'])
+                mean = np.mean(diff)
+                color = CoordinatesBenchmark._accuracy_color(mean)
+                fmt = '<td class="{}">{:.6f}<br>{:.6f}<br>{:.6f}<br>{:.6f}'
+                yield fmt.format(color, np.median(diff), mean,
+                                 np.max(diff), np.std(diff))
+
+            yield '<th align="left">Median<br>Mean<br>Max<br>Std.Dev.'
+        yield '</tr>'
+        yield '</table>'
 
 
 if __name__ == '__main__':
