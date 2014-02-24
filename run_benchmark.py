@@ -57,7 +57,7 @@ class CoordinatesBenchmark():
         except IOError:
             print("Benchmarks for {0} cannot be run because {0}/convert.py could not be imported.".format(tool))
             return
-        logging.info('Running celestial conversions using %s' % tool)    
+        logging.info('Running celestial conversions using %s' % tool)
         coords = self._read_coords('initial_coords.txt')
         for systems in CELESTIAL_CONVERSIONS:
             timestamp = time.time()
@@ -86,7 +86,7 @@ class CoordinatesBenchmark():
                   vmin=-3, vmax=1):
         """Make a comparison plot for celestial conversion"""
         import matplotlib.pyplot as plt
-        
+
         try:
             filename1 = CoordinatesBenchmark._celestial_filename(tool1, system1, system2)
             # For plotting we need longitudes in the symmetric range -180 to +180
@@ -155,31 +155,21 @@ class CoordinatesBenchmark():
         data = np.transpose(np.vstack([coords['lon'], coords['lat']]))
         np.savetxt(filename, data, fmt="%20.15f")
 
-    def summary(self, txt_filename='summary.txt', html_filename='summary.html'):
+    def summary(self, txt_filename='summary.txt', html_filename='summary.html', html_matrix_filename='summary_matrix.html'):
         """Write txt and html summary"""
         f_txt = open(txt_filename, 'wb')
         f_html = open(html_filename, 'wb')
 
         fmt = ('{tool1:10s} {tool2:10s} {system1:10s} {system2:10s} '
                '{median:>12s} {mean:>12s} {max:>12s} {std:>12s}')
-        
+
         labels = dict(tool1="Tool 1", tool2="Tool 2", system1='System 1', system2='System 2',
                       median='Median', mean='Mean', max='Max', std='Std.Dev.')
 
         f_txt.write(fmt.format(**labels) + "\n")
         f_txt.write('-' * 94 + "\n")
-        
-        f_html.write("<html>\n")
-        f_html.write("   <head>\n")
-        f_html.write("      <link href='style.css' rel='stylesheet' type='text/css'\n")
-        f_html.write("   </head>\n")
-        f_html.write("   <body>\n")        
-        f_html.write("<p align='center'>Summary of differences in arcseconds</p>\n")
-        f_html.write("<p align='center'>Green means < 10 milli-arcsec, orange < 1 arcsec and red > 1 arcsec</p>\n")
 
-        for tool in sorted(TOOLS):
-            for line in self.tool_comparison_table(tool):
-                f_html.write(line)
+        self._html_header(f_html)
 
         for systems in CELESTIAL_CONVERSIONS:
             logging.info('Summarizing celestial conversions: %s -> %s' % (systems['in'], systems['out']))
@@ -197,17 +187,44 @@ class CoordinatesBenchmark():
             f_html.write("    <th width=80>Std. Dev.</th>\n")
             f_html.write("    <th width=80>Plot</th>\n")
             f_html.write("  </tr>\n")
-        
+
             for tool1, tool2 in TOOL_PAIRS:
                 self._compare_celestial(tool1, tool2, systems['in'],
                                         systems['out'], f_txt, f_html)
 
             f_html.write("   </table>\n")
 
-        f_html.write("   </body>\n")
-        f_html.write("</html>\n")
+        self._html_footer(f_html)
+
         logging.info('Writing %s' % txt_filename)
         logging.info('Writing %s' % html_filename)
+
+        # Write comparison matrix
+
+        f_matrix_html = open(html_matrix_filename, 'wb')
+
+        self._html_header(f_matrix_html)
+
+        for tool in sorted(TOOLS):
+            for line in self.tool_comparison_table(tool):
+                f_matrix_html.write(line)
+
+        self._html_footer(f_matrix_html)
+
+        logging.info('Writing %s' % html_matrix_filename)
+
+    def _html_header(self, file_handle):
+        file_handle.write("<html>\n")
+        file_handle.write("   <head>\n")
+        file_handle.write("      <link href='style.css' rel='stylesheet' type='text/css'\n")
+        file_handle.write("   </head>\n")
+        file_handle.write("   <body>\n")
+        file_handle.write("      <p align='center'>Summary of differences in arcseconds</p>\n")
+        file_handle.write("      <p align='center'>Green means < 10 milli-arcsec, orange < 1 arcsec and red > 1 arcsec</p>\n")
+
+    def _html_footer(self, file_handle):
+        file_handle.write("   </body>\n")
+        file_handle.write("</html>\n")
 
     def _compare_celestial(self, tool1, tool2, system1, system2, f_txt, f_html):
         try:
@@ -220,22 +237,22 @@ class CoordinatesBenchmark():
                                         coords2['lon'], coords2['lat'])
         except IOError:
             return
-    
-        # Compute stats    
+
+        # Compute stats
         median = np.median(diff)
         mean = np.mean(diff)
         max = np.max(diff)
         std = np.std(diff)
-    
+
         # Print out stats
         fmt = ('{tool1:10s} {tool2:10s} {system1:10s} {system2:10s} '
                '{median:12.6f} {mean:12.6f} {max:12.6f} {std:12.6f}')
         f_txt.write(fmt.format(**locals()) + "\n")
-    
+
         # Write out to HTML
         color = CoordinatesBenchmark._accuracy_color(mean)
         plot_filename = CoordinatesBenchmark._plot_filename(tool1, tool2, system1, system2)
-    
+
         f_html.write("  <tr>\n")
         f_html.write("    <td align='center'>{tool1:10s}</td>\n".format(tool1=tool1))
         f_html.write("    <td align='center'>{tool2:10s}</td>\n".format(tool2=tool2))
@@ -253,9 +270,9 @@ class CoordinatesBenchmark():
 
         yield '<h2>{}</h2>'.format(tool)
         yield '<table align="center">'
-        yield '<tr><th>'
+        yield '<tr><th width="80">'
         for t in other_tools:
-            yield '<th>{}'.format(t)
+            yield '<th width="80">{}'.format(t)
         pairs = itertools.permutations(CELESTIAL_SYSTEMS, 2)
         for in_system, out_system in pairs:
             filename = self._celestial_filename(tool, in_system, out_system)
@@ -299,11 +316,11 @@ if __name__ == '__main__':
     parser.add_argument('--tools', nargs='+', default='',
                         help='List tools to run. Available tools: %s' % ', '.join(TOOLS))
     args = parser.parse_args()
-    
+
     if not args.tasks:
         parser.error('You must choose at least one task. '
                      'Available tasks:\n%s' % TASKS)
-    
+
     if not 'summary' in args.tasks:
         if not args.tools:
             args.tools = TOOLS
@@ -311,7 +328,7 @@ if __name__ == '__main__':
     for task in args.tasks:
         if not task in [_[0] for _ in TASKS]:
             parser.error("Unknown task: %s" % task)
-    
+
     for tool in args.tools:
         if not tool in TOOLS:
             parser.error("Unknown tool: %s" % tool)
@@ -319,11 +336,11 @@ if __name__ == '__main__':
     # Execute the requested steps for the requested tools
 
     benchmark = CoordinatesBenchmark()
-    
+
     if 'celestial' in args.tasks:
         for tool in args.tools:
             benchmark.run_celestial_conversions(tool)
-        
+
     if 'horizontal' in args.tasks:
         raise NotImplementedError()
 
