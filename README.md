@@ -20,6 +20,11 @@ To generate the plots:
 
     python run_benchmarks --tasks plots
 
+Latest Results
+--------------
+
+The latest results can be viewed at http://www.astropy.org/coordinates-benchmark/summary.html
+
 Links
 -----
 
