@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 """Run the coordinates benchmark"""
+
+from __future__ import print_function
+
 import os
 import argparse
 import time
@@ -49,7 +52,11 @@ class CoordinatesBenchmark():
 
     def run_celestial_conversions(self, tool):
         """Run celestial conversion benchmark for one given tool"""
-        tool_module = imp.load_source('dummy', '%s/convert.py' % tool)
+        try:
+            tool_module = imp.load_source('dummy', '%s/convert.py' % tool)
+        except IOError:
+            print("Benchmarks for {0} cannot be run because {0}/convert.py could not be imported.".format(tool))
+            return
         logging.info('Running celestial conversions using %s' % tool)    
         coords = self._read_coords('initial_coords.txt')
         for systems in CELESTIAL_CONVERSIONS:
@@ -113,7 +120,7 @@ class CoordinatesBenchmark():
 
     @staticmethod
     def _plot_filename(tool1, tool2, system1, system2):
-        return 'plots/{tool1}_vs_{tool2}_for_{system1}_to_{system2}.png'.format(**locals())
+        return 'plots/{tool1}_vs_{tool2}_for_{system1}_to_{system2}.svg'.format(**locals())
 
     @staticmethod
     def _celestial_filename(tool, in_system, out_system):
