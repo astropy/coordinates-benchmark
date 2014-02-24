@@ -171,6 +171,8 @@ class CoordinatesBenchmark():
 
         self._html_header(f_html)
 
+        f_html.write('<p align="center"><a href="summary_matrix.html"><b>See also matrix view</b></a></p>')
+
         for systems in CELESTIAL_CONVERSIONS:
             logging.info('Summarizing celestial conversions: %s -> %s' % (systems['in'], systems['out']))
 
@@ -196,6 +198,9 @@ class CoordinatesBenchmark():
 
         self._html_footer(f_html)
 
+        f_html.close()
+        f_txt.close()
+
         logging.info('Writing %s' % txt_filename)
         logging.info('Writing %s' % html_filename)
 
@@ -205,11 +210,15 @@ class CoordinatesBenchmark():
 
         self._html_header(f_matrix_html)
 
+        f_matrix_html.write('<p align="center"><a href="summary.html"><b>See also list view</b></a></p>')
+
         for tool in sorted(TOOLS):
             for line in self.tool_comparison_table(tool):
                 f_matrix_html.write(line)
 
         self._html_footer(f_matrix_html)
+
+        f_matrix_html.close()
 
         logging.info('Writing %s' % html_matrix_filename)
 
