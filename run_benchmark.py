@@ -53,12 +53,12 @@ class CoordinatesBenchmark():
     def run_celestial_conversions(self, tool):
         """Run celestial conversion benchmark for one given tool"""
         try:
-            tool_module = imp.load_source('dummy', '%s/convert.py' % tool)
+            tool_module = imp.load_source('dummy', 'tools/%s/convert.py' % tool)
         except IOError:
-            print("Benchmarks for {0} cannot be run because {0}/convert.py could not be imported.".format(tool))
+            print("Benchmarks for {0} cannot be run because tools/{0}/convert.py could not be imported.".format(tool))
             return
         logging.info('Running celestial conversions using %s' % tool)
-        coords = self._read_coords('initial_coords.txt')
+        coords = self._read_coords('input/initial_coords.txt')
         for systems in CELESTIAL_CONVERSIONS:
             timestamp = time.time()
             out_coords = tool_module.convert(coords, systems)
@@ -68,7 +68,7 @@ class CoordinatesBenchmark():
                 continue
             duration = time.time() - timestamp
             # TODO: print execution time to an ascii file (one for each tool)
-            filename = '%s/%s_to_%s.txt' % (tool, systems['in'], systems['out'])
+            filename = 'tools/%s/%s_to_%s.txt' % (tool, systems['in'], systems['out'])
             CoordinatesBenchmark._write_coords(filename, out_coords)
 
     @staticmethod
@@ -124,7 +124,7 @@ class CoordinatesBenchmark():
 
     @staticmethod
     def _celestial_filename(tool, in_system, out_system):
-        return '%s/%s_to_%s.txt' % (tool, in_system, out_system)
+        return 'tools/%s/%s_to_%s.txt' % (tool, in_system, out_system)
 
     def _read_coords(self, filename, symmetric=False):
         """Read ascii coordinates file.
