@@ -20,4 +20,4 @@ try:
     subprocess.call('git commit -m "Latest build"', shell=True)
 
 finally:
-    subprocess.call('git checkout deployer', shell=True)
+    subprocess.call('git checkout master', shell=True)

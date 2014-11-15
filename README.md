@@ -30,6 +30,17 @@ To generate the plots:
 
     python run_benchmark.py --tasks plots
 
+Deploying
+---------
+
+To deploy the latest results to the web version:
+
+    python deploy.py
+
+and if there are no errors:
+
+    git push upstream gh-pages
+
 Latest Results
 --------------
 
