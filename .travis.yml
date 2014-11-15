@@ -21,6 +21,11 @@ before_install:
     # Make sure matplotlib uses PyQT not PySide
     - export QT_API=pyqt
 
+before_install:
+
+    # Install gfortran for pyslalib
+    - sudo apt-get install gfortran
+
 install:
 
     # CONDA
