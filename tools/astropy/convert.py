@@ -30,10 +30,17 @@ def convert(coords, systems):
     lons = np.zeros_like(coords['lon'])
     lats = np.zeros_like(coords['lat'])
 
-    in_coord = coord.SkyCoord(coords['lon'] * u.deg, coords['lat'] * u.deg,
-                              frame=skyin, obstime=Time('J2000', scale='utc'))
+    in_kwargs = {}
+    if skyin is coord.FK4:
+        in_kwargs['obstime'] = Time('J2000', scale='utc')
 
-    out_coord = in_coord.transform_to(skyout)
+    out_kwargs = {}
+    if skyout is coord.FK4:
+        out_kwargs['obstime'] = Time('J2000', scale='utc')
+
+    in_coord = skyin(coords['lon'] * u.deg, coords['lat'] * u.deg, **in_kwargs)
+
+    out_coord = in_coord.transform_to(skyout(**out_kwargs))
 
     lons, lats = out_coord.spherical.lon.degree, out_coord.spherical.lat.degree
 
