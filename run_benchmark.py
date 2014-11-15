@@ -71,7 +71,7 @@ class CoordinatesBenchmark():
             if report_speed:
                 f_speed.write('%15s %10s %10s %10.6f\n' %
                               (tool, systems['in'], systems['out'], duration))
-            filename = '%s/%s_to_%s.txt' % (tool, systems['in'], systems['out'])
+            filename = 'tools/%s/%s_to_%s.txt' % (tool, systems['in'], systems['out'])
             self._write_coords(filename, out_coords)
 
     @staticmethod
