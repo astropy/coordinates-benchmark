@@ -21,8 +21,6 @@ before_install:
     # Make sure matplotlib uses PyQT not PySide
     - export QT_API=pyqt
 
-before_install:
-
     # Install gfortran for pyslalib
     - sudo apt-get install gfortran
 
@@ -38,3 +36,5 @@ install:
 
 script:
     - python run_benchmark.py --tasks celestial
+    - python run_benchmark.py --tasks summary
+    - python run_benchmark.py --tasks plots
