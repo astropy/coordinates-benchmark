@@ -12,7 +12,8 @@ try:
 
     for root, dirnames, filenames in os.walk(os.path.join(tmpdir, 'output')):
         for filename in filenames:
-            print(root, filename)
+            if filename.endswith('.png'):  # for now
+                continue
             filename = os.path.relpath(os.path.join(root, filename), os.path.join(tmpdir, 'output'))
             shutil.copy(os.path.join(tmpdir, 'output', filename), filename)
             subprocess.call('git add ' + filename, shell=True)
