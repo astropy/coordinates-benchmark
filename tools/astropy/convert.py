@@ -30,12 +30,12 @@ def convert(coords, systems):
     lons = np.zeros_like(coords['lon'])
     lats = np.zeros_like(coords['lat'])
 
-    in_coord = skyin(coords['lon'], coords['lat'], unit=(u.degree, u.degree),
-                     obstime=Time('J2000', scale='utc'))
+    in_coord = coord.SkyCoord(coords['lon'] * u.deg, coords['lat'] * u.deg,
+                              frame=skyin, obstime=Time('J2000', scale='utc'))
 
     out_coord = in_coord.transform_to(skyout)
 
-    lons, lats = out_coord.lonangle.degree, out_coord.latangle.degree
+    lons, lats = out_coord.spherical.lon.degree, out_coord.spherical.lat.degree
 
     lons = lons % 360.
 
