@@ -157,7 +157,7 @@ class CoordinatesBenchmark():
     def _write_coords(filename, coords):
         logging.info('Writing %s' % filename)
         data = np.transpose(np.vstack([coords['lon'], coords['lat']]))
-        np.savetxt(filename, data, fmt="%20.15f")
+        np.savetxt(filename, data, fmt="%15.10f")
 
     def summary(self, txt_filename='summary.txt', html_filename='summary.html', html_matrix_filename='summary_matrix.html'):
         """Write txt and html summary"""
