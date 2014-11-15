@@ -50,6 +50,7 @@ Links
 -----
 
 Repository: https://github.com/astropy/coordinates-benchmark
+
 Results summary: http://www.astropy.org/coordinates-benchmark/summary.html
 
 Mailing list discussions:
