@@ -119,12 +119,12 @@ class CoordinatesBenchmark():
         ax.set_title("{tool1} vs {tool2} for conversion {system1} -> {system2}".format(**locals()), y=1.1)
         filename = CoordinatesBenchmark._plot_filename(tool1, tool2, system1, system2)
         logging.info('Writing %s' % filename)
-        fig.savefig(filename, bbox_inches='tight')
+        fig.savefig(os.path.join('output', filename), bbox_inches='tight')
         plt.close(fig)
 
     @staticmethod
     def _plot_filename(tool1, tool2, system1, system2):
-        return 'plots/{tool1}_vs_{tool2}_for_{system1}_to_{system2}.svg'.format(**locals())
+        return 'plots/{tool1}_vs_{tool2}_for_{system1}_to_{system2}.png'.format(**locals())
 
     @staticmethod
     def _celestial_filename(tool, in_system, out_system):
@@ -367,8 +367,10 @@ if __name__ == '__main__':
         benchmark.summary()
 
     if 'plots' in args.tasks:
-        if not os.path.exists('plots'):
-            os.mkdir('plots')
+        if not os.path.exists('output'):
+            os.mkdir('output')
+        if not os.path.exists('output/plots'):
+            os.mkdir('output/plots')
 
         for tool in args.tools:
             logging.info('Making plots for tool {tool}'.format(tool=tool))
