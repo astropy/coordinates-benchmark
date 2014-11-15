@@ -5,20 +5,30 @@ Here we compare astropy coordinate conversion results against other Python packa
 
 For now we only compare precision, in the future we also want to compare speed.
 
+Setting up an environment to run the benchmarks
+-----------------------------------------------
+
+If you want to set up a virtual environment to run the benchmarks, you can do:
+
+    virtualenv env
+    source env/bin/activate
+    pip install numpy Cython
+    pip install -r pip-requirements.txt
+
 Running
 -------
 
 To run the benchmarks:
 
-    python run_benchmarks --tasks celestial
+    python run_benchmark.py --tasks celestial
 
 To generate the summary:
 
-    python run_benchmarks --tasks summary
+    python run_benchmark.py --tasks summary
 
 To generate the plots:
 
-    python run_benchmarks --tasks plots
+    python run_benchmark.py --tasks plots
 
 Latest Results
 --------------
