@@ -6,3 +6,4 @@
 *.html
 *.pyc
 output/plots/
+env

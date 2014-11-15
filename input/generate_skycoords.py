@@ -1,3 +1,9 @@
+"""Generate skycoords.txt file.
+
+Columns:
+- lon      : longitude in deg
+- lat      : latitude in deg
+"""
 import numpy as np
 np.random.seed(12345)
 
