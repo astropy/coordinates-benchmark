@@ -5,6 +5,8 @@ Here we compare astropy coordinate conversion results against other Python packa
 
 For now we only compare precision, in the future we also want to compare speed.
 
+[![Build Status](https://travis-ci.org/astropy/coordinates-benchmark.svg?branch=master)](https://travis-ci.org/astropy/coordinates-benchmark)
+
 Setting up an environment to run the benchmarks
 -----------------------------------------------
 
