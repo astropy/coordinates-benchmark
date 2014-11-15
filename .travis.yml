@@ -1,0 +1,40 @@
+language: python
+
+python:
+    - 2.7
+
+before_install:
+
+    # Use utf8 encoding. Should be default, but this is insurance against
+    # future changes
+    - export PYTHONIOENCODING=UTF8
+    - wget http://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh -O miniconda.sh
+    - chmod +x miniconda.sh
+    - ./miniconda.sh -b
+    - export PATH=/home/travis/miniconda/bin:$PATH
+    - conda update --yes conda
+
+    # Make sure that interactive matplotlib backends work
+    - export DISPLAY=:99.0
+    - sh -e /etc/init.d/xvfb start
+
+    # Make sure matplotlib uses PyQT not PySide
+    - export QT_API=pyqt
+
+    # Install gfortran for pyslalib
+    - sudo apt-get install gfortran
+
+install:
+
+    # CONDA
+    - conda create --yes -n test -c astropy-ci-extras python=$TRAVIS_PYTHON_VERSION
+    - source activate test
+
+    # CORE DEPENDENCIES
+    - conda install --yes numpy pip Cython pyqt matplotlib
+    - pip install -r pip-requirements.txt
+
+script:
+    - python run_benchmark.py --tasks celestial
+    - python run_benchmark.py --tasks summary
+    - python run_benchmark.py --tasks plots
