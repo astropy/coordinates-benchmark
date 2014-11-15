@@ -120,6 +120,7 @@ class CoordinatesBenchmark():
         filename = CoordinatesBenchmark._plot_filename(tool1, tool2, system1, system2)
         logging.info('Writing %s' % filename)
         fig.savefig(filename, bbox_inches='tight')
+        plt.close(fig)
 
     @staticmethod
     def _plot_filename(tool1, tool2, system1, system2):
@@ -274,7 +275,7 @@ class CoordinatesBenchmark():
         f_html.write("    <td align='right' class='{color}'>{mean:12.6f}</td>\n".format(color=color, mean=mean))
         f_html.write("    <td align='right' class='{color}'>{max:12.6f}</td>\n".format(color=color, max=max))
         f_html.write("    <td align='right' class='{color}'>{std:12.6f}</td>\n".format(color=color, std=std))
-        f_html.write("    <td align='center'><a href='{plot_filename}'>PNG</a></td>\n".format(plot_filename=plot_filename))
+        f_html.write("    <td align='center'><a href='{plot_filename}'>Plot</a></td>\n".format(plot_filename=plot_filename))
         f_html.write("  </tr>\n")
 
     def tool_comparison_table(self, tool):
