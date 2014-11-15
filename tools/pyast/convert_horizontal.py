@@ -5,8 +5,8 @@ from astropy.time import Time
 
 # Read in initial coordinates and the observers.
 # For now just process one observer and 10 positions to compare against pyast
-data_j2000 = np.loadtxt('../../input/initial_coords.txt')[:3]
-observers = np.recfromcsv('../../input/observers.txt')[:2]
+data_j2000 = np.loadtxt('../initial_coords.txt')[:3]
+observers = np.recfromcsv('../observers.txt')[:2]
 
 # We'll store the results here
 results = np.zeros(data_j2000.shape[0] * observers.shape[0], dtype=[('az', 'float64'), ('alt', 'float64')])
