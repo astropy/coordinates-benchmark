@@ -8,6 +8,7 @@ The following Python packages for astronomy coordinate calculations are compared
 * `kapteyn.celestial <http://www.astro.rug.nl/software/kapteyn/celestial.html>`_: Part of the `Kapteyn <http://www.astro.rug.nl/software/kapteyn/>`_ package.
 * NOVAS (`PyPI <http://pypi.python.org/pypi/novas/>`_, `Official <http://www.usno.navy.mil/USNO/astronomical-applications/software-products/novas/novas-python>`_): A `ctypes <http://docs.python.org/library/ctypes.html>`_ wrapper for the NOVAS C library from the United States Naval observatory.
 * `pyast <http://dsberry.github.com/starlink/pyast.html>`_: A Python interface to the `Starlink AST <http://starlink.jach.hawaii.edu/starlink/AST>`_ C library.
+* `palpy <https://github.com/Starlink/palpy>`_: A Python interface to the `Starlink PAL <https://github.com/Starlink/pal>`_ C library which is a reimplementation of SLALIB using SOFA/ERFA.
 * `pyephem <http://rhodesmill.org/pyephem/>`_: A Python astrometry package based on the `xephem <http://www.clearskyinstitute.com/xephem/>`_ coordinate routines, which are interfaced as C extensions. Currently a re-write using Cython is underway in the `version4` branch on github.
 * `pyslalib <https://github.com/scottransom/pyslalib>`_: `f2py <http://www.scipy.org/F2py>`_ and `numpy <http://numpy.scipy.org/>`_ wrappers of the fortran version of the astro library `SLALIB <http://www.starlink.rl.ac.uk/docs/sun67.htx/sun67.html>`_
 * `pysofa <http://pypi.python.org/pypi/pysofa>`_ is a `ctypes <http://docs.python.org/library/ctypes.html>`_ wrapper for the `SOFA <http://www.iausofa.org>`_ `C library <http://www.iausofa.org/current_C.html>`_. It does use numpy for 3x3 matrices, but it does not support input numpy arrays of coordinates for it's functions.
@@ -30,6 +31,7 @@ astropy           BSD           ---           No    No
 astrolib.coords   BSD           ???           No    No
 kapteyn.celestial BSD           ---           Yes   No
 novas             Public Domain Public Domain No    Yes
+palpy             GPL           GPL           Some  Yes
 pyast             GPL           GPL           Yes   Yes
 pyephem           LGPL          LGPL          No    Yes
 pyslalib          GPL           GPL           No    Yes

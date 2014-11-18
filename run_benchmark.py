@@ -21,7 +21,7 @@ CELESTIAL_CONVERSIONS = [dict(zip(['in', 'out'], _))
                          for _ in CELESTIAL_CONVERSIONS
                          if _[0] != _[1]]
 
-TOOLS = 'astropy kapteyn novas pyast pyephem pyslalib astrolib idl'.split()
+TOOLS = 'astropy kapteyn novas pyast palpy pyephem pyslalib astrolib idl'.split()
 TOOL_PAIRS = [_ for _ in itertools.product(TOOLS, TOOLS)
               if _[0] < _[1]]
 
