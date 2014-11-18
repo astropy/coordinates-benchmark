@@ -18,3 +18,7 @@ h2 {
 	font: 24px "Lucida Grande", Lucida, Verdana, sans-serif;
 	text-align: center;
 }
+
+.anchor {
+	text-decoration:none;
+}

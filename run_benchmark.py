@@ -180,7 +180,7 @@ class CoordinatesBenchmark():
         for systems in CELESTIAL_CONVERSIONS:
             logging.info('Summarizing celestial conversions: %s -> %s' % (systems['in'], systems['out']))
 
-            f_html.write("<h2>{in} to {out}</h2>".format(**systems))
+            f_html.write("<a name='{in}_{out}'></a><a class='anchor' href='#{in}_{out}'><h2>{in} to {out}</h2></a>".format(**systems))
             f_html.write("<table align='center'>\n")
             f_html.write("  <tr>\n")
             f_html.write("    <th width=80>Tool 1</th>\n")
@@ -281,7 +281,7 @@ class CoordinatesBenchmark():
     def tool_comparison_table(self, tool):
         other_tools = sorted(t for t in TOOLS if t != tool)
 
-        yield '<h2>{}</h2>'.format(tool)
+        yield '<a name="{0}"></a><a class="anchor" href="#{0}"><h2>{0}</h2></a>'.format(tool)
         yield '<table align="center">'
         yield '<tr><th width="80">'
         for t in other_tools:
