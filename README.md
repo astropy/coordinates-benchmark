@@ -43,6 +43,19 @@ and if there are no errors:
 
     git push upstream gh-pages
 
+The benchmarks
+--------------
+
+The coordinate systems used in the benchmarks are:
+
+* ``fk4``: FK4 system (with e-terms), equinox B1950 and observation epoch J2000
+* ``fk5``: FK5 system, equinox J2000
+* ``icrs``: ICRS system
+* ``galactic``: Galactic coordinate system
+* ``ecliptic``: Ecliptic coordinate system, observation epoch J2000
+
+The main scripts to set up the benchmarks are in ``tools/<toolname>/convert.py``.
+
 Latest Results
 --------------
 
