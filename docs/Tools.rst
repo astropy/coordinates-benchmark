@@ -32,7 +32,7 @@ astrolib.coords   BSD           ???           No    No
 kapteyn.celestial BSD           ---           Yes   No
 novas             Public Domain Public Domain No    Yes
 palpy             GPL           GPL           Some  Yes
-pyast             GPL           GPL           Yes   Yes
+pyast             LGPL          LGPL          Yes   Yes
 pyephem           LGPL          LGPL          No    Yes
 pyslalib          GPL           GPL           No    Yes
 pysofa            MIT           SOFA          No    Yes
