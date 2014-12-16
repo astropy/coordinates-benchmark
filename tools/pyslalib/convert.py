@@ -8,8 +8,8 @@ from pyslalib import slalib
 
 SUPPORTED_SYSTEMS = 'fk5 fk4 icrs galactic ecliptic'.split()
 
+
 def convert(coords, systems):
-    
     if not set(systems.values()).issubset(SUPPORTED_SYSTEMS):
         return None
 
@@ -26,11 +26,11 @@ def convert(coords, systems):
             lon, lat = slalib.sla_galeq(lon, lat)
         elif systems['in'] == 'ecliptic':
             lon, lat = slalib.sla_ecleq(lon, lat, 51544)
-        
+
         # Now convert from FK5 J2000 to out system    
         if systems['out'] == 'fk4':
             # FK5 -> FK4 at BEPOCH 2000 assuming no proper motion or parallax
-            lon, lat = slalib.sla_fk54z (lon, lat, 2000.0012775136652)[:2]
+            lon, lat = slalib.sla_fk54z(lon, lat, 2000.0012775136652)[:2]
         elif systems['out'] == 'icrs':
             # FK5 -> Hipparcos (i.e. ICRF, which is as close as SLALIB
             # gets to ICRS) at epoch 2000 and with no proper motion

@@ -54,8 +54,9 @@ class CoordinatesBenchmark():
         """Run celestial conversion benchmark for one given tool"""
         try:
             tool_module = imp.load_source('dummy', 'tools/%s/convert.py' % tool)
-        except IOError:
-            print("Benchmarks for {0} cannot be run because tools/{0}/convert.py could not be imported.".format(tool))
+        except (IOError, ImportError):
+            logging.warning("Benchmarks for {0} cannot be run because tools/{0}/convert.py "
+                            "could not be imported.".format(tool))
             return
         logging.info('Running celestial conversions using %s' % tool)
         coords = self._read_coords('input/initial_coords.txt')
@@ -210,7 +211,7 @@ class CoordinatesBenchmark():
 
         # Write comparison matrix
 
-        f_matrix_html = open(os.path.join('output', html_matrix_filename), 'wb')
+        f_matrix_html = open(os.path.join('output', html_matrix_filename), 'w')
 
         self._html_header(f_matrix_html)
 
@@ -355,7 +356,7 @@ if __name__ == '__main__':
     if 'celestial' in args.tasks:
         report_speed = True
         if report_speed:
-            f_speed = open('speed.txt', 'wb')
+            f_speed = open('speed.txt', 'w')
 
         for tool in args.tools:
             benchmark.run_celestial_conversions(tool, report_speed=report_speed)

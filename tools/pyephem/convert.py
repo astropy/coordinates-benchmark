@@ -9,8 +9,8 @@ import ephem
 
 SUPPORTED_SYSTEMS = 'fk5 fk4 galactic ecliptic'.split()
 
+
 def convert(coords, systems):
-    
     if not set(systems.values()).issubset(SUPPORTED_SYSTEMS):
         return None
 
@@ -46,7 +46,7 @@ def convert(coords, systems):
             lon, lat = coord.lon, coord.lat
         else:
             raise ValueError()
-        
+
         lons[ii], lats[ii] = lon, lat
 
     return dict(lon=np.degrees(lons), lat=np.degrees(lats))

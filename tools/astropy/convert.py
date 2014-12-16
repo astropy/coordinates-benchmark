@@ -4,12 +4,12 @@ Coordinate conversions with the astropy Python package.
 https://github.com/astropy/astropy
 http://www.astropy.org
 """
-import numpy as np
 from astropy import coordinates as coord
 from astropy.time import Time
 from astropy import units as u
 
 SUPPORTED_SYSTEMS = 'fk5 fk4 icrs galactic'.split()
+
 
 def get_system(system):
     """Convert generic system specification tags to astropy specific class."""
@@ -20,15 +20,12 @@ def get_system(system):
     d['galactic'] = coord.Galactic
     return d[system]
 
-def convert(coords, systems):
 
+def convert(coords, systems):
     if not set(systems.values()).issubset(SUPPORTED_SYSTEMS):
         return None
 
     skyin, skyout = get_system(systems['in']), get_system(systems['out'])
-
-    lons = np.zeros_like(coords['lon'])
-    lats = np.zeros_like(coords['lat'])
 
     in_kwargs = {}
     if skyin is coord.FK4:
