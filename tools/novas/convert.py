@@ -10,8 +10,8 @@ from novas import compat as novas
 
 T0 = 2451545.00000000
 
-def convert(coords, systems):
 
+def convert(coords, systems):
     rav = coords['lon'] / 15.0
     decv = coords['lat']
     plist = [novas.radec2vector(ra, dec, 1.0) for ra, dec in zip(rav, decv)]
