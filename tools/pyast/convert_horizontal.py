@@ -1,4 +1,5 @@
-"""Convert FK5 J2000 to / from horizontal coordinate system"""
+"""Convert ICRS to AltAz with PyAST.
+"""
 import numpy as np
 import starlink.Ast as Ast
 from astropy.time import Time
@@ -34,7 +35,7 @@ for ii, (lon, lat, altitude, time, time_mjd, time_tdb) in enumerate(observers):
         # Compute alt / az
         fk5_to_out = fk5_frame.convert( out_frame )
         #import IPython; IPython.embed(); 1/0
-        alt, az = np.degrees(fk5_to_out.tran([[ra], [dec]]))
+        az, alt = np.degrees(fk5_to_out.tran([[ra], [dec]]))
 
         # Store in results array
         kk = ii * data_j2000.shape[0] + jj

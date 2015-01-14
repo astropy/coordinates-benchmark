@@ -1,11 +1,11 @@
-"""Convert ICRS to AltAz with PyEphem.
+"""Convert ICRS to AltAz with Astropy.
 """
 import logging
 logging.basicConfig(level=logging.INFO)
-import numpy as np
-import astropy.units as u
 from astropy.table import Table
-import ephem
+import astropy.units as u
+from astropy.time import Time
+from astropy.coordinates import Angle, EarthLocation, AltAz, SkyCoord
 
 TABLE_FORMAT = 'ascii.fixed_width_two_line'
 FLOAT_FORMAT = '%20.15f'
@@ -27,28 +27,28 @@ def read_positions_observers():
 def _convert_radec_to_altaz(ra, dec, lon, lat, height, time):
     """Convert a single position.
 
-    (PyEphem doesn't support arrays of positions.)
+    This is done for easy code sharing with other tools.
+    Astropy does support arrays of positions.
     """
-    # We need to create a "Body" in pyephem, which represents the coordinate
-    # http://stackoverflow.com/questions/11169523/how-to-compute-alt-az-for-given-galactic-coordinate-glon-glat-with-pyephem
-    body = ephem.FixedBody()
-    body._ra = np.radians(ra)
-    body._dec = np.radians(dec)
-    #body._epoch = 'eq.epoch'
+    radec = SkyCoord(ra, dec, unit='deg')
 
-    # Set observer parameters
-    obs = ephem.Observer()
-    obs.lon = np.radians(lon)
-    obs.lat = np.radians(lat)
-    obs.elevation = (height * u.km).to(u.m).value
-    obs.epoch = '2000'
-    obs.date = time
-    # Turn refraction off by setting pressure to zero
-    obs.pressure = 0
+    location = EarthLocation(lon=Angle(lon, 'deg'),
+                             lat=Angle(lat, 'deg'),
+                             height=height * u.km)
 
-    # Compute alt / az of the body for that observer
-    body.compute(obs)
-    az, alt = np.degrees([body.az, body.alt])
+
+    # Pressure = 0 is the default
+    obstime = Time(time, scale='utc')
+    # temperature = 0 * u.deg_C
+    # pressure = 0 * u.bar
+    # relative_humidity = ?
+    # obswl = ?
+    altaz_frame = AltAz(obstime=obstime, location=location)
+    #                temperature=temperature, pressure=pressure)
+
+    altaz = radec.transform_to(altaz_frame)
+    az = altaz.az.deg
+    alt = altaz.alt.deg
 
     return dict(az=az, alt=alt)
 
