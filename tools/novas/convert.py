@@ -1,3 +1,4 @@
+# Licensed under a 3-clause BSD style license - see LICENSE.rst
 """Conversions using the Python-wrapped high-precision C NOVAS library.
 
 http://aa.usno.navy.mil/software/novas/novas_py/novaspy_intro.php

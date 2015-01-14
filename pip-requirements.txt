@@ -7,3 +7,5 @@ pyephem
 https://github.com/scottransom/pyslalib/archive/master.zip
 starlink-pyast
 palpy
+click
+

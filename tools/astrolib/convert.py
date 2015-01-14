@@ -1,3 +1,4 @@
+# Licensed under a 3-clause BSD style license - see LICENSE.rst
 """
 Coordinate conversions with the astrolib coords package.
 astrolib coords is a Python wrapper around the TPM C library [2].

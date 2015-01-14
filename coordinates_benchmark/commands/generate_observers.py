@@ -1,41 +1,36 @@
-"""Generate observers.txt file.
-
-A small list of observers (lon, lat, altitude, time in various formats).
-
-This list will be used as input for the horizontal coordinate conversion tests.
-
-Columns:
-- lon      : longitude in deg
-- lat      : latitude in deg
-- altitude : altitude in km
-- time     : UTC time string
-- time_mjd : time in MJD scale
-- time_tdb : time in TDB scale
-"""
+# Licensed under a 3-clause BSD style license - see LICENSE.rst
+"""Create lists of observers."""
 import logging
-logging.basicConfig(level=logging.INFO)
 import itertools
 import numpy as np
 from astropy.time import Time
 from astropy.table import Table
+from ..config import FLOAT_FORMAT, TABLE_FORMAT
+import click
 
-TABLE_FORMAT = 'ascii.fixed_width_two_line'
-FLOAT_FORMAT = '%20.15f'
 
+def make_observer_table(n_samples=5):
+    """Generate table of observers.
 
-def make_observer_table():
-    """Make table with test observer locations / times.
+    TODO: use real observatory positions instead.
 
-    TODO: use real observatory locations instead.
+    A small list of observers (lon, lat, altitude, time in various formats).
+
+    This list will be used as input for the horizontal coordinate conversion tests.
+
+    Columns:
+    - lon      : longitude in deg
+    - lat      : latitude in deg
+    - altitude : altitude in km
+    - time     : UTC time string
+    - time_mjd : time in MJD scale
+    - time_tdb : time in TDB scale
     """
     np.random.seed(12345)
 
-    # Number of samples
-    N = 5
-
     # Sample uniformly on the unit sphere
-    lon = np.random.uniform(0., 360., N)
-    lat = np.degrees(np.arcsin(np.random.uniform(-1., 1., N)))
+    lon = np.random.uniform(0., 360., n_samples)
+    lat = np.degrees(np.arcsin(np.random.uniform(-1., 1., n_samples)))
 
     # Sample of heights (distances from the Earth's center) in km
     height = np.array([6e3, 10e3], dtype='float64')
@@ -63,12 +58,10 @@ def make_observer_table():
     return table
 
 
-def main():
+@click.command(name='make_observer_table')
+def make_observer_table_command():
+    """Generate table of observers."""
     table = make_observer_table()
-    filename = 'observers.txt'
+    filename = 'input/observers.txt'
     logging.info('Writing {}'.format(filename))
     table.write(filename, format=TABLE_FORMAT)
-
-
-if __name__ == '__main__':
-    main()

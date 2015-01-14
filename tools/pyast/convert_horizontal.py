@@ -1,3 +1,4 @@
+# Licensed under a 3-clause BSD style license - see LICENSE.rst
 """Convert ICRS to AltAz with PyAST.
 """
 import numpy as np

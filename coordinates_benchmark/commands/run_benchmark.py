@@ -1,15 +1,15 @@
+# Licensed under a 3-clause BSD style license - see LICENSE.rst
 """Run the coordinates benchmark"""
-
 from __future__ import print_function
-
 import os
 import argparse
 import time
 import itertools
 import imp
 import logging
-logging.basicConfig(format='%(levelname)s: %(message)s', level=logging.INFO)
 import numpy as np
+import click
+from ..utils import _vicenty_dist_arcsec
 
 # Make a list of celestial conversions to check
 # We simply list all possible combinations here,
@@ -24,24 +24,6 @@ TOOLS = 'astropy kapteyn novas pyast palpy pyephem pyslalib astrolib pytpm idl'.
 TOOL_PAIRS = [_ for _ in itertools.product(TOOLS, TOOLS)
               if _[0] < _[1]]
 
-def _vicenty_dist_arcsec(lon1, lat1, lon2, lat2):
-    """Compute distance on the sky. Input and output in arcsec"""
-
-    lon1 = np.radians(lon1)
-    lat1 = np.radians(lat1)
-    lon2 = np.radians(lon2)
-    lat2 = np.radians(lat2)
-
-    sdlon = np.sin(lon2 - lon1)
-    cdlon = np.cos(lon2 - lon1)
-
-    num1 = np.cos(lat2) * sdlon
-    num2 = np.cos(lat1) * np.sin(lat2) - np.sin(lat1) * np.cos(lat2) * cdlon
-    denominator = np.sin(lat1) * np.sin(lat2) + np.cos(lat1) * np.cos(lat2) * cdlon
-
-    dist_in_radians = np.arctan2((num1 ** 2 + num2 ** 2) ** 0.5, denominator)
-    deg_to_arcsec = 3600.
-    return deg_to_arcsec * np.degrees(dist_in_radians)
 
 class CoordinatesBenchmark():
     """Summarize all available benchmark results in a txt and html file"""
@@ -314,65 +296,57 @@ class CoordinatesBenchmark():
         yield '</table>'
 
 
-def main():
-    # Command line argument parsing and argument checking
+benchmark = CoordinatesBenchmark()
 
-    TASKS = [('celestial', 'Run celestial coordinate conversions'),
-             ('horizontal', 'Run horizontal coordinate conversions'),
-             ('summary', 'Create txt and html summaries'),
-             ('plots', 'Create plots')]
 
-    parser = argparse.ArgumentParser(description='Run the coordinates benchmark')
-    parser.add_argument('--tasks', nargs='+', default='',
-                        help='List of tasks to run.\n'
-                        'Available tasks:\n%s' % TASKS)
-    parser.add_argument('--tools', nargs='+', default='',
-                        help='List tools to run.\n'
-                        'Available tools: %s' % ', '.join(TOOLS))
-    args = parser.parse_args()
+# parser.add_argument('--tools', nargs='+', default='',
+#                     help='List tools to run.\n'
+#                     'Available tools: %s' % ', '.join(TOOLS))
+# for tool in args.tools:
+#     if not tool in TOOLS:
+#         parser.error("Unknown tool: %s" % tool)
 
-    if not args.tasks:
-        parser.error('You must choose at least one task. '
-                     'Available tasks:\n%s' % TASKS)
 
-    if not 'summary' in args.tasks:
-        if not args.tools:
-            args.tools = TOOLS
+@click.command()
+def benchmark_celestial(tools):
+    """Run celestial coordinate conversions."""
+    # TODO: implement command line option for speed reporting
+    report_speed = False
 
-    for task in args.tasks:
-        if not task in [_[0] for _ in TASKS]:
-            parser.error("Unknown task: %s" % task)
+    for tool in tools:
+        benchmark.run_celestial_conversions(tool, report_speed=report_speed)
 
-    for tool in args.tools:
-        if not tool in TOOLS:
-            parser.error("Unknown tool: %s" % tool)
 
-    # Execute the requested steps for the requested tools
+@click.command()
+def benchmark_horizontal(tools):
+    """Run horizontal coordinate conversions."""
+    raise NotImplementedError
 
-    benchmark = CoordinatesBenchmark()
 
-    if 'celestial' in args.tasks:
-        # TODO: implement command line option for speed reporting
-        report_speed = False
+@click.command()
+def benchmark_all(tools):
+    """Run coordinate benchmarks."""
+    benchmark_celestial(tools)
+    benchmark_horizontal(tools)
 
-        for tool in args.tools:
-            benchmark.run_celestial_conversions(tool, report_speed=report_speed)
-        
-    if 'horizontal' in args.tasks:
-        raise NotImplementedError()
 
-    if 'summary' in args.tasks:
-        benchmark.summary()
+@click.command()
+def summary():
+    """Summarize all results into a few stats (mean, stddev, ...)"""
+    benchmark.summary()
 
-    if 'plots' in args.tasks:
-        if not os.path.exists('output'):
-            os.mkdir('output')
-        if not os.path.exists('output/plots'):
-            os.mkdir('output/plots')
 
-        for tool in args.tools:
-            logging.info('Making plots for tool {tool}'.format(tool=tool))
-            other_tools = [_[1] for _ in TOOL_PAIRS if _[0] == tool]
-            for tool2 in other_tools:
-                for systems in CELESTIAL_CONVERSIONS:
-                    benchmark.make_plot(tool, tool2, systems['in'], systems['out'])
+@click.command()
+def plots(tools):
+    """Create plots illustrating differences in the results."""
+    if not os.path.exists('output'):
+        os.mkdir('output')
+    if not os.path.exists('output/plots'):
+        os.mkdir('output/plots')
+
+    for tool in tools:
+        logging.info('Making plots for tool {tool}'.format(tool=tool))
+        other_tools = [_[1] for _ in TOOL_PAIRS if _[0] == tool]
+        for tool2 in other_tools:
+            for systems in CELESTIAL_CONVERSIONS:
+                benchmark.make_plot(tool, tool2, systems['in'], systems['out'])

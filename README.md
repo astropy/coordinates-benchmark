@@ -17,27 +17,29 @@ If you want to set up a virtual environment to run the benchmarks, you can do:
     pip install numpy Cython jinja2
     pip install -r pip-requirements.txt
 
+Make sure you use Python 2, because ``kapteyn`` doesn't support Python 3.
+
 Running
 -------
 
 To run the benchmarks:
 
-    ./make.py --tasks celestial
+    ./make.py celestial
 
 To generate the summary:
 
-    ./make.py --tasks summary
+    ./make.py summary
 
 To generate the plots:
 
-    ./make.py --tasks plots
+    ./make.py plots
 
 Deploying
 ---------
 
 To deploy the latest results to the web version:
 
-    python deploy.py
+    ./make.py deploy
 
 and if there are no errors:
 

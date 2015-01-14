@@ -2,6 +2,7 @@ language: python
 
 python:
     - 2.7
+    - 3.4
 
 before_install:
 
@@ -32,9 +33,10 @@ install:
 
     # CORE DEPENDENCIES
     - conda install --yes numpy pip Cython jinja2 pyqt matplotlib
-    - pip install -r pip-requirements.txt
+    - pip install -r requirements.txt
 
 script:
-    - python run_benchmark.py --tasks celestial
-    - python run_benchmark.py --tasks summary
-    - python run_benchmark.py --tasks plots
+    - ./make.py --help
+    - ./make.py benchmark_all
+    - ./make.py summary
+    - ./make.py plots

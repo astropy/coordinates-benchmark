@@ -1,5 +1,6 @@
 #!/usr/bin/env python
-"""Run coordinate-benchmark tasks.
+# Licensed under a 3-clause BSD style license - see LICENSE.rst
+"""Run coordinate-benchmark commands.
 """
-from coordinates_benchmark.run_benchmark import main
-main()
+from coordinates_benchmark.commands import cli
+cli()
