@@ -1,0 +1,2 @@
+"""Astropy coordinates benchmark.
+"""
