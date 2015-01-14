@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 """Run the coordinates benchmark"""
 
 from __future__ import print_function
@@ -69,9 +68,9 @@ class CoordinatesBenchmark():
                 logging.info('Skipping %s -> %s. Not supported.' %
                              (systems['in'], systems['out']))
                 continue
-            if report_speed:
-                f_speed.write('%15s %10s %10s %10.6f\n' %
-                              (tool, systems['in'], systems['out'], duration))
+            #if report_speed:
+            #    f_speed.write('%15s %10s %10s %10.6f\n' %
+            #                  (tool, systems['in'], systems['out'], duration))
             filename = 'tools/%s/%s_to_%s.txt' % (tool, systems['in'], systems['out'])
             self._write_coords(filename, out_coords)
 
@@ -315,8 +314,7 @@ class CoordinatesBenchmark():
         yield '</table>'
 
 
-if __name__ == '__main__':
-
+def main():
     # Command line argument parsing and argument checking
 
     TASKS = [('celestial', 'Run celestial coordinate conversions'),
@@ -354,9 +352,8 @@ if __name__ == '__main__':
     benchmark = CoordinatesBenchmark()
 
     if 'celestial' in args.tasks:
-        report_speed = True
-        if report_speed:
-            f_speed = open('speed.txt', 'w')
+        # TODO: implement command line option for speed reporting
+        report_speed = False
 
         for tool in args.tools:
             benchmark.run_celestial_conversions(tool, report_speed=report_speed)

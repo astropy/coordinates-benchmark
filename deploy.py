@@ -1,3 +1,6 @@
+"""Deploy HTML output to Github pages.
+"""
+
 import os
 import shutil
 import tempfile

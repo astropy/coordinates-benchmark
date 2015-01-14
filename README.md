@@ -22,15 +22,15 @@ Running
 
 To run the benchmarks:
 
-    python run_benchmark.py --tasks celestial
+    ./make.py --tasks celestial
 
 To generate the summary:
 
-    python run_benchmark.py --tasks summary
+    ./make.py --tasks summary
 
 To generate the plots:
 
-    python run_benchmark.py --tasks plots
+    ./make.py --tasks plots
 
 Deploying
 ---------
