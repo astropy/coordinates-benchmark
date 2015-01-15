@@ -1,7 +1,10 @@
 # Licensed under a 3-clause BSD style license - see LICENSE.rst
 """Utility functions / classes.
 """
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
 import numpy as np
+
 
 # TODO: replace by function from astropy.coordinates
 def _vicenty_dist_arcsec(lon1, lat1, lon2, lat2):

@@ -1,6 +1,8 @@
 # Licensed under a 3-clause BSD style license - see LICENSE.rst
 """Command line tool (uses sub-commands).
 """
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
 # TODO: set up logging with click and add verbosity option
 import logging
 logging.basicConfig(format='%(levelname)s: %(message)s', level=logging.INFO)

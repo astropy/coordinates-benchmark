@@ -1,8 +1,8 @@
 # Licensed under a 3-clause BSD style license - see LICENSE.rst
 """Run the coordinates benchmark"""
-from __future__ import print_function
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
 import os
-import argparse
 import time
 import itertools
 import imp
@@ -10,19 +10,6 @@ import logging
 import numpy as np
 import click
 from ..utils import _vicenty_dist_arcsec
-
-# Make a list of celestial conversions to check
-# We simply list all possible combinations here,
-# systems not supported by certain tools are simply skipped later
-CELESTIAL_SYSTEMS = 'fk5 fk4 icrs galactic ecliptic'.split()
-CELESTIAL_CONVERSIONS = itertools.product(CELESTIAL_SYSTEMS, CELESTIAL_SYSTEMS)
-CELESTIAL_CONVERSIONS = [dict(zip(['in', 'out'], _))
-                         for _ in CELESTIAL_CONVERSIONS
-                         if _[0] != _[1]]
-
-TOOLS = 'astropy kapteyn novas pyast palpy pyephem pyslalib astrolib pytpm idl'.split()
-TOOL_PAIRS = [_ for _ in itertools.product(TOOLS, TOOLS)
-              if _[0] < _[1]]
 
 
 class CoordinatesBenchmark():
@@ -308,6 +295,8 @@ benchmark = CoordinatesBenchmark()
 
 
 @click.command()
+@click.option('-tools', default='all',
+              help='Which tools to benchmark.')
 def benchmark_celestial(tools):
     """Run celestial coordinate conversions."""
     # TODO: implement command line option for speed reporting
