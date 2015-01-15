@@ -11,6 +11,8 @@ and is on github, so you can look at the code there.
 [2] http://www.sal.wisc.edu/~jwp/astro/tpm/tpm.html
 [3] https://github.com/phn/pytpm/tree/master/src/tpm
 """
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
 import numpy as np
 from astrolib.coords import Position
 

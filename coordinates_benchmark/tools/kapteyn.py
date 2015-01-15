@@ -12,6 +12,8 @@ http://www.astro.rug.nl/software/kapteyn/celestial.html#celestial.skyparser
 http://www.astro.rug.nl/software/kapteyn/celestialbackground.html
 http://www.astro.rug.nl/software/kapteyn/celestialbackground.html#composing-other-transformations
 """
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
 import numpy as np
 from kapteyn import celestial
 

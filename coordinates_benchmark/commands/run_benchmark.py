@@ -9,6 +9,8 @@ import imp
 import logging
 import numpy as np
 import click
+from ..config import CELESTIAL_CONVERSIONS, CELESTIAL_SYSTEMS
+from ..config import TOOLS, TOOL_PAIRS
 from ..utils import _vicenty_dist_arcsec
 
 
@@ -321,13 +323,13 @@ def benchmark_all(tools):
 
 @click.command()
 def summary():
-    """Summarize all results into a few stats (mean, stddev, ...)"""
+    """Summarize all results into a few stats"""
     benchmark.summary()
 
 
 @click.command()
 def plots(tools):
-    """Create plots illustrating differences in the results."""
+    """Create plots to illustrate results"""
     if not os.path.exists('output'):
         os.mkdir('output')
     if not os.path.exists('output/plots'):

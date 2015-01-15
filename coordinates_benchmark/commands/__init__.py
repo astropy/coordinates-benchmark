@@ -6,8 +6,8 @@ from __future__ import (absolute_import, division, print_function,
 # TODO: set up logging with click and add verbosity option
 import logging
 logging.basicConfig(format='%(levelname)s: %(message)s', level=logging.INFO)
-
 import click
+from ..config import TOOL_INFO
 
 # All commands are implemented as `click` sub-commands
 # on the `cli` click command group.
@@ -39,3 +39,10 @@ cli.add_command(summary)
 
 from .run_benchmark import plots
 cli.add_command(plots)
+
+
+@click.command(name='tool-info')
+def tool_info():
+    """Print which tools are installed and their versions"""
+    print(TOOL_INFO)
+cli.add_command(tool_info)

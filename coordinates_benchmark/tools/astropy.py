@@ -4,6 +4,8 @@
 https://github.com/astropy/astropy
 http://www.astropy.org
 """
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
 import logging
 from astropy.table import Table
 from astropy.coordinates import Angle, EarthLocation, AltAz, SkyCoord
