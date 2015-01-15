@@ -5,5 +5,6 @@
 .idea
 *.html
 *.pyc
+*~
 output/plots/
 env
