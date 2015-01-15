@@ -51,11 +51,11 @@ def make_observer_table(n_samples=5):
     # http://docs.python.org/2/library/itertools.html#itertools.product
     table = list(itertools.product(zip(lon, lat), height, zip(time, time_mjd, time_tdb)))
     table = [(_[0][0], _[0][1], _[1], _[2][0], _[2][1], _[2][2]) for _ in table]
-    colnames = 'lon lat height time time_mjd time_tdb'.split()
+    cols = 'lon lat height time time_mjd time_tdb'.split()
 
-    table = Table(rows=table, names=colnames)
-    for colname in ['lon', 'lat', 'height']:
-        table[colname].format = FLOAT_FORMAT
+    table = Table(rows=table, names=cols)
+    for cols in ['lon', 'lat', 'height']:
+        table[cols].format = FLOAT_FORMAT
 
     return table
 

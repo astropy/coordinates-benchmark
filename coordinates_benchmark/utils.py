@@ -40,7 +40,7 @@ def get_observers():
     return table
 
 def get_positions():
-    filename = 'input/initial_coords.txt'
+    filename = 'input/skycoords.txt'
     table = Table.read(filename, format='ascii',
                        names=['lon', 'lat'])
 

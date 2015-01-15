@@ -5,7 +5,8 @@ from __future__ import (absolute_import, division, print_function,
 import logging
 import numpy as np
 import click
-from ..config import FLOAT_FORMAT
+from astropy.table import Table
+from ..config import FLOAT_FORMAT, TABLE_FORMAT
 
 
 def make_skycoord_table():
@@ -23,17 +24,21 @@ def make_skycoord_table():
     N = 1000
 
     # Sample uniformly on the unit sphere
-    lon = np.random.uniform(0., 360., N)
-    lat = np.degrees(np.arcsin(np.random.uniform(-1., 1., N)))
+    table = Table()
+    table['lon'] = np.random.uniform(0., 360., N)
+    table['lat'] = np.degrees(np.arcsin(np.random.uniform(-1., 1., N)))
 
-    return lon, lat
+    for col in ['lon', 'lat']:
+        table[col].format = FLOAT_FORMAT
+
+    return table
 
 
 @click.command(name='make_skycoord_table')
 def make_skycoord_table_command():
     """Generate table of random sky coordinates."""
-    lon, lat = make_skycoord_table()
+    table = make_skycoord_table()
 
-    filename = 'input/initial_coords.txt'
+    filename = 'input/skycoords.txt'
     logging.info('Writing {}'.format(filename))
-    np.savetxt(filename, zip(lon, lat), fmt=FLOAT_FORMAT)
+    table.write(filename, format=TABLE_FORMAT)
