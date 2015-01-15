@@ -15,11 +15,15 @@ import ephem
 SUPPORTED_SYSTEMS = 'fk5 fk4 galactic ecliptic'.split()
 
 
-def convert(coords, systems):
+def transform_celestial(coords, systems):
     if not set(systems.values()).issubset(SUPPORTED_SYSTEMS):
         return None
 
     lons, lats = np.radians(coords['lon']), np.radians(coords['lat'])
+
+    out = Table()
+    out['lon'] = np.zeros(len(coords), dtype='float64')
+    out['lat'] = np.zeros(len(coords), dtype='float64')
 
     for ii, (lon, lat) in enumerate(zip(lons, lats)):
         # Create coordinate in input system
@@ -52,9 +56,10 @@ def convert(coords, systems):
         else:
             raise ValueError()
 
-        lons[ii], lats[ii] = lon, lat
+        out[ii]['lon'] = np.degrees(lon)
+        out[ii]['lat'] = np.degrees(lat)
 
-    return dict(lon=np.degrees(lons), lat=np.degrees(lats))
+    return out
 
 
 def _convert_radec_to_altaz(ra, dec, lon, lat, height, time):
@@ -99,5 +104,5 @@ def convert_horizontal(positions, observers):
             altaz = _convert_radec_to_altaz(ra, dec, lon, lat, height, time)
             results.append(altaz)
 
-    table = Table(results)
-    return table
+    out = Table(results)
+    return out

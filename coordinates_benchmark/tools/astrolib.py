@@ -14,18 +14,20 @@ and is on github, so you can look at the code there.
 from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 import numpy as np
+from astropy.table import Table
 from astrolib.coords import Position
 
 SUPPORTED_SYSTEMS = 'fk5 fk4 galactic ecliptic'.split()
 
 
-def convert(coords, systems):
+def transform_celestial(coords, systems):
     
     if not set(systems.values()).issubset(SUPPORTED_SYSTEMS):
         return None
 
-    lons = np.zeros_like(coords['lon'])
-    lats = np.zeros_like(coords['lat'])
+    out = Table()
+    out['lon'] = np.zeros_like(coords['lon'])
+    out['lat'] = np.zeros_like(coords['lat'])
 
     for ii, (lon, lat) in enumerate(zip(coords['lon'], coords['lat'])):
 
@@ -53,6 +55,7 @@ def convert(coords, systems):
         else:
             raise ValueError()
 
-        lons[ii], lats[ii] = lon, lat
+        out['lon'][ii] = lon
+        out['lat'][ii] = lat
 
-    return dict(lon=lons, lat=lats)
+    return out

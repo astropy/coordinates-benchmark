@@ -7,16 +7,21 @@ https://github.com/Starlink/palpy
 from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 import numpy as np
+from astropy.table import Table
 import palpy as pal
 
 SUPPORTED_SYSTEMS = 'fk5 fk4 icrs galactic ecliptic'.split()
 
 
-def convert(coords, systems):
+def transform_celestial(coords, systems):
     if not set(systems.values()).issubset(SUPPORTED_SYSTEMS):
         return None
 
     lons, lats = np.radians(coords['lon']), np.radians(coords['lat'])
+
+    out = Table()
+    out['lon'] = np.zeros(len(coords), dtype='float64')
+    out['lat'] = np.zeros(len(coords), dtype='float64')
 
     for ii, (lon, lat) in enumerate(zip(lons, lats)):
 
@@ -45,6 +50,7 @@ def convert(coords, systems):
             # FK5 -> Ecliptic at TDB (MJD) 51544 (i.e. J2000)
             lon, lat = pal.eqecl(lon, lat, 51544)
 
-        lons[ii], lats[ii] = lon, lat
+        out[ii]['lon'] = np.degrees(lon)
+        out[ii]['lat'] = np.degrees(lat)
 
-    return dict(lon=np.degrees(lons), lat=np.degrees(lats))
+    return out

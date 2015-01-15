@@ -9,12 +9,13 @@ https://pypi.python.org/pypi/novas/
 from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 import numpy as np
+from astropy.table import Table
 from novas import compat as novas
 
 T0 = 2451545.00000000
 
 
-def convert(coords, systems):
+def transform_celestial(coords, systems):
     rav = coords['lon'] / 15.0
     decv = coords['lat']
     plist = [novas.radec2vector(ra, dec, 1.0) for ra, dec in zip(rav, decv)]
@@ -38,4 +39,9 @@ def convert(coords, systems):
         return None
 
     ra, dec = np.array([novas.vector2radec(position) for position in plist]).T
-    return dict(lon=ra * 15.0, lat=dec)
+
+    out = Table()
+    out['lon'] = ra * 15.0
+    out['lat'] = dec
+
+    return out

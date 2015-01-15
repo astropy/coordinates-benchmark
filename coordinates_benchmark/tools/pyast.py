@@ -8,6 +8,7 @@ http://dsberry.github.com/starlink/pyast.html
 from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 import numpy as np
+from astropy.table import Table
 import starlink.Ast as Ast
 from astropy.time import Time
 
@@ -31,8 +32,7 @@ def get_frame(system):
     return Ast.SkyFrame('System=%s,Format(1)=hms.5,Format(2)=dms.5,Epoch=2000.0' % d[system])
 
 
-def convert(coords, systems):
-    """Convert an array of in_coords from in_system to out_system"""
+def transform_celestial(coords, systems):
 
     if not set(systems.values()).issubset(SUPPORTED_SYSTEMS):
         return None
@@ -42,8 +42,11 @@ def convert(coords, systems):
     lon, lat = np.radians(coords['lon']), np.radians(coords['lat'])
     coords = frameset.tran([lon, lat])
     coords = np.degrees(coords.T)
-    return dict(lon=coords[:, 0], lat=coords[:, 1])
 
+    out = Table()
+    out['lon'] = coords[:, 0]
+    out['lat'] = coords[:, 1]
+    return out
 
 
 def altaz_radec_transform():

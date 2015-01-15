@@ -8,6 +8,7 @@ http://phn.github.com/pytpm
 from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 import numpy as np
+from astropy.table import Table
 import pytpm
 from pytpm import tpm
 
@@ -29,8 +30,7 @@ def get_state(system):
     return d[system]
 
 
-def convert(coords, systems):
-    """Convert an array of in_coords from in_system to out_system"""
+def transform_celestial(coords, systems):
 
     if not set(systems.values()).issubset(SUPPORTED_SYSTEMS):
         return None
@@ -57,4 +57,8 @@ def convert(coords, systems):
     lat = np.array([_['delta'] for _ in out_coords])
     lon, lat = np.degrees(lon), np.degrees(lat)
 
-    return dict(lon=lon, lat=lat)
+    out = Table()
+    out['lon'] = lon
+    out['lat'] = lat
+
+    return out

@@ -3,47 +3,20 @@
 from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 import os
-import time
 import itertools
-import imp
 import logging
 import numpy as np
 import click
 from .. import utils
+from .. import config
 from ..utils import _vicenty_dist_arcsec
 from ..config import CELESTIAL_CONVERSIONS, CELESTIAL_SYSTEMS
 from ..config import TOOLS, TOOL_PAIRS
-from ..config import select_tools
 from ..config import FLOAT_FORMAT_OUTPUT, TABLE_FORMAT
 
 
 class CoordinatesBenchmark():
     """Summarize all available benchmark results in a txt and html file"""
-
-    def run_celestial_conversions(self, tool, report_speed):
-        """Run celestial conversion benchmark for one given tool"""
-        try:
-            tool_module = imp.load_source('dummy', 'tools/%s/convert.py' % tool)
-        except (IOError, ImportError):
-            logging.warning("Benchmarks for {0} cannot be run because tools/{0}/convert.py "
-                            "could not be imported.".format(tool))
-            return
-        logging.info('Running celestial conversions using %s' % tool)
-        coords = self._read_coords('input/initial_coords.txt')
-
-        for systems in CELESTIAL_CONVERSIONS:
-            timestamp = time.time()
-            out_coords = tool_module.convert(coords, systems)
-            duration = time.time() - timestamp
-            if out_coords == None:
-                logging.info('Skipping %s -> %s. Not supported.' %
-                             (systems['in'], systems['out']))
-                continue
-            #if report_speed:
-            #    f_speed.write('%15s %10s %10s %10.6f\n' %
-            #                  (tool, systems['in'], systems['out'], duration))
-            filename = 'tools/%s/%s_to_%s.txt' % (tool, systems['in'], systems['out'])
-            self._write_coords(filename, out_coords)
 
     @staticmethod
     def _accuracy_color(mean):
@@ -96,10 +69,6 @@ class CoordinatesBenchmark():
     @staticmethod
     def _plot_filename(tool1, tool2, system1, system2):
         return 'plots/{tool1}_vs_{tool2}_for_{system1}_to_{system2}.png'.format(**locals())
-
-    @staticmethod
-    def _celestial_filename(tool, in_system, out_system):
-        return 'tools/%s/%s_to_%s.txt' % (tool, in_system, out_system)
 
     def summary(self, txt_filename='summary.txt', html_filename='summary.html', html_matrix_filename='summary_matrix.html'):
         """Write txt and html summary"""
@@ -264,11 +233,39 @@ benchmark = CoordinatesBenchmark()
               help='Which tools to benchmark.')
 def benchmark_celestial(tools):
     """Run celestial coordinate conversions."""
-    # TODO: implement command line option for speed reporting
-    report_speed = False
+    tools = utils.select_tools(tools)
+
+    positions = utils.get_positions()
 
     for tool in tools:
-        benchmark.run_celestial_conversions(tool, report_speed=report_speed)
+        module = utils.get_test_module(tool)
+
+        if not hasattr(module, 'transform_celestial'):
+            logging.warning('{} does not support `transform_celestial`'.format(tool))
+            continue
+
+        logging.info('Running `transform_celestial` for tool `{}`'.format(tool))
+        for systems in CELESTIAL_CONVERSIONS:
+
+            supported_systems = config.CELESTIAL_SYSTEMS
+            if not set(systems.values()).issubset(module.SUPPORTED_SYSTEMS):
+                continue
+
+            results = module.transform_celestial(positions, systems)
+
+            #if results is None:
+            #    logging.debug('Skipping {}'.format(systems))
+            #    continue
+
+            results['lon'] %= 360
+
+            for col in ['lon', 'lat']:
+                results[col].format = FLOAT_FORMAT_OUTPUT
+
+            filename = utils.celestial_filename(tool, systems)
+            logging.info('Writing {}'.format(filename))
+            results.write(filename, format=TABLE_FORMAT)
+
 
 
 @click.command()
@@ -278,8 +275,9 @@ def benchmark_horizontal(tools):
     """Run horizontal coordinate conversions."""
     tools = select_tools(tools)
 
-    positions = utils.get_positions()
-    observers = utils.get_observers()
+    # TODO: for now we're running on a small subset for debugging
+    positions = utils.get_positions(use_subset=True)
+    observers = utils.get_observers(use_subset=True)
 
     for tool in tools:
         module = utils.get_test_module(tool)
@@ -290,11 +288,12 @@ def benchmark_horizontal(tools):
 
         logging.info('Running `convert_horizontal` for tool `{}`'.format(tool))
         results = module.convert_horizontal(positions, observers)
+        results['az'] %= 360
 
         for col in ['az', 'alt']:
             results[col].format = FLOAT_FORMAT_OUTPUT
 
-        filename = 'output/tools/{}/coords_fk5_to_horizontal.txt'.format(tool)
+        filename = utils.horizontal_filename(tool)
         logging.info('Writing {}'.format(filename))
         results.write(filename, format=TABLE_FORMAT)
 

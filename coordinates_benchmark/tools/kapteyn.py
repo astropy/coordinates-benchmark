@@ -15,6 +15,7 @@ http://www.astro.rug.nl/software/kapteyn/celestialbackground.html#composing-othe
 from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 import numpy as np
+from astropy.table import Table
 from kapteyn import celestial
 
 SUPPORTED_SYSTEMS = 'fk5 fk4 icrs galactic ecliptic'.split()
@@ -28,17 +29,21 @@ def system_spec(system):
     d['icrs'] = 'icrs'
     d['galactic'] = 'galactic'
     d['ecliptic'] = 'ecliptic,J2000'
-    return d[system]
+    return str(d[system])
 
 
-def convert(coords, systems):
+def transform_celestial(coords, systems):
     """Convert an array of in_coords from in_system to out_system"""
 
-    if not set(systems.values()).issubset(SUPPORTED_SYSTEMS):
-        return None
 
     # Use kapteyn package specific specifiers for in- and out-systems
     skyin, skyout = system_spec(systems['in']), system_spec(systems['out'])
+
     coords = celestial.sky2sky(skyin, skyout, coords['lon'], coords['lat'])
     coords = np.array(coords)
-    return dict(lon=coords[:, 0], lat=coords[:, 1])
+
+    out = Table()
+    out['lon'] = coords[:, 0]
+    out['lat'] = coords[:, 1]
+
+    return out

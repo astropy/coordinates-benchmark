@@ -25,7 +25,7 @@ def get_system(system):
     return d[system]
 
 
-def convert(coords, systems):
+def transform_celestial(coords, systems):
     if not set(systems.values()).issubset(SUPPORTED_SYSTEMS):
         return None
 
@@ -43,11 +43,11 @@ def convert(coords, systems):
 
     out_coord = in_coord.transform_to(skyout(**out_kwargs))
 
-    lons, lats = out_coord.spherical.lon.degree, out_coord.spherical.lat.degree
+    out = Table()
+    out['lon'] = out_coord.spherical.lon.degree
+    out['lat'] = out_coord.spherical.lat.degree
 
-    lons = lons % 360.
-
-    return dict(lon=lons, lat=lats)
+    return out
 
 
 def _convert_radec_to_altaz(ra, dec, lon, lat, height, time):
@@ -94,5 +94,5 @@ def convert_horizontal(positions, observers):
             altaz = _convert_radec_to_altaz(ra, dec, lon, lat, height, time)
             results.append(altaz)
 
-    table = Table(results)
-    return table
+    out = Table(results)
+    return out
