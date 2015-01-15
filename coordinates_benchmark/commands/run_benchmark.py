@@ -7,7 +7,6 @@ import time
 import itertools
 import imp
 import logging
-from importlib import import_module
 import numpy as np
 import click
 from .. import utils
@@ -15,14 +14,11 @@ from ..utils import _vicenty_dist_arcsec
 from ..config import CELESTIAL_CONVERSIONS, CELESTIAL_SYSTEMS
 from ..config import TOOLS, TOOL_PAIRS
 from ..config import select_tools
-from ..config import FLOAT_FORMAT, TABLE_FORMAT
+from ..config import FLOAT_FORMAT_OUTPUT, TABLE_FORMAT
 
 
 class CoordinatesBenchmark():
     """Summarize all available benchmark results in a txt and html file"""
-
-    def __init__(self):
-        self._data_cache = {}
 
     def run_celestial_conversions(self, tool, report_speed):
         """Run celestial conversion benchmark for one given tool"""
@@ -104,35 +100,6 @@ class CoordinatesBenchmark():
     @staticmethod
     def _celestial_filename(tool, in_system, out_system):
         return 'tools/%s/%s_to_%s.txt' % (tool, in_system, out_system)
-
-    def _read_coords(self, filename, symmetric=False):
-        """Read ascii coordinates file.
-        If symmetric = True, convert longitudes to range -180 .. +180"""
-        data = self._data_cache.get(filename)
-        if data is None:
-            try:
-                data = np.loadtxt(filename)
-            except IOError:
-                logging.warning('File not found: {0}'.format(filename))
-                self._data_cache[filename] = 'not found'
-                raise
-            logging.info('Reading {0}'.format(filename))
-            self._data_cache[filename] = data.copy()
-        elif data == 'not found':
-            raise IOError('file not found')
-        else:
-            data = data.copy()
-        lon = data[:, 0]
-        lat = data[:, 1]
-        if symmetric:
-            lon = np.where(lon > 180, lon - 360, lon)
-        return dict(lon=lon, lat=lat)
-
-    @staticmethod
-    def _write_coords(filename, coords):
-        logging.info('Writing %s' % filename)
-        data = np.transpose(np.vstack([coords['lon'], coords['lat']]))
-        np.savetxt(filename, data, fmt="%15.10f")
 
     def summary(self, txt_filename='summary.txt', html_filename='summary.html', html_matrix_filename='summary_matrix.html'):
         """Write txt and html summary"""
@@ -325,7 +292,7 @@ def benchmark_horizontal(tools):
         results = module.convert_horizontal(positions, observers)
 
         for col in ['az', 'alt']:
-            results[col].format = FLOAT_FORMAT
+            results[col].format = FLOAT_FORMAT_OUTPUT
 
         filename = 'output/tools/{}/coords_fk5_to_horizontal.txt'.format(tool)
         logging.info('Writing {}'.format(filename))

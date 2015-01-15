@@ -39,10 +39,15 @@ def get_observers():
 
     return table
 
-def get_positions():
+
+def get_positions(symmetric=False):
     filename = 'input/skycoords.txt'
     table = Table.read(filename, format='ascii',
                        names=['lon', 'lat'])
+
+    if symmetric:
+        lon = table['lon']
+        table['lon'] = np.where(lon > 180, lon - 360, lon)
 
     # TODO: for debugging we use a small subset here
     table = table[:10]

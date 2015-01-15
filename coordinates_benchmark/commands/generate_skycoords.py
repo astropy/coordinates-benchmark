@@ -6,7 +6,7 @@ import logging
 import numpy as np
 import click
 from astropy.table import Table
-from ..config import FLOAT_FORMAT, TABLE_FORMAT
+from ..config import FLOAT_FORMAT_INPUT, TABLE_FORMAT
 
 
 def make_skycoord_table():
@@ -29,7 +29,7 @@ def make_skycoord_table():
     table['lat'] = np.degrees(np.arcsin(np.random.uniform(-1., 1., N)))
 
     for col in ['lon', 'lat']:
-        table[col].format = FLOAT_FORMAT
+        table[col].format = FLOAT_FORMAT_INPUT
 
     return table
 

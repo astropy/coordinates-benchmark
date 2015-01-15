@@ -7,12 +7,10 @@ https://github.com/brandon-rhodes/pyephem
 """
 from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
-import logging
 import numpy as np
 import astropy.units as u
 from astropy.table import Table
 import ephem
-from ..config import FLOAT_FORMAT, TABLE_FORMAT
 
 SUPPORTED_SYSTEMS = 'fk5 fk4 galactic ecliptic'.split()
 

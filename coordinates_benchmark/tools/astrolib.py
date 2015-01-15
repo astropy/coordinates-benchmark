@@ -18,6 +18,7 @@ from astrolib.coords import Position
 
 SUPPORTED_SYSTEMS = 'fk5 fk4 galactic ecliptic'.split()
 
+
 def convert(coords, systems):
     
     if not set(systems.values()).issubset(SUPPORTED_SYSTEMS):

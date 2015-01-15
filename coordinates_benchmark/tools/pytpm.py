@@ -13,6 +13,7 @@ from pytpm import tpm
 
 SUPPORTED_SYSTEMS = 'fk5 fk4 galactic ecliptic'.split()
 
+
 def get_state(system):
     # The table of TPM states is here
     # http://phn.github.com/pytpm/conversions.html#function-convert-convertv6
@@ -26,6 +27,7 @@ def get_state(system):
     d['ecliptic'] = dict(state=tpm.TPM_S03, epoch=tpm.J2000, equinox=tpm.jyear2jd(1984))
     # d['icrs'] = TPM_S06
     return d[system]
+
 
 def convert(coords, systems):
     """Convert an array of in_coords from in_system to out_system"""

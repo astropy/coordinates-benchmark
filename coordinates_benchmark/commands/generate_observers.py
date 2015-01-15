@@ -7,7 +7,7 @@ import itertools
 import numpy as np
 from astropy.time import Time
 from astropy.table import Table
-from ..config import FLOAT_FORMAT, TABLE_FORMAT
+from ..config import FLOAT_FORMAT_INPUT, TABLE_FORMAT
 import click
 
 
@@ -55,7 +55,7 @@ def make_observer_table(n_samples=5):
 
     table = Table(rows=table, names=cols)
     for cols in ['lon', 'lat', 'height']:
-        table[cols].format = FLOAT_FORMAT
+        table[cols].format = FLOAT_FORMAT_INPUT
 
     return table
 

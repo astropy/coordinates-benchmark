@@ -9,7 +9,8 @@ from importlib import import_module
 from astropy.table import Table
 
 TABLE_FORMAT = 'ascii.fixed_width_two_line'
-FLOAT_FORMAT = '%20.15f'
+FLOAT_FORMAT_OUTPUT = '%15.10f'   # For output tables
+FLOAT_FORMAT_INPUT = '%20.15f'  # for input tables
 
 
 # Make a list of celestial conversions to check
