@@ -143,11 +143,33 @@ def celestial_filename(tool, systems):
     return fmt.format(tool, systems['in'], systems['out'])
 
 
+def celestial_results(tool, systems, symmetric=False):
+    filename = celestial_filename(tool, systems)
+    table = Table.read(filename, format=TABLE_FORMAT)
+
+    if symmetric:
+        lon = table['lon']
+        table['lon'] = np.where(lon > 180, lon - 360, lon)
+
+    return table
+
+
+def celestial_separation_table(tool1, tool2, systems):
+    c1 = celestial_results(tool1, systems, symmetric=True)
+    c2 = celestial_results(tool2, systems, symmetric=True)
+    separation = _vicenty_dist_arcsec(c1['lon'], c1['lat'],
+                                      c2['lon'], c2['lat'])
+    table = c1.copy()
+    table['separation'] = separation
+
+    return table
+
+
 def horizontal_filename(tool):
     fmt = 'output/tools/{}/coords_fk5_to_horizontal.txt'
     return fmt.format(tool)
 
 
-def plot_filename(tool1, tool2, system1, system2):
-    fmt = 'plots/{tool1}_vs_{tool2}_for_{system1}_to_{system2}.png'
-    return fmt.format(**locals())
+def plot_filename(tool1, tool2, systems):
+    fmt = 'output/plots/{}_vs_{}_for_{}_to_{}.png'
+    return fmt.format(tool1, tool2, systems['in'], systems['out'])
