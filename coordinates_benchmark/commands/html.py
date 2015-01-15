@@ -49,7 +49,7 @@ def write_html_table_header(fh, systems):
     fh.write("  </tr>\n")
 
 
-def _compare_celestial(self, tool1, tool2, systems, f_txt, f_html):
+def _compare_celestial(tool1, tool2, systems, f_txt, f_html):
 
     try:
         table = utils.celestial_separation_table(tool1, tool2, systems)
@@ -87,43 +87,44 @@ def _compare_celestial(self, tool1, tool2, systems, f_txt, f_html):
     f_html.write("  </tr>\n")
 
 
-def tool_comparison_table(self, tool):
+def write_tool_comparison_table(fh, tool):
     other_tools = sorted(t for t in utils.TOOLS if t != tool)
 
-    yield '<a name="{0}"></a><a class="anchor" href="#{0}"><h2>{0}</h2></a>'.format(tool)
-    yield '<table align="center">'
-    yield '<tr><th width="80">'
+    fh.write('<a name="{0}"></a><a class="anchor" href="#{0}"><h2>{0}</h2></a>\n'.format(tool))
+    fh.write('<table align="center">\n')
+    fh.write('<tr><th width="80">\n')
     for t in other_tools:
-        yield '<th width="80">{}'.format(t)
+        fh.write('<th width="80">{}\n'.format(t))
     pairs = itertools.permutations(utils.CELESTIAL_SYSTEMS, 2)
-    for in_system, out_system in pairs:
-        filename = self._celestial_filename(tool, in_system, out_system)
+    for systems in pairs:
+        systems = {'in': systems[0], 'out': systems[1]}
         try:
-            c = self._read_coords(filename)
+            c = utils.celestial_results(tool, systems)
         except IOError:
             continue
-        yield '<tr><th>{} &#8594; {}'.format(in_system, out_system)
+
+        fh.write('<tr><th>{} &#8594; {}\n'.format(systems['in'], systems['out']))
         for t in other_tools:
-            filename = self._celestial_filename(t, in_system, out_system)
             try:
-                d = self._read_coords(filename)
+                d = utils.celestial_results(t, systems)
             except IOError:
-                yield '<td> &mdash;'
+                fh.write('<td> &mdash;\n')
                 continue
-            diff = _vicenty_dist_arcsec(c['lon'], c['lat'],
-                                        d['lon'], d['lat'])
+            diff = utils.our_angular_separation(c['lon'], c['lat'], d['lon'], d['lat'])
             mean = np.mean(diff)
             color = _accuracy_color(mean)
             fmt = '<td class="{}">{:.6f}<br>{:.6f}<br>{:.6f}<br>{:.6f}'
-            yield fmt.format(color, np.median(diff), mean,
-                             np.max(diff), np.std(diff))
+            fh.write(fmt.format(color, np.median(diff), mean,
+                                np.max(diff), np.std(diff)))
 
-        yield '<th align="left">Median<br>Mean<br>Max<br>Std.Dev.'
-    yield '</tr>'
-    yield '</table>'
+        fh.write('<th align="left">Median<br>Mean<br>Max<br>Std.Dev.\n')
+    fh.write('</tr>\n')
+    fh.write('</table>\n')
 
 
-def summary(txt_filename='summary.txt', html_filename='summary.html', html_matrix_filename='summary_matrix.html'):
+def summary(txt_filename='summary.txt',
+            html_filename='summary.html',
+            html_matrix_filename='summary_matrix.html'):
     """Write txt and html summary"""
     f_txt = open(os.path.join('output', txt_filename), 'w')
     f_html = open(os.path.join('output', html_filename), 'w')
@@ -147,8 +148,7 @@ def summary(txt_filename='summary.txt', html_filename='summary.html', html_matri
         write_html_table_header(f_html, systems)
 
         for tool1, tool2 in utils.TOOL_PAIRS:
-            self._compare_celestial(tool1, tool2, systems['in'],
-                                    systems['out'], f_txt, f_html)
+            _compare_celestial(tool1, tool2, systems, f_txt, f_html)
 
         f_html.write("   </table>\n")
 
@@ -169,8 +169,7 @@ def summary(txt_filename='summary.txt', html_filename='summary.html', html_matri
     f_matrix_html.write('<p align="center"><a href="summary.html"><b>See also list view</b></a></p>')
 
     for tool in utils.TOOLS:
-        for line in self.tool_comparison_table(tool):
-            f_matrix_html.write(line)
+        write_tool_comparison_table(f_matrix_html, tool)
 
     write_html_footer(f_matrix_html)
 
@@ -181,5 +180,6 @@ def summary(txt_filename='summary.txt', html_filename='summary.html', html_matri
 
 @click.command()
 def summary_celestial():
-    """Summarize all results into a few stats"""
-    raise NotImplementedEr
+    """For now: summary and HTML page."""
+    # """Summarize all results into a few stats"""
+    summary()

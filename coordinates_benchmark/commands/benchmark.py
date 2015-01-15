@@ -2,7 +2,6 @@
 """Run the coordinates benchmark"""
 from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
-import os
 import logging
 import click
 from .. import utils
@@ -45,7 +44,6 @@ def benchmark_celestial(tools):
             filename = utils.celestial_filename(tool, systems)
             logging.info('Writing {}'.format(filename))
             results.write(filename, format=utils.TABLE_FORMAT)
-
 
 
 @click.command()

@@ -23,7 +23,7 @@ def make_plot(tool1, tool2, systems,
         diff = np.clip(np.log10(table['separation']), vmin, vmax)
 
     fig = plt.figure()
-    ax = fig.add_subplot(1,1,1, projection='aitoff')
+    ax = fig.add_subplot(1, 1, 1, projection='aitoff')
     s = ax.scatter(np.radians(table['lon']), np.radians(table['lat']),
                    s=10, c=diff, vmin=vmin, vmax=vmax, lw=0, cmap=plt.cm.RdYlGn_r)
     ax.grid()

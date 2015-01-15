@@ -9,7 +9,7 @@ from astropy.table import Table
 from .. import utils
 
 
-def make_skycoord_table():
+def make_skycoord_table(n_samples=1000):
     """Generate table of random sky coordinates.
 
     TODO: change this to make an Astropy table.
@@ -20,13 +20,10 @@ def make_skycoord_table():
     """
     np.random.seed(12345)
 
-    # Number of samples
-    N = 1000
-
     # Sample uniformly on the unit sphere
     table = Table()
-    table['lon'] = np.random.uniform(0., 360., N)
-    table['lat'] = np.degrees(np.arcsin(np.random.uniform(-1., 1., N)))
+    table['lon'] = np.random.uniform(0., 360., n_samples)
+    table['lat'] = np.degrees(np.arcsin(np.random.uniform(-1., 1., n_samples)))
 
     for col in ['lon', 'lat']:
         table[col].format = utils.FLOAT_FORMAT_INPUT
