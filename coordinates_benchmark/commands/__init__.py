@@ -25,17 +25,17 @@ cli.add_command(make_skycoord_table_command)
 from .generate_observers import make_observer_table_command
 cli.add_command(make_observer_table_command)
 
-from .run_benchmark import benchmark_celestial
+from .benchmark import benchmark_celestial
 cli.add_command(benchmark_celestial)
 
-from .run_benchmark import benchmark_horizontal
+from .benchmark import benchmark_horizontal
 cli.add_command(benchmark_horizontal)
 
 # TODO: this doesn't work ... not important for now.
 # from .run_benchmark import benchmark_all
 # cli.add_command(benchmark_all)
 
-from .run_benchmark import summary
+from .benchmark import summary
 cli.add_command(summary)
 
 from .plot import plots_command
