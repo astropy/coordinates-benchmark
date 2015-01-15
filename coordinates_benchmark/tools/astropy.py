@@ -6,13 +6,11 @@ http://www.astropy.org
 """
 from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
-import logging
 from astropy.table import Table
 from astropy.coordinates import Angle, EarthLocation, AltAz, SkyCoord
 from astropy import coordinates as coord
 from astropy.time import Time
 from astropy import units as u
-from ..config import FLOAT_FORMAT, TABLE_FORMAT
 
 SUPPORTED_SYSTEMS = 'fk5 fk4 icrs galactic'.split()
 
@@ -50,19 +48,6 @@ def convert(coords, systems):
     lons = lons % 360.
 
     return dict(lon=lons, lat=lats)
-
-
-def read_positions_observers():
-    # Read in initial coordinates and the observers.
-    # For now just process one observer and 10 positions to compare against pyast
-    positions = Table.read('../../input/initial_coords.txt', format='ascii',
-                           names=['lon', 'lat'])
-    observers = Table.read('../../input/observers.txt', format='ascii')
-
-    # Select subset for now
-    positions = positions[:10]
-
-    return positions, observers
 
 
 def _convert_radec_to_altaz(ra, dec, lon, lat, height, time):
@@ -111,16 +96,3 @@ def convert_horizontal(positions, observers):
 
     table = Table(results)
     return table
-
-
-def main():
-    positions, observers = read_positions_observers()
-
-    results = convert_horizontal(positions, observers)
-
-    for col in ['az', 'alt']:
-        results[col].format = FLOAT_FORMAT
-
-    filename = 'coords_fk5_to_horizontal.txt'
-    logging.info('Writing {}'.format(filename))
-    results.write(filename, format=TABLE_FORMAT)

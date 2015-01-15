@@ -3,8 +3,10 @@
 """
 from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
+import logging
+from importlib import import_module
 import numpy as np
-
+from astropy.table import Table
 
 # TODO: replace by function from astropy.coordinates
 def _vicenty_dist_arcsec(lon1, lat1, lon2, lat2):
@@ -25,3 +27,27 @@ def _vicenty_dist_arcsec(lon1, lat1, lon2, lat2):
     dist_in_radians = np.arctan2((num1 ** 2 + num2 ** 2) ** 0.5, denominator)
     deg_to_arcsec = 3600.
     return deg_to_arcsec * np.degrees(dist_in_radians)
+
+
+def get_observers():
+    filename = 'input/observers.txt'
+    logging.debug('Reading {}'.format(filename))
+
+    table = Table.read(filename, format='ascii')
+    # TODO: for debugging we use a small subset here
+    table = table[:5]
+
+    return table
+
+def get_positions():
+    filename = 'input/initial_coords.txt'
+    table = Table.read(filename, format='ascii',
+                       names=['lon', 'lat'])
+
+    # TODO: for debugging we use a small subset here
+    table = table[:10]
+    return table
+
+
+def get_test_module(name):
+    return import_module('coordinates_benchmark.tools.' + name)

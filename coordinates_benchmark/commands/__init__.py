@@ -43,6 +43,6 @@ cli.add_command(plots)
 
 @click.command(name='tool-info')
 def tool_info():
-    """Print which tools are installed and their versions"""
+    """Print tool availability and version info"""
     print(TOOL_INFO)
 cli.add_command(tool_info)

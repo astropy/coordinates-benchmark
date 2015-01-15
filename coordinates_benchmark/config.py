@@ -3,6 +3,7 @@
 """
 from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
+import logging
 import itertools
 from importlib import import_module
 from astropy.table import Table
@@ -14,13 +15,13 @@ FLOAT_FORMAT = '%20.15f'
 # Make a list of celestial conversions to check
 # We simply list all possible combinations here,
 # systems not supported by certain tools are simply skipped later
-CELESTIAL_SYSTEMS = 'fk5 fk4 icrs galactic ecliptic'.split()
+CELESTIAL_SYSTEMS = sorted('fk5 fk4 icrs galactic ecliptic'.split())
 CELESTIAL_CONVERSIONS = itertools.product(CELESTIAL_SYSTEMS, CELESTIAL_SYSTEMS)
 CELESTIAL_CONVERSIONS = [dict(zip(['in', 'out'], _))
                          for _ in CELESTIAL_CONVERSIONS
                          if _[0] != _[1]]
 
-TOOLS = 'astropy kapteyn novas pyast palpy pyephem pyslalib astrolib pytpm idl'.split()
+TOOLS = sorted('astropy kapteyn novas pyast palpy pyephem pyslalib astrolib pytpm'.split())
 TOOL_PAIRS = [_ for _ in itertools.product(TOOLS, TOOLS)
               if _[0] < _[1]]
 
@@ -45,7 +46,6 @@ def _tool_check():
 
     for tool in tools:
         try:
-            # module = import_module('coordinates_benchmark.tools.' + tool['name'])
             module = import_module(tool['import_name'])
             tool['available'] = True
             try:
@@ -60,3 +60,25 @@ def _tool_check():
 
 # Table with tools are available and what their version is
 TOOL_INFO = _tool_check()
+
+
+def select_tools(tools, include_idl=False):
+    """Select the sub-set of requested and available tools."""
+    all = list(TOOL_INFO['tool_name'])
+
+    if include_idl:
+        all.add_row(['idl', True, 'N/A'])
+
+    available = TOOL_INFO['tool_name'][TOOL_INFO['available']]
+
+    requested = tools.split(',')
+
+    if 'all' in requested:
+        requested = all
+
+    missing = set(requested).difference(available)
+    if missing:
+        logging.error('The following tools are not available: {}'.format(', '.join(missing)))
+        exit(1)
+
+    return sorted(requested)

@@ -7,11 +7,15 @@ import time
 import itertools
 import imp
 import logging
+from importlib import import_module
 import numpy as np
 import click
+from .. import utils
+from ..utils import _vicenty_dist_arcsec
 from ..config import CELESTIAL_CONVERSIONS, CELESTIAL_SYSTEMS
 from ..config import TOOLS, TOOL_PAIRS
-from ..utils import _vicenty_dist_arcsec
+from ..config import select_tools
+from ..config import FLOAT_FORMAT, TABLE_FORMAT
 
 
 class CoordinatesBenchmark():
@@ -187,7 +191,7 @@ class CoordinatesBenchmark():
 
         f_matrix_html.write('<p align="center"><a href="summary.html"><b>See also list view</b></a></p>')
 
-        for tool in sorted(TOOLS):
+        for tool in TOOLS:
             for line in self.tool_comparison_table(tool):
                 f_matrix_html.write(line)
 
@@ -288,16 +292,8 @@ class CoordinatesBenchmark():
 benchmark = CoordinatesBenchmark()
 
 
-# parser.add_argument('--tools', nargs='+', default='',
-#                     help='List tools to run.\n'
-#                     'Available tools: %s' % ', '.join(TOOLS))
-# for tool in args.tools:
-#     if not tool in TOOLS:
-#         parser.error("Unknown tool: %s" % tool)
-
-
 @click.command()
-@click.option('-tools', default='all',
+@click.option('--tools', default='all',
               help='Which tools to benchmark.')
 def benchmark_celestial(tools):
     """Run celestial coordinate conversions."""
@@ -309,9 +305,32 @@ def benchmark_celestial(tools):
 
 
 @click.command()
+@click.option('--tools', default='all',
+              help='Which tools to benchmark.')
 def benchmark_horizontal(tools):
     """Run horizontal coordinate conversions."""
-    raise NotImplementedError
+    tools = select_tools(tools)
+
+    positions = utils.get_positions()
+    observers = utils.get_observers()
+
+    for tool in tools:
+        module = utils.get_test_module(tool)
+
+        if not hasattr(module, 'convert_horizontal'):
+            logging.warning('{} does not support `convert_horizontal`'.format(tool))
+            continue
+
+        logging.info('Running `convert_horizontal` for tool `{}`'.format(tool))
+        results = module.convert_horizontal(positions, observers)
+
+        for col in ['az', 'alt']:
+            results[col].format = FLOAT_FORMAT
+
+        filename = 'output/tools/{}/coords_fk5_to_horizontal.txt'.format(tool)
+        logging.info('Writing {}'.format(filename))
+        results.write(filename, format=TABLE_FORMAT)
+
 
 
 @click.command()

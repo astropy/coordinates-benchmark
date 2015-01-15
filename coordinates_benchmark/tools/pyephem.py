@@ -59,19 +59,6 @@ def convert(coords, systems):
     return dict(lon=np.degrees(lons), lat=np.degrees(lats))
 
 
-def read_positions_observers():
-    # Read in initial coordinates and the observers.
-    # For now just process one observer and 10 positions to compare against pyast
-    positions = Table.read('../../input/initial_coords.txt', format='ascii',
-                           names=['lon', 'lat'])
-    observers = Table.read('../../input/observers.txt', format='ascii')
-
-    # Select subset for now
-    positions = positions[:10]
-
-    return positions, observers
-
-
 def _convert_radec_to_altaz(ra, dec, lon, lat, height, time):
     """Convert a single position.
 
@@ -82,14 +69,12 @@ def _convert_radec_to_altaz(ra, dec, lon, lat, height, time):
     body = ephem.FixedBody()
     body._ra = np.radians(ra)
     body._dec = np.radians(dec)
-    #body._epoch = 'eq.epoch'
 
     # Set observer parameters
     obs = ephem.Observer()
     obs.lon = np.radians(lon)
     obs.lat = np.radians(lat)
     obs.elevation = (height * u.km).to(u.m).value
-    obs.epoch = '2000'
     obs.date = time
     # Turn refraction off by setting pressure to zero
     obs.pressure = 0
@@ -118,16 +103,3 @@ def convert_horizontal(positions, observers):
 
     table = Table(results)
     return table
-
-
-def main():
-    positions, observers = read_positions_observers()
-
-    results = convert_horizontal(positions, observers)
-
-    for col in ['az', 'alt']:
-        results[col].format = FLOAT_FORMAT
-
-    filename = 'coords_fk5_to_horizontal.txt'
-    logging.info('Writing {}'.format(filename))
-    results.write(filename, format=TABLE_FORMAT)
