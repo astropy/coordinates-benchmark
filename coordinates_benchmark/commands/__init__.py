@@ -35,8 +35,8 @@ cli.add_command(benchmark_horizontal)
 # from .run_benchmark import benchmark_all
 # cli.add_command(benchmark_all)
 
-from .benchmark import summary
-cli.add_command(summary)
+from .html import summary_celestial
+cli.add_command(summary_celestial)
 
 from .plot import plots_command
 cli.add_command(plots_command)

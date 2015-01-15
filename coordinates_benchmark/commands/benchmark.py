@@ -83,9 +83,3 @@ def benchmark_all():
     """Run coordinate benchmarks."""
     benchmark_celestial()
     benchmark_horizontal()
-
-
-@click.command()
-def summary():
-    """Summarize all results into a few stats"""
-    benchmark.summary()

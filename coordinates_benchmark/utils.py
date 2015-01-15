@@ -8,6 +8,7 @@ import logging
 import itertools
 from importlib import import_module
 from astropy.table import Table
+from astropy.coordinates import Angle
 
 TABLE_FORMAT = 'ascii.fixed_width_two_line'
 FLOAT_FORMAT_OUTPUT = '%15.10f'   # For output tables
@@ -86,25 +87,13 @@ def select_tools(tools, include_idl=False):
     return sorted(requested)
 
 
-# TODO: replace by function from astropy.coordinates
-def _vicenty_dist_arcsec(lon1, lat1, lon2, lat2):
-    """Compute distance on the sky. Input and output in arcsec"""
-
-    lon1 = np.radians(lon1)
-    lat1 = np.radians(lat1)
-    lon2 = np.radians(lon2)
-    lat2 = np.radians(lat2)
-
-    sdlon = np.sin(lon2 - lon1)
-    cdlon = np.cos(lon2 - lon1)
-
-    num1 = np.cos(lat2) * sdlon
-    num2 = np.cos(lat1) * np.sin(lat2) - np.sin(lat1) * np.cos(lat2) * cdlon
-    denominator = np.sin(lat1) * np.sin(lat2) + np.cos(lat1) * np.cos(lat2) * cdlon
-
-    dist_in_radians = np.arctan2((num1 ** 2 + num2 ** 2) ** 0.5, denominator)
-    deg_to_arcsec = 3600.
-    return deg_to_arcsec * np.degrees(dist_in_radians)
+# TODO: get rid of this helper function!
+def our_angular_separation(lon1, lat1, lon2, lat2):
+    """Input coordinates in `deg` and output separation in `arcsec`."""
+    from astropy.coordinates.angle_utilities import angular_separation as _as
+    rad = np.radians
+    sep =_as(rad(lon1), rad(lat1), rad(lon2), rad(lat2))
+    return Angle(sep, 'degree').to('marcsec').value
 
 
 def get_observers(use_subset=False):
@@ -157,8 +146,7 @@ def celestial_results(tool, systems, symmetric=False):
 def celestial_separation_table(tool1, tool2, systems):
     c1 = celestial_results(tool1, systems, symmetric=True)
     c2 = celestial_results(tool2, systems, symmetric=True)
-    separation = _vicenty_dist_arcsec(c1['lon'], c1['lat'],
-                                      c2['lon'], c2['lat'])
+    separation = our_angular_separation(c1['lon'], c1['lat'], c2['lon'], c2['lat'])
     table = c1.copy()
     table['separation'] = separation
 

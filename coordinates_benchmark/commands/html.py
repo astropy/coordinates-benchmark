@@ -3,8 +3,8 @@ import logging
 import os
 import itertools
 import numpy as np
+import click
 from .. import utils
-from ..utils import _vicenty_dist_arcsec
 
 
 def _accuracy_color(mean):
@@ -18,34 +18,61 @@ def _accuracy_color(mean):
     return color
 
 
-def _compare_celestial(self, tool1, tool2, system1, system2, f_txt, f_html):
+def write_html_header(fh):
+    fh.write("<html>\n")
+    fh.write("   <head>\n")
+    fh.write("      <link href='style.css' rel='stylesheet' type='text/css'\n")
+    fh.write("   </head>\n")
+    fh.write("   <body>\n")
+    fh.write("      <p align='center'>Summary of differences in arcseconds</p>\n")
+    fh.write("      <p align='center'>Green means < 10 milli-arcsec, orange < 1 arcsec and red > 1 arcsec</p>\n")
+
+
+def write_html_footer(fh):
+    fh.write("   </body>\n")
+    fh.write("</html>\n")
+
+
+def write_html_table_header(fh, systems):
+    fh.write("<a name='{in}_{out}'></a><a class='anchor' href='#{in}_{out}'><h2>{in} to {out}</h2></a>".format(**systems))
+    fh.write("<table align='center'>\n")
+    fh.write("  <tr>\n")
+    fh.write("    <th width=80>Tool 1</th>\n")
+    fh.write("    <th width=80>Tool 2</th>\n")
+    fh.write("    <th width=80>System 1</th>\n")
+    fh.write("    <th width=80>System 2</th>\n")
+    fh.write("    <th width=80>Median</th>\n")
+    fh.write("    <th width=80>Mean</th>\n")
+    fh.write("    <th width=80>Max</th>\n")
+    fh.write("    <th width=80>Std. Dev.</th>\n")
+    fh.write("    <th width=80>Plot</th>\n")
+    fh.write("  </tr>\n")
+
+
+def _compare_celestial(self, tool1, tool2, systems, f_txt, f_html):
+
     try:
-        # TODO: this code is duplicated in plot.py make_plot
-        systems = {'in': system1, 'out': system2}
-        filename1 = utils.celestial_filename(tool1, systems)
-        # For plotting we need longitudes in the symmetric range -180 to +180
-        coords1 = self._read_coords(filename1, symmetric=True)
-        filename2 = utils.celestial_filename(tool2, systems)
-        coords2 = self._read_coords(filename2, symmetric=True)
-        diff = _vicenty_dist_arcsec(coords1['lon'], coords1['lat'],
-                                    coords2['lon'], coords2['lat'])
-    except IOError:
+        table = utils.celestial_separation_table(tool1, tool2, systems)
+    except IOError as exc:
+        logging.debug(str(exc))
         return
 
     # Compute stats
+    diff = table['separation']
     median = np.median(diff)
     mean = np.mean(diff)
     max = np.max(diff)
     std = np.std(diff)
 
     # Print out stats
+    system1, system2 = systems['in'], systems['out']
     fmt = ('{tool1:10s} {tool2:10s} {system1:10s} {system2:10s} '
            '{median:12.6f} {mean:12.6f} {max:12.6f} {std:12.6f}')
     f_txt.write(fmt.format(**locals()) + "\n")
 
     # Write out to HTML
     color = _accuracy_color(mean)
-    plot_filename = utils.plot_filename(tool1, tool2, system1, system2)
+    plot_filename = utils.plot_filename(tool1, tool2, systems)
 
     f_html.write("  <tr>\n")
     f_html.write("    <td align='center'>{tool1:10s}</td>\n".format(tool1=tool1))
@@ -117,19 +144,7 @@ def summary(txt_filename='summary.txt', html_filename='summary.html', html_matri
     for systems in utils.CELESTIAL_CONVERSIONS:
         logging.info('Summarizing celestial conversions: %s -> %s' % (systems['in'], systems['out']))
 
-        f_html.write("<a name='{in}_{out}'></a><a class='anchor' href='#{in}_{out}'><h2>{in} to {out}</h2></a>".format(**systems))
-        f_html.write("<table align='center'>\n")
-        f_html.write("  <tr>\n")
-        f_html.write("    <th width=80>Tool 1</th>\n")
-        f_html.write("    <th width=80>Tool 2</th>\n")
-        f_html.write("    <th width=80>System 1</th>\n")
-        f_html.write("    <th width=80>System 2</th>\n")
-        f_html.write("    <th width=80>Median</th>\n")
-        f_html.write("    <th width=80>Mean</th>\n")
-        f_html.write("    <th width=80>Max</th>\n")
-        f_html.write("    <th width=80>Std. Dev.</th>\n")
-        f_html.write("    <th width=80>Plot</th>\n")
-        f_html.write("  </tr>\n")
+        write_html_table_header(f_html, systems)
 
         for tool1, tool2 in utils.TOOL_PAIRS:
             self._compare_celestial(tool1, tool2, systems['in'],
@@ -163,16 +178,8 @@ def summary(txt_filename='summary.txt', html_filename='summary.html', html_matri
 
     logging.info('Writing output/%s' % html_matrix_filename)
 
-def write_html_header(file_handle):
-    file_handle.write("<html>\n")
-    file_handle.write("   <head>\n")
-    file_handle.write("      <link href='style.css' rel='stylesheet' type='text/css'\n")
-    file_handle.write("   </head>\n")
-    file_handle.write("   <body>\n")
-    file_handle.write("      <p align='center'>Summary of differences in arcseconds</p>\n")
-    file_handle.write("      <p align='center'>Green means < 10 milli-arcsec, orange < 1 arcsec and red > 1 arcsec</p>\n")
 
-
-def write_html_footer(file_handle):
-    file_handle.write("   </body>\n")
-    file_handle.write("</html>\n")
+@click.command()
+def summary_celestial():
+    """Summarize all results into a few stats"""
+    raise NotImplementedEr
