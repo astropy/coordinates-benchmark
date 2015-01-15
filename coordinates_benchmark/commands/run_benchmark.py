@@ -8,11 +8,7 @@ import logging
 import numpy as np
 import click
 from .. import utils
-from .. import config
 from ..utils import _vicenty_dist_arcsec
-from ..config import CELESTIAL_CONVERSIONS, CELESTIAL_SYSTEMS
-from ..config import TOOLS, TOOL_PAIRS
-from ..config import FLOAT_FORMAT_OUTPUT, TABLE_FORMAT
 
 
 class CoordinatesBenchmark():
@@ -88,7 +84,7 @@ class CoordinatesBenchmark():
 
         f_html.write('<p align="center"><a href="summary_matrix.html"><b>See also matrix view</b></a></p>')
 
-        for systems in CELESTIAL_CONVERSIONS:
+        for systems in utils.CELESTIAL_CONVERSIONS:
             logging.info('Summarizing celestial conversions: %s -> %s' % (systems['in'], systems['out']))
 
             f_html.write("<a name='{in}_{out}'></a><a class='anchor' href='#{in}_{out}'><h2>{in} to {out}</h2></a>".format(**systems))
@@ -105,7 +101,7 @@ class CoordinatesBenchmark():
             f_html.write("    <th width=80>Plot</th>\n")
             f_html.write("  </tr>\n")
 
-            for tool1, tool2 in TOOL_PAIRS:
+            for tool1, tool2 in utils.TOOL_PAIRS:
                 self._compare_celestial(tool1, tool2, systems['in'],
                                         systems['out'], f_txt, f_html)
 
@@ -127,7 +123,7 @@ class CoordinatesBenchmark():
 
         f_matrix_html.write('<p align="center"><a href="summary.html"><b>See also list view</b></a></p>')
 
-        for tool in TOOLS:
+        for tool in utils.TOOLS:
             for line in self.tool_comparison_table(tool):
                 f_matrix_html.write(line)
 
@@ -190,14 +186,14 @@ class CoordinatesBenchmark():
         f_html.write("  </tr>\n")
 
     def tool_comparison_table(self, tool):
-        other_tools = sorted(t for t in TOOLS if t != tool)
+        other_tools = sorted(t for t in utils.TOOLS if t != tool)
 
         yield '<a name="{0}"></a><a class="anchor" href="#{0}"><h2>{0}</h2></a>'.format(tool)
         yield '<table align="center">'
         yield '<tr><th width="80">'
         for t in other_tools:
             yield '<th width="80">{}'.format(t)
-        pairs = itertools.permutations(CELESTIAL_SYSTEMS, 2)
+        pairs = itertools.permutations(utils.CELESTIAL_SYSTEMS, 2)
         for in_system, out_system in pairs:
             filename = self._celestial_filename(tool, in_system, out_system)
             try:
@@ -245,26 +241,26 @@ def benchmark_celestial(tools):
             continue
 
         logging.info('Running `transform_celestial` for tool `{}`'.format(tool))
-        for systems in CELESTIAL_CONVERSIONS:
+        for systems in utils.CELESTIAL_CONVERSIONS:
 
-            supported_systems = config.CELESTIAL_SYSTEMS
-            if not set(systems.values()).issubset(module.SUPPORTED_SYSTEMS):
+            supported_systems = utils.CELESTIAL_SYSTEMS
+            if hasattr(module, 'SUPPORTED_SYSTEMS'):
+                supported_systems = module.SUPPORTED_SYSTEMS
+
+            if not set(systems.values()).issubset(supported_systems):
+                logging.debug('Skipping {}'.format(systems))
                 continue
 
             results = module.transform_celestial(positions, systems)
 
-            #if results is None:
-            #    logging.debug('Skipping {}'.format(systems))
-            #    continue
-
             results['lon'] %= 360
 
             for col in ['lon', 'lat']:
-                results[col].format = FLOAT_FORMAT_OUTPUT
+                results[col].format = utils.FLOAT_FORMAT_OUTPUT
 
             filename = utils.celestial_filename(tool, systems)
             logging.info('Writing {}'.format(filename))
-            results.write(filename, format=TABLE_FORMAT)
+            results.write(filename, format=utils.TABLE_FORMAT)
 
 
 
@@ -273,7 +269,7 @@ def benchmark_celestial(tools):
               help='Which tools to benchmark.')
 def benchmark_horizontal(tools):
     """Run horizontal coordinate conversions."""
-    tools = select_tools(tools)
+    tools = utils.select_tools(tools)
 
     # TODO: for now we're running on a small subset for debugging
     positions = utils.get_positions(use_subset=True)
@@ -291,11 +287,11 @@ def benchmark_horizontal(tools):
         results['az'] %= 360
 
         for col in ['az', 'alt']:
-            results[col].format = FLOAT_FORMAT_OUTPUT
+            results[col].format = utils.FLOAT_FORMAT_OUTPUT
 
         filename = utils.horizontal_filename(tool)
         logging.info('Writing {}'.format(filename))
-        results.write(filename, format=TABLE_FORMAT)
+        results.write(filename, format=utils.TABLE_FORMAT)
 
 
 
@@ -322,7 +318,7 @@ def plots(tools):
 
     for tool in tools:
         logging.info('Making plots for tool {tool}'.format(tool=tool))
-        other_tools = [_[1] for _ in TOOL_PAIRS if _[0] == tool]
+        other_tools = [_[1] for _ in utils.TOOL_PAIRS if _[0] == tool]
         for tool2 in other_tools:
-            for systems in CELESTIAL_CONVERSIONS:
+            for systems in utils.CELESTIAL_CONVERSIONS:
                 benchmark.make_plot(tool, tool2, systems['in'], systems['out'])

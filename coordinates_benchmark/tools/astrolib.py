@@ -21,13 +21,9 @@ SUPPORTED_SYSTEMS = 'fk5 fk4 galactic ecliptic'.split()
 
 
 def transform_celestial(coords, systems):
-    
-    if not set(systems.values()).issubset(SUPPORTED_SYSTEMS):
-        return None
-
     out = Table()
-    out['lon'] = np.zeros_like(coords['lon'])
-    out['lat'] = np.zeros_like(coords['lat'])
+    out['lon'] = np.zeros(len(coords), dtype='float64')
+    out['lat'] = np.zeros(len(coords), dtype='float64')
 
     for ii, (lon, lat) in enumerate(zip(coords['lon'], coords['lat'])):
 

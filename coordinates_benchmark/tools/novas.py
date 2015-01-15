@@ -14,6 +14,8 @@ from novas import compat as novas
 
 T0 = 2451545.00000000
 
+SUPPORTED_SYSTEMS = 'icrs fk5 ecliptic'.split()
+
 
 def transform_celestial(coords, systems):
     rav = coords['lon'] / 15.0
@@ -26,8 +28,6 @@ def transform_celestial(coords, systems):
         plist = [novas.frame_tie(position, -1) for position in plist]
     elif systems['in'] == 'ecliptic':
         plist = [novas.ecl2equ_vec(T0, position, 2) for position in plist]
-    else:
-        return None
 
     if systems['out'] == 'icrs':
         pass
@@ -35,8 +35,6 @@ def transform_celestial(coords, systems):
         plist = [novas.frame_tie(position, 0) for position in plist]
     elif systems['out'] == 'ecliptic':
         plist = [novas.equ2ecl_vec(T0, position, 2) for position in plist]
-    else:
-        return None
 
     ra, dec = np.array([novas.vector2radec(position) for position in plist]).T
 

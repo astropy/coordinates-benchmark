@@ -14,9 +14,6 @@ SUPPORTED_SYSTEMS = 'fk5 fk4 icrs galactic ecliptic'.split()
 
 
 def transform_celestial(coords, systems):
-    if not set(systems.values()).issubset(SUPPORTED_SYSTEMS):
-        return None
-
     lons, lats = np.radians(coords['lon']), np.radians(coords['lat'])
 
     out = Table()

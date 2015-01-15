@@ -31,10 +31,6 @@ def get_state(system):
 
 
 def transform_celestial(coords, systems):
-
-    if not set(systems.values()).issubset(SUPPORTED_SYSTEMS):
-        return None
-
     # Convert coords to a list of tpm.V6C objects called in_coords
     lon, lat = np.radians(coords['lon']), np.radians(coords['lat'])
     dummy = np.zeros_like(lon)

@@ -33,10 +33,6 @@ def get_frame(system):
 
 
 def transform_celestial(coords, systems):
-
-    if not set(systems.values()).issubset(SUPPORTED_SYSTEMS):
-        return None
-
     in_frame, out_frame = get_frame(systems['in']), get_frame(systems['out'])
     frameset = in_frame.convert(out_frame)
     lon, lat = np.radians(coords['lon']), np.radians(coords['lat'])

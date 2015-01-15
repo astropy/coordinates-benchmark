@@ -7,7 +7,7 @@ from __future__ import (absolute_import, division, print_function,
 import logging
 logging.basicConfig(format='%(levelname)s: %(message)s', level=logging.INFO)
 import click
-from ..config import TOOL_INFO
+from .. import utils
 
 # All commands are implemented as `click` sub-commands
 # on the `cli` click command group.
@@ -44,5 +44,5 @@ cli.add_command(plots)
 @click.command(name='tool-info')
 def tool_info():
     """Print tool availability and version info"""
-    print(TOOL_INFO)
+    print(utils.TOOL_INFO)
 cli.add_command(tool_info)

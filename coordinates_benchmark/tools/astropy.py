@@ -26,9 +26,6 @@ def get_system(system):
 
 
 def transform_celestial(coords, systems):
-    if not set(systems.values()).issubset(SUPPORTED_SYSTEMS):
-        return None
-
     skyin, skyout = get_system(systems['in']), get_system(systems['out'])
 
     in_kwargs = {}

@@ -34,8 +34,6 @@ def system_spec(system):
 
 def transform_celestial(coords, systems):
     """Convert an array of in_coords from in_system to out_system"""
-
-
     # Use kapteyn package specific specifiers for in- and out-systems
     skyin, skyout = system_spec(systems['in']), system_spec(systems['out'])
 
