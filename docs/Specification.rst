@@ -8,7 +8,7 @@ To be able to compare results from different coordinate conversion packages, we 
 
 Note that with some conversions arcsecond, milli-arcsecond or even micro-arcsecond precision can be achieved.
 
-We follow http://www.astro.rug.nl/software/kapteyn/celestial.html#sky-definitions which states that a "sky definition" consists of four things::
+We follow http://www.astro.rug.nl/software/kapteyn/celestial.html#sky-definitions which states that a "sky definition" consists of four things:
 
 * Sky system (equatorial, ecliptic, galactic, supergalactic)
 * Reference system (fk4, fk4_no_e, fk5, icrs, j2000)
@@ -17,7 +17,7 @@ We follow http://www.astro.rug.nl/software/kapteyn/celestial.html#sky-definition
 
 Although not all four values have to be specified all the time, because for some "sky definitions" only some fixed values are allowed for the other parameters.
 
-To understand this better, you can read these documents::
+To understand this better, you can read these documents:
 
 * http://www.astro.rug.nl/software/kapteyn/celestial.html
 * http://www.astro.rug.nl/software/kapteyn/celestialbackground.html
