@@ -31,14 +31,15 @@ cli.add_command(benchmark_celestial)
 from .run_benchmark import benchmark_horizontal
 cli.add_command(benchmark_horizontal)
 
-from .run_benchmark import benchmark_all
-cli.add_command(benchmark_all)
+# TODO: this doesn't work ... not important for now.
+# from .run_benchmark import benchmark_all
+# cli.add_command(benchmark_all)
 
 from .run_benchmark import summary
 cli.add_command(summary)
 
-from .run_benchmark import plots
-cli.add_command(plots)
+from .plot import plots_command
+cli.add_command(plots_command)
 
 
 @click.command(name='tool-info')

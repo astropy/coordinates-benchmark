@@ -146,3 +146,8 @@ def celestial_filename(tool, systems):
 def horizontal_filename(tool):
     fmt = 'output/tools/{}/coords_fk5_to_horizontal.txt'
     return fmt.format(tool)
+
+
+def plot_filename(tool1, tool2, system1, system2):
+    fmt = 'plots/{tool1}_vs_{tool2}_for_{system1}_to_{system2}.png'
+    return fmt.format(**locals())
