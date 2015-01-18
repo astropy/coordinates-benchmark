@@ -50,13 +50,8 @@ def make_plot(tool1, tool2, systems,
               help='Which tools to benchmark.')
 def plots_command(tools):
     """Create plots to illustrate results"""
+    utils.make_output_dir('plots')
     tools = utils.select_tools(tools)
-
-    # Make sure the output folder for plots exists
-    if not os.path.exists('output'):
-        os.mkdir('output')
-    if not os.path.exists('output/plots'):
-        os.mkdir('output/plots')
 
     for tool in tools:
         logging.info('Making plots for tool {tool}'.format(tool=tool))

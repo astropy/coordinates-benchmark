@@ -3,10 +3,11 @@
 """
 from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
-import numpy as np
+import os
 import logging
 import itertools
 from importlib import import_module
+import numpy as np
 from astropy.table import Table
 from astropy.coordinates import Angle
 
@@ -161,3 +162,18 @@ def horizontal_filename(tool):
 def plot_filename(tool1, tool2, systems):
     fmt = 'output/plots/{}_vs_{}_for_{}_to_{}.png'
     return fmt.format(tool1, tool2, systems['in'], systems['out'])
+
+
+def make_output_dir(path):
+    """Make a dir in `outputs` if it doesn't exist already."""
+    path = os.path.join('output', path)
+    if os.path.exists(path):
+        logging.debug('Directory exists: {}'.format(path))
+    else:
+        logging.info('Making directory: {}'.format(path))
+        os.makedirs(path)
+
+
+def make_tool_output_dir(tool):
+    path = os.path.join('tools', tool)
+    make_output_dir(path)

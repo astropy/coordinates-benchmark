@@ -17,6 +17,7 @@ def benchmark_celestial(tools):
     positions = utils.get_positions()
 
     for tool in tools:
+        utils.make_tool_output_dir(tool)
         module = utils.get_test_module(tool)
 
         if not hasattr(module, 'transform_celestial'):
@@ -58,6 +59,7 @@ def benchmark_horizontal(tools):
     observers = utils.get_observers(use_subset=True)
 
     for tool in tools:
+        utils.make_tool_output_dir(tool)
         module = utils.get_test_module(tool)
 
         if not hasattr(module, 'convert_horizontal'):
