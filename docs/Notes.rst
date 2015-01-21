@@ -1,7 +1,13 @@
 Notes
 -----
 
-From David Berry:
+This is a somewhat random collection of notes that summarize
+discussions in Github issues and mailing lists to understand
+differences in results seen in the benchmarks.
+
+
+David Berry on differences in celestial coordinate transforms
+-------------------------------------------------------------
 
 > 1) The differences between kapteyn and (idl,pyast,tpm) on the J2000 to
 > B1950 tests is reduced seriously if you specify the epoch of

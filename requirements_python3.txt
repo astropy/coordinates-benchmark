@@ -1,0 +1,13 @@
+pytpm
+git+http://github.com/astropy/astropy.git#egg=astropy
+novas
+pyephem
+https://github.com/scottransom/pyslalib/archive/master.zip
+starlink-pyast
+palpy
+click
+
+# This file is the same as `requirements.txt` only that `kapteyn` is missing
+# because it doesn't work with Python 3.
+# This duplication was the simplest solution I found to make `pip install`
+# work on Python 2 and 3

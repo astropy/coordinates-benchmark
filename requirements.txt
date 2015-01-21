@@ -1,0 +1,13 @@
+pytpm
+git+http://github.com/astropy/astropy.git#egg=astropy
+novas
+pyephem
+https://github.com/scottransom/pyslalib/archive/master.zip
+starlink-pyast
+palpy
+http://www.astro.rug.nl/software/kapteyn/kapteyn-2.2.tar.gz
+click
+
+# This only works with a very recent pip:
+# https://pip.pypa.io/en/latest/reference/pip_install.html#requirements-file-format
+# http://www.astro.rug.nl/software/kapteyn/kapteyn-2.2.tar.gz; python_version < '3.0'

@@ -2,6 +2,7 @@ language: python
 
 python:
     - 2.7
+    # - 3.4
 
 before_install:
 
@@ -32,9 +33,16 @@ install:
 
     # CORE DEPENDENCIES
     - conda install --yes numpy pip Cython jinja2 pyqt matplotlib
-    - pip install -r pip-requirements.txt
+    - if [[ $TRAVIS_PYTHON_VERSION == 2.7 ]]; then pip install -r requirements.txt; fi
+    - if [[ $TRAVIS_PYTHON_VERSION == 3.4 ]]; then pip install -r requirements_python3.txt; fi
 
 script:
-    - python run_benchmark.py --tasks celestial
-    - python run_benchmark.py --tasks summary
-    - python run_benchmark.py --tasks plots
+    - ./make.py --help
+    - ./make.py tool-info
+    - ./make.py make_observer_table
+    - ./make.py make_skycoord_table
+    - ./make.py benchmark_celestial
+    - ./make.py benchmark_horizontal
+    - ./make.py summary_celestial
+    # Making all plots is slow ... testing that plots work for two tools should be sufficient
+    - ./make.py plots --tools astropy,pyast

@@ -5,5 +5,8 @@
 .idea
 *.html
 *.pyc
-output/plots/
+*~
+output
 env
+.ipynb_checkpoints
+*.ipynb

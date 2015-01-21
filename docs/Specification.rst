@@ -8,7 +8,7 @@ To be able to compare results from different coordinate conversion packages, we 
 
 Note that with some conversions arcsecond, milli-arcsecond or even micro-arcsecond precision can be achieved.
 
-We follow http://www.astro.rug.nl/software/kapteyn/celestial.html#sky-definitions which states that a "sky definition" consists of four things::
+We follow http://www.astro.rug.nl/software/kapteyn/celestial.html#sky-definitions which states that a "sky definition" consists of four things:
 
 * Sky system (equatorial, ecliptic, galactic, supergalactic)
 * Reference system (fk4, fk4_no_e, fk5, icrs, j2000)
@@ -17,7 +17,7 @@ We follow http://www.astro.rug.nl/software/kapteyn/celestial.html#sky-definition
 
 Although not all four values have to be specified all the time, because for some "sky definitions" only some fixed values are allowed for the other parameters.
 
-To understand this better, you can read these documents::
+To understand this better, you can read these documents:
 
 * http://www.astro.rug.nl/software/kapteyn/celestial.html
 * http://www.astro.rug.nl/software/kapteyn/celestialbackground.html
@@ -75,13 +75,12 @@ Notes:
 * Galactic coordinates are defined by (ra,dec) positions specified in the FK4 system, but since there is no other alternative (i.e. we are not free to change this definition), the reference system is not a free parameter.
 * For ecliptic, no reference system is needed. Kapteyn allows different reference systems to be associated with ecliptic coords, but looking at the code (function MatrixEq2Ecl in celestial.py) the only use it makes of the reference system is to decide if the supplied epoch is interpreted as Besselian or Julian. This is done differently in AST - you specify B or J when storing the epoch. So if you always make sure that that the Equinox and Epoch of Observation always include a B or J explicitly, the reference system should not be relevant to ecliptic.
 
-Celestial -- Horizontal Conversions
-+++++++++++++++++++++++++++++++++++
+ICRS -- AltAz Conversions
++++++++++++++++++++++++++
 
-This is work in progress:
-https://github.com/astropy/coordinates-benchmark/pull/10
+Transformations between AltAz (a.k.a. horizontal) and celestial coordinate systems have been implemented in Astropy 1.0.
 
-This is not implemented in astropy 0.2, so it's not urgent.
+A few checks are available via ``./make.py benchmark_horizontal``.
 
 Speed
 -----
