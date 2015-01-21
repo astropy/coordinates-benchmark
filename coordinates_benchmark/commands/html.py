@@ -10,11 +10,11 @@ from .. import utils
 def _accuracy_color(mean):
     """Accuracy color for a given mean difference in arcsec"""
     if mean > 1.:
-        color='red'
+        color = 'red'
     elif mean > 0.01:
-        color='orange'
+        color = 'orange'
     else:
-        color='green'
+        color = 'green'
     return color
 
 
@@ -110,7 +110,7 @@ def write_tool_comparison_table(fh, tool):
             except IOError:
                 fh.write('<td> &mdash;\n')
                 continue
-            diff = utils.our_angular_separation(c['lon'], c['lat'], d['lon'], d['lat'])
+            diff = utils.angular_separation_deg_to_arcsec(c['lon'], c['lat'], d['lon'], d['lat'])
             mean = np.mean(diff)
             color = _accuracy_color(mean)
             fmt = '<td class="{}">{:.6f}<br>{:.6f}<br>{:.6f}<br>{:.6f}'

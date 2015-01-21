@@ -88,15 +88,6 @@ def select_tools(tools, include_idl=False):
     return sorted(requested)
 
 
-# TODO: get rid of this helper function!
-def our_angular_separation(lon1, lat1, lon2, lat2):
-    """Input coordinates in `deg` and output separation in `arcsec`."""
-    from astropy.coordinates.angle_utilities import angular_separation as _as
-    rad = np.radians
-    sep =_as(rad(lon1), rad(lat1), rad(lon2), rad(lat2))
-    return Angle(sep, 'degree').to('marcsec').value
-
-
 def get_observers(use_subset=False):
     filename = 'input/observers.txt'
     logging.debug('Reading {}'.format(filename))
@@ -144,12 +135,25 @@ def celestial_results(tool, systems, symmetric=False):
     return table
 
 
+# TODO: switch internally to radians and get rid of this helper function!
+def angular_separation_deg_to_arcsec(lon1, lat1, lon2, lat2):
+    from astropy.coordinates.angle_utilities import angular_separation
+    from astropy.coordinates import Angle
+    lon1 = np.radians(lon1)
+    lat1 = np.radians(lat1)
+    lon2 = np.radians(lon2)
+    lat2 = np.radians(lat2)
+
+    separation = angular_separation(lon1, lat1, lon2, lat2)
+
+    return Angle(separation, 'radian').to('arcsec').value
+
+
 def celestial_separation_table(tool1, tool2, systems):
     c1 = celestial_results(tool1, systems, symmetric=True)
     c2 = celestial_results(tool2, systems, symmetric=True)
-    separation = our_angular_separation(c1['lon'], c1['lat'], c2['lon'], c2['lat'])
     table = c1.copy()
-    table['separation'] = separation
+    table['separation'] = angular_separation_deg_to_arcsec(c1['lon'], c1['lat'], c2['lon'], c2['lat'])
 
     return table
 

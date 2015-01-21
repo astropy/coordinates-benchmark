@@ -8,3 +8,5 @@
 *~
 output
 env
+.ipynb_checkpoints
+*.ipynb
