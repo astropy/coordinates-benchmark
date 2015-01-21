@@ -5,63 +5,9 @@
    <body>
       <p align='center'>Summary of differences in arcseconds</p>
       <p align='center'>Green means < 10 milli-arcsec, orange < 1 arcsec and red > 1 arcsec</p>
-<p align="center"><a href="summary.html"><b>See also list view</b></a></p><a name="astrolib"></a><a class="anchor" href="#astrolib"><h2>astrolib</h2></a>
+<p align="center"><a href="summary.html"><b>See also list view</b></a></p><a name="astropy"></a><a class="anchor" href="#astropy"><h2>astropy</h2></a>
 <table align="center">
 <tr><th width="80">
-<th width="80">astropy
-<th width="80">kapteyn
-<th width="80">novas
-<th width="80">palpy
-<th width="80">pyast
-<th width="80">pyephem
-<th width="80">pyslalib
-<th width="80">pytpm
-<tr><th>ecliptic &#8594; fk4
-<td> &mdash;
-<td class="red">12250.399549<br>11055.181990<br>14043.525468<br>3094.162775<td> &mdash;
-<td class="red">12249.776173<br>11054.737206<br>14042.840784<br>3093.907991<td class="red">12250.826448<br>11055.683405<br>14044.042103<br>3094.172264<td class="red">12244.403802<br>11048.446082<br>14040.354438<br>3092.226184<td class="red">12249.618659<br>11054.627746<br>14042.729306<br>3093.901637<td class="red">107.196797<br>96.596700<br>122.947586<br>27.861664<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
-<tr><th>ecliptic &#8594; fk5
-<td> &mdash;
-<td class="red">12250.665328<br>11055.574096<br>14043.910734<br>3094.165755<td class="red">12250.738320<br>11055.585255<br>14043.904025<br>3094.150593<td class="red">12249.772508<br>11054.737301<br>14042.822521<br>3093.907819<td class="red">12250.822782<br>11055.683501<br>14044.023859<br>3094.172093<td class="red">12250.664286<br>11055.573937<br>14043.910830<br>3094.165972<td class="red">12249.614990<br>11054.627841<br>14042.709327<br>3093.901465<td class="red">107.196878<br>96.596702<br>122.947550<br>27.861666<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
-<tr><th>ecliptic &#8594; galactic
-<td> &mdash;
-<td class="red">12250.395808<br>11055.182066<br>14043.518201<br>3094.162601<td> &mdash;
-<td class="red">12249.499531<br>11054.343803<br>14042.428949<br>3093.904878<td class="red">12250.549806<br>11055.290002<br>14043.630285<br>3094.169152<td class="red">12250.331381<br>11055.114246<br>14043.431832<br>3094.143898<td class="red">12249.341998<br>11054.234429<br>14042.315807<br>3093.898568<td class="red">107.196879<br>96.596702<br>122.947553<br>27.861666<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
-<tr><th>fk4 &#8594; ecliptic
-<td> &mdash;
-<td class="red">37885.238455<br>34189.781601<br>43882.286469<br>10054.932443<td> &mdash;
-<td class="red">37884.625712<br>34189.326220<br>43881.583885<br>10054.712438<td class="red">37885.662976<br>34190.262490<br>43882.785351<br>10054.987834<td class="red">464.484987<br>418.006602<br>532.840056<br>120.393078<td class="red">37884.524760<br>34189.221733<br>43881.467476<br>10054.686590<td class="red">107.196940<br>96.596705<br>122.947555<br>27.861667<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
-<tr><th>fk4 &#8594; fk5
-<td class="orange">0.077662<br>0.073588<br>0.107958<br>0.023081<td class="orange">0.077727<br>0.073584<br>0.108021<br>0.023092<td> &mdash;
-<td class="green">0.000149<br>0.000157<br>0.000246<br>0.000041<td class="green">0.000149<br>0.000157<br>0.000246<br>0.000041<td class="red">9.877942<br>10.035825<br>17.795423<br>4.440543<td class="green">0.000149<br>0.000157<br>0.000246<br>0.000041<td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
-<tr><th>fk4 &#8594; galactic
-<td class="green">0.000004<br>0.000004<br>0.000009<br>0.000003<td class="green">0.000076<br>0.000069<br>0.000095<br>0.000020<td> &mdash;
-<td class="red">3.803644<br>3.423373<br>4.347082<br>0.973049<td class="red">3.803644<br>3.423373<br>4.347082<br>0.973049<td class="red">8.019691<br>7.995893<br>15.012459<br>4.026064<td class="red">3.803644<br>3.423373<br>4.347082<br>0.973049<td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
-<tr><th>fk5 &#8594; ecliptic
-<td> &mdash;
-<td class="red">107.196894<br>96.596715<br>122.947567<br>27.861669<td class="red">106.557763<br>96.020786<br>122.214527<br>27.695553<td class="red">107.067862<br>96.142904<br>122.350086<br>27.715668<td class="red">106.674440<br>96.109027<br>122.334135<br>27.725477<td class="red">107.206036<br>96.604954<br>122.958054<br>27.864046<td class="red">107.651045<br>96.631359<br>122.964542<br>27.852647<td class="red">107.196878<br>96.596702<br>122.947549<br>27.861666<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
-<tr><th>fk5 &#8594; fk4
-<td class="orange">0.077670<br>0.073604<br>0.108015<br>0.023078<td class="orange">0.077660<br>0.073598<br>0.108020<br>0.023080<td> &mdash;
-<td class="green">0.000129<br>0.000130<br>0.000243<br>0.000059<td class="green">0.000129<br>0.000130<br>0.000243<br>0.000059<td class="red">9.857609<br>10.033876<br>17.792414<br>4.441360<td class="green">0.000129<br>0.000129<br>0.000243<br>0.000059<td class="green">0.000000<br>0.000000<br>0.000005<br>0.000000<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
-<tr><th>fk5 &#8594; galactic
-<td class="red">3.798655<br>3.421350<br>4.345329<br>0.972642<td class="red">3.798638<br>3.421336<br>4.345310<br>0.972637<td> &mdash;
-<td class="red">3.801027<br>3.422859<br>4.347022<br>0.973004<td class="red">3.801027<br>3.422859<br>4.347022<br>0.973004<td class="red">3.887598<br>3.503904<br>4.449748<br>0.995877<td class="red">3.801027<br>3.422859<br>4.347022<br>0.973004<td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
-<tr><th>galactic &#8594; ecliptic
-<td> &mdash;
-<td class="red">32067.343778<br>29071.703981<br>36861.945638<br>8259.288631<td> &mdash;
-<td class="red">32066.262524<br>29070.838840<br>36860.859087<br>8259.041979<td class="red">32067.306956<br>29071.786236<br>36862.060537<br>8259.311170<td class="red">32067.294774<br>29071.636391<br>36861.859973<br>8259.270195<td class="red">32066.299711<br>29070.755842<br>36860.742973<br>8259.019180<td class="red">106.142935<br>95.700136<br>122.947551<br>28.381054<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
-<tr><th>galactic &#8594; fk4
-<td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td class="green">0.000076<br>0.000069<br>0.000094<br>0.000020<td> &mdash;
-<td class="red">3.789511<br>3.403949<br>4.346516<br>0.984042<td class="red">3.789511<br>3.403949<br>4.346516<br>0.984042<td class="red">7.828024<br>7.853365<br>14.988437<br>3.953863<td class="red">3.789511<br>3.403949<br>4.346516<br>0.984042<td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
-<tr><th>galactic &#8594; fk5
-<td class="red">3.778197<br>3.402357<br>4.344959<br>0.983954<td class="red">3.778180<br>3.402343<br>4.344939<br>0.983949<td> &mdash;
-<td class="red">3.789535<br>3.404020<br>4.346603<br>0.984064<td class="red">3.789535<br>3.404020<br>4.346603<br>0.984064<td class="red">3.860862<br>3.481722<br>4.448603<br>1.010236<td class="red">3.789535<br>3.404020<br>4.346603<br>0.984064<td class="green">0.000000<br>0.000000<br>0.000006<br>0.000000<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
-</tr>
-</table>
-<a name="astropy"></a><a class="anchor" href="#astropy"><h2>astropy</h2></a>
-<table align="center">
-<tr><th width="80">
-<th width="80">astrolib
 <th width="80">kapteyn
 <th width="80">novas
 <th width="80">palpy
@@ -70,53 +16,47 @@
 <th width="80">pyslalib
 <th width="80">pytpm
 <tr><th>fk4 &#8594; fk5
-<td class="orange">0.077662<br>0.073588<br>0.107958<br>0.023081<td class="green">0.000345<br>0.000331<br>0.000508<br>0.000109<td> &mdash;
+<td class="green">0.000345<br>0.000331<br>0.000508<br>0.000109<td> &mdash;
 <td class="orange">0.077748<br>0.073705<br>0.108141<br>0.023115<td class="orange">0.077748<br>0.073705<br>0.108141<br>0.023115<td class="red">9.855793<br>10.031132<br>17.806029<br>4.449346<td class="orange">0.077748<br>0.073705<br>0.108141<br>0.023115<td class="orange">0.077662<br>0.073588<br>0.107958<br>0.023081<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>fk4 &#8594; galactic
-<td class="green">0.000004<br>0.000004<br>0.000009<br>0.000003<td class="green">0.000076<br>0.000069<br>0.000093<br>0.000020<td> &mdash;
+<td class="green">0.000076<br>0.000069<br>0.000093<br>0.000020<td> &mdash;
 <td class="red">3.803643<br>3.423373<br>4.347082<br>0.973049<td class="red">3.803643<br>3.423373<br>4.347082<br>0.973049<td class="red">8.019694<br>7.995893<br>15.012462<br>4.026064<td class="red">3.803643<br>3.423373<br>4.347082<br>0.973049<td class="green">0.000004<br>0.000004<br>0.000009<br>0.000003<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>fk4 &#8594; icrs
-<td> &mdash;
 <td class="green">0.000071<br>0.000070<br>0.000109<br>0.000023<td> &mdash;
 <td class="orange">0.077853<br>0.073708<br>0.108194<br>0.023125<td class="orange">0.077853<br>0.073708<br>0.108194<br>0.023125<td> &mdash;
 <td class="orange">0.077853<br>0.073708<br>0.108194<br>0.023125<td> &mdash;
 <th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>fk5 &#8594; fk4
-<td class="orange">0.077670<br>0.073604<br>0.108015<br>0.023078<td class="green">0.000071<br>0.000070<br>0.000109<br>0.000023<td> &mdash;
+<td class="green">0.000071<br>0.000070<br>0.000109<br>0.000023<td> &mdash;
 <td class="orange">0.077672<br>0.073597<br>0.108104<br>0.023071<td class="orange">0.077672<br>0.073597<br>0.108104<br>0.023071<td class="red">9.856096<br>10.029079<br>17.802983<br>4.450121<td class="orange">0.077668<br>0.073596<br>0.108097<br>0.023071<td class="orange">0.077670<br>0.073604<br>0.108015<br>0.023078<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>fk5 &#8594; galactic
-<td class="red">3.798655<br>3.421350<br>4.345329<br>0.972642<td class="green">0.000015<br>0.000015<br>0.000022<br>0.000005<td> &mdash;
+<td class="green">0.000015<br>0.000015<br>0.000022<br>0.000005<td> &mdash;
 <td class="orange">0.021554<br>0.019379<br>0.024676<br>0.005569<td class="orange">0.021554<br>0.019379<br>0.024676<br>0.005569<td class="orange">0.137884<br>0.124816<br>0.159905<br>0.036410<td class="orange">0.021554<br>0.019379<br>0.024676<br>0.005569<td class="red">3.798655<br>3.421350<br>4.345329<br>0.972642<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>fk5 &#8594; icrs
-<td> &mdash;
 <td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td class="orange">0.449726<br>0.407614<br>0.523996<br>0.119667<td class="green">0.000000<br>0.000000<br>0.000006<br>0.000000<td class="green">0.000000<br>0.000000<br>0.000006<br>0.000000<td> &mdash;
 <td class="green">0.000000<br>0.000000<br>0.000006<br>0.000000<td> &mdash;
 <th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>galactic &#8594; fk4
-<td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td class="green">0.000076<br>0.000069<br>0.000094<br>0.000020<td> &mdash;
+<td class="green">0.000076<br>0.000069<br>0.000094<br>0.000020<td> &mdash;
 <td class="red">3.789511<br>3.403949<br>4.346516<br>0.984042<td class="red">3.789511<br>3.403949<br>4.346516<br>0.984042<td class="red">7.828024<br>7.853365<br>14.988437<br>3.953863<td class="red">3.789511<br>3.403949<br>4.346516<br>0.984042<td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>galactic &#8594; fk5
-<td class="red">3.778197<br>3.402357<br>4.344959<br>0.983954<td class="green">0.000014<br>0.000014<br>0.000023<br>0.000005<td> &mdash;
+<td class="green">0.000014<br>0.000014<br>0.000023<br>0.000005<td> &mdash;
 <td class="orange">0.021163<br>0.019167<br>0.024679<br>0.005693<td class="orange">0.021163<br>0.019167<br>0.024679<br>0.005693<td class="orange">0.137756<br>0.124580<br>0.159904<br>0.035822<td class="orange">0.021163<br>0.019167<br>0.024679<br>0.005693<td class="red">3.778197<br>3.402357<br>4.344959<br>0.983954<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>galactic &#8594; icrs
-<td> &mdash;
 <td class="green">0.000014<br>0.000014<br>0.000024<br>0.000005<td> &mdash;
 <td class="orange">0.021166<br>0.019167<br>0.024679<br>0.005693<td class="orange">0.021166<br>0.019167<br>0.024679<br>0.005693<td> &mdash;
 <td class="orange">0.021166<br>0.019167<br>0.024679<br>0.005693<td> &mdash;
 <th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>icrs &#8594; fk4
-<td> &mdash;
 <td class="green">0.000071<br>0.000070<br>0.000109<br>0.000023<td> &mdash;
 <td class="orange">0.077672<br>0.073597<br>0.108097<br>0.023071<td class="orange">0.077672<br>0.073597<br>0.108097<br>0.023071<td> &mdash;
 <td class="orange">0.077668<br>0.073596<br>0.108091<br>0.023071<td> &mdash;
 <th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>icrs &#8594; fk5
-<td> &mdash;
 <td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td class="orange">0.449733<br>0.407614<br>0.523995<br>0.119667<td class="green">0.000000<br>0.000000<br>0.000006<br>0.000000<td class="green">0.000000<br>0.000000<br>0.000006<br>0.000000<td> &mdash;
 <td class="green">0.000000<br>0.000000<br>0.000006<br>0.000000<td> &mdash;
 <th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>icrs &#8594; galactic
-<td> &mdash;
 <td class="green">0.000014<br>0.000014<br>0.000022<br>0.000005<td> &mdash;
 <td class="orange">0.021553<br>0.019379<br>0.024677<br>0.005569<td class="orange">0.021553<br>0.019379<br>0.024677<br>0.005569<td> &mdash;
 <td class="orange">0.021553<br>0.019379<br>0.024677<br>0.005569<td> &mdash;
@@ -126,7 +66,6 @@
 <a name="kapteyn"></a><a class="anchor" href="#kapteyn"><h2>kapteyn</h2></a>
 <table align="center">
 <tr><th width="80">
-<th width="80">astrolib
 <th width="80">astropy
 <th width="80">novas
 <th width="80">palpy
@@ -135,87 +74,79 @@
 <th width="80">pyslalib
 <th width="80">pytpm
 <tr><th>ecliptic &#8594; fk4
-<td class="red">12250.399549<br>11055.181990<br>14043.525468<br>3094.162775<td> &mdash;
+<td> &mdash;
 <td> &mdash;
 <td class="red">4.151025<br>3.719352<br>4.790023<br>1.109462<td class="red">4.150162<br>3.726882<br>4.769336<br>1.087979<td class="red">8.080089<br>8.065174<br>15.137341<br>4.073871<td class="red">3.772070<br>3.416804<br>4.401806<br>1.017706<td class="red">12266.185574<br>11057.495658<br>14043.001356<br>3091.683829<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>ecliptic &#8594; fk5
-<td class="red">12250.665328<br>11055.574096<br>14043.910734<br>3094.165755<td> &mdash;
+<td> &mdash;
 <td class="orange">0.639128<br>0.575929<br>0.733041<br>0.166117<td class="red">1.099371<br>1.003593<br>1.293136<br>0.290912<td class="orange">0.631521<br>0.574956<br>0.725311<br>0.155075<td class="green">0.009143<br>0.008239<br>0.010493<br>0.002377<td class="orange">1.049091<br>0.946415<br>1.201618<br>0.264318<td class="red">12266.236161<br>11057.888473<br>14043.390783<br>3091.685765<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>ecliptic &#8594; galactic
-<td class="red">12250.395808<br>11055.182066<br>14043.518201<br>3094.162601<td> &mdash;
+<td> &mdash;
 <td> &mdash;
 <td class="orange">1.092319<br>0.995464<br>1.282630<br>0.288761<td class="orange">0.611887<br>0.558001<br>0.703853<br>0.150219<td class="orange">0.132582<br>0.120682<br>0.153943<br>0.034472<td class="orange">1.049493<br>0.948353<br>1.203404<br>0.264183<td class="red">12266.181959<br>11057.495734<br>14043.014869<br>3091.683653<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>ecliptic &#8594; icrs
-<td> &mdash;
 <td> &mdash;
 <td class="orange">0.921724<br>0.835028<br>1.070799<br>0.243840<td class="red">1.099369<br>1.003593<br>1.293136<br>0.290912<td class="orange">0.631516<br>0.574956<br>0.725313<br>0.155075<td> &mdash;
 <td class="orange">1.049091<br>0.946415<br>1.201618<br>0.264318<td> &mdash;
 <th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>fk4 &#8594; ecliptic
-<td class="red">37885.238455<br>34189.781601<br>43882.286469<br>10054.932443<td> &mdash;
+<td> &mdash;
 <td> &mdash;
 <td class="red">4.192927<br>3.759908<br>4.790691<br>1.078086<td class="red">4.191235<br>3.763229<br>4.769581<br>1.063588<td class="red">37907.814139<br>34204.884129<br>43894.180259<br>10061.193641<td class="red">3.828435<br>3.448919<br>4.402386<br>0.994030<td class="red">37879.184278<br>34191.191585<br>43882.019781<br>10055.777197<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>fk4 &#8594; fk5
-<td class="orange">0.077727<br>0.073584<br>0.108021<br>0.023092<td class="green">0.000345<br>0.000331<br>0.000508<br>0.000109<td> &mdash;
+<td class="green">0.000345<br>0.000331<br>0.000508<br>0.000109<td> &mdash;
 <td class="orange">0.077842<br>0.073701<br>0.108203<br>0.023127<td class="orange">0.077842<br>0.073701<br>0.108203<br>0.023127<td class="red">9.855339<br>10.031017<br>17.805821<br>4.449293<td class="orange">0.077842<br>0.073701<br>0.108203<br>0.023127<td class="orange">0.077727<br>0.073584<br>0.108021<br>0.023092<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>fk4 &#8594; galactic
-<td class="green">0.000076<br>0.000069<br>0.000095<br>0.000020<td class="green">0.000076<br>0.000069<br>0.000093<br>0.000020<td> &mdash;
+<td class="green">0.000076<br>0.000069<br>0.000093<br>0.000020<td> &mdash;
 <td class="red">3.803668<br>3.423373<br>4.346999<br>0.973048<td class="red">3.803668<br>3.423373<br>4.346999<br>0.973048<td class="red">8.019649<br>7.995866<br>15.012372<br>4.026025<td class="red">3.803668<br>3.423373<br>4.346999<br>0.973048<td class="green">0.000076<br>0.000069<br>0.000095<br>0.000020<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>fk4 &#8594; icrs
-<td> &mdash;
 <td class="green">0.000071<br>0.000070<br>0.000109<br>0.000023<td> &mdash;
 <td class="orange">0.077842<br>0.073701<br>0.108203<br>0.023127<td class="orange">0.077842<br>0.073701<br>0.108203<br>0.023127<td> &mdash;
 <td class="orange">0.077842<br>0.073701<br>0.108203<br>0.023127<td> &mdash;
 <th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>fk5 &#8594; ecliptic
-<td class="red">107.196894<br>96.596715<br>122.947567<br>27.861669<td> &mdash;
+<td> &mdash;
 <td class="orange">0.639131<br>0.575929<br>0.733040<br>0.166117<td class="red">1.105274<br>1.000137<br>1.293141<br>0.296768<td class="orange">0.636028<br>0.577344<br>0.725310<br>0.155921<td class="green">0.009142<br>0.008239<br>0.010493<br>0.002377<td class="orange">1.037677<br>0.936398<br>1.201619<br>0.275437<td class="green">0.000014<br>0.000013<br>0.000021<br>0.000004<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>fk5 &#8594; fk4
-<td class="orange">0.077660<br>0.073598<br>0.108020<br>0.023080<td class="green">0.000071<br>0.000070<br>0.000109<br>0.000023<td> &mdash;
+<td class="green">0.000071<br>0.000070<br>0.000109<br>0.000023<td> &mdash;
 <td class="orange">0.077661<br>0.073590<br>0.108109<br>0.023073<td class="orange">0.077661<br>0.073590<br>0.108109<br>0.023073<td class="red">9.856079<br>10.029071<br>17.802912<br>4.450083<td class="orange">0.077657<br>0.073589<br>0.108103<br>0.023073<td class="orange">0.077660<br>0.073598<br>0.108020<br>0.023080<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>fk5 &#8594; galactic
-<td class="red">3.798638<br>3.421336<br>4.345310<br>0.972637<td class="green">0.000015<br>0.000015<br>0.000022<br>0.000005<td> &mdash;
+<td class="green">0.000015<br>0.000015<br>0.000022<br>0.000005<td> &mdash;
 <td class="orange">0.021561<br>0.019380<br>0.024680<br>0.005569<td class="orange">0.021561<br>0.019380<br>0.024680<br>0.005569<td class="orange">0.137897<br>0.124826<br>0.159915<br>0.036412<td class="orange">0.021561<br>0.019380<br>0.024680<br>0.005569<td class="red">3.798638<br>3.421336<br>4.345310<br>0.972637<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>fk5 &#8594; icrs
-<td> &mdash;
 <td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td class="orange">0.449726<br>0.407614<br>0.523996<br>0.119667<td class="green">0.000000<br>0.000000<br>0.000006<br>0.000000<td class="green">0.000000<br>0.000000<br>0.000006<br>0.000000<td> &mdash;
 <td class="green">0.000000<br>0.000000<br>0.000006<br>0.000000<td> &mdash;
 <th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>galactic &#8594; ecliptic
-<td class="red">32067.343778<br>29071.703981<br>36861.945638<br>8259.288631<td> &mdash;
+<td> &mdash;
 <td> &mdash;
 <td class="red">1.124964<br>1.020745<br>1.282630<br>0.282091<td class="orange">0.608407<br>0.553916<br>0.703854<br>0.156740<td class="orange">0.133731<br>0.119924<br>0.153946<br>0.034651<td class="orange">1.049617<br>0.948653<br>1.203400<br>0.269597<td class="red">32104.380150<br>29070.410487<br>36861.649120<br>8259.198451<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>galactic &#8594; fk4
-<td class="green">0.000076<br>0.000069<br>0.000094<br>0.000020<td class="green">0.000076<br>0.000069<br>0.000094<br>0.000020<td> &mdash;
+<td class="green">0.000076<br>0.000069<br>0.000094<br>0.000020<td> &mdash;
 <td class="red">3.789473<br>3.403948<br>4.346434<br>0.984042<td class="red">3.789473<br>3.403948<br>4.346434<br>0.984042<td class="red">7.827997<br>7.853341<br>14.988349<br>3.953823<td class="red">3.789473<br>3.403948<br>4.346434<br>0.984042<td class="green">0.000076<br>0.000069<br>0.000094<br>0.000020<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>galactic &#8594; fk5
-<td class="red">3.778180<br>3.402343<br>4.344939<br>0.983949<td class="green">0.000014<br>0.000014<br>0.000023<br>0.000005<td> &mdash;
+<td class="green">0.000014<br>0.000014<br>0.000023<br>0.000005<td> &mdash;
 <td class="orange">0.021167<br>0.019168<br>0.024682<br>0.005693<td class="orange">0.021167<br>0.019168<br>0.024682<br>0.005693<td class="orange">0.137770<br>0.124589<br>0.159913<br>0.035825<td class="orange">0.021167<br>0.019168<br>0.024682<br>0.005693<td class="red">3.778180<br>3.402343<br>4.344939<br>0.983949<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>galactic &#8594; icrs
-<td> &mdash;
 <td class="green">0.000014<br>0.000014<br>0.000024<br>0.000005<td> &mdash;
 <td class="orange">0.021166<br>0.019168<br>0.024683<br>0.005693<td class="orange">0.021166<br>0.019168<br>0.024683<br>0.005693<td> &mdash;
 <td class="orange">0.021166<br>0.019168<br>0.024683<br>0.005693<td> &mdash;
 <th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>icrs &#8594; ecliptic
 <td> &mdash;
-<td> &mdash;
 <td class="orange">0.920069<br>0.839921<br>1.070801<br>0.237463<td class="red">1.105271<br>1.000137<br>1.293136<br>0.296768<td class="orange">0.636028<br>0.577344<br>0.725309<br>0.155921<td> &mdash;
 <td class="orange">1.037680<br>0.936398<br>1.201616<br>0.275436<td> &mdash;
 <th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>icrs &#8594; fk4
-<td> &mdash;
 <td class="green">0.000071<br>0.000070<br>0.000109<br>0.000023<td> &mdash;
 <td class="orange">0.077661<br>0.073590<br>0.108109<br>0.023073<td class="orange">0.077661<br>0.073590<br>0.108109<br>0.023073<td> &mdash;
 <td class="orange">0.077657<br>0.073589<br>0.108103<br>0.023073<td> &mdash;
 <th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>icrs &#8594; fk5
-<td> &mdash;
 <td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td class="orange">0.449733<br>0.407614<br>0.523995<br>0.119667<td class="green">0.000000<br>0.000000<br>0.000006<br>0.000000<td class="green">0.000000<br>0.000000<br>0.000006<br>0.000000<td> &mdash;
 <td class="green">0.000000<br>0.000000<br>0.000006<br>0.000000<td> &mdash;
 <th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>icrs &#8594; galactic
-<td> &mdash;
 <td class="green">0.000014<br>0.000014<br>0.000022<br>0.000005<td> &mdash;
 <td class="orange">0.021559<br>0.019380<br>0.024676<br>0.005569<td class="orange">0.021559<br>0.019380<br>0.024676<br>0.005569<td> &mdash;
 <td class="orange">0.021559<br>0.019380<br>0.024676<br>0.005569<td> &mdash;
@@ -225,7 +156,6 @@
 <a name="novas"></a><a class="anchor" href="#novas"><h2>novas</h2></a>
 <table align="center">
 <tr><th width="80">
-<th width="80">astrolib
 <th width="80">astropy
 <th width="80">kapteyn
 <th width="80">palpy
@@ -234,30 +164,26 @@
 <th width="80">pyslalib
 <th width="80">pytpm
 <tr><th>ecliptic &#8594; fk5
-<td class="red">12250.738320<br>11055.585255<br>14043.904025<br>3094.150593<td> &mdash;
+<td> &mdash;
 <td class="orange">0.639128<br>0.575929<br>0.733041<br>0.166117<td class="orange">0.991892<br>0.900809<br>1.151408<br>0.262468<td class="orange">0.349176<br>0.317468<br>0.403997<br>0.089391<td class="orange">0.648272<br>0.584168<br>0.743528<br>0.168493<td class="red">1.241002<br>1.125180<br>1.413376<br>0.305267<td class="red">12266.184872<br>11057.904822<br>14043.391325<br>3091.671509<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>ecliptic &#8594; icrs
-<td> &mdash;
 <td> &mdash;
 <td class="orange">0.921724<br>0.835028<br>1.070799<br>0.243840<td class="orange">0.738304<br>0.676082<br>0.850953<br>0.184637<td class="orange">0.476996<br>0.430392<br>0.552813<br>0.123345<td> &mdash;
 <td class="red">1.194003<br>1.090723<br>1.364864<br>0.293446<td> &mdash;
 <th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>fk5 &#8594; ecliptic
-<td class="red">106.557763<br>96.020786<br>122.214527<br>27.695553<td> &mdash;
+<td> &mdash;
 <td class="orange">0.639131<br>0.575929<br>0.733040<br>0.166117<td class="orange">0.987126<br>0.895449<br>1.151405<br>0.263512<td class="orange">0.351246<br>0.318047<br>0.403996<br>0.090410<td class="orange">0.648273<br>0.584169<br>0.743527<br>0.168494<td class="red">1.226238<br>1.116210<br>1.413377<br>0.311939<td class="orange">0.639115<br>0.575916<br>0.733022<br>0.166113<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>fk5 &#8594; icrs
-<td> &mdash;
 <td class="orange">0.449726<br>0.407614<br>0.523996<br>0.119667<td class="orange">0.449726<br>0.407614<br>0.523996<br>0.119667<td class="orange">0.449726<br>0.407614<br>0.523996<br>0.119667<td class="orange">0.449726<br>0.407614<br>0.523996<br>0.119667<td> &mdash;
 <td class="orange">0.449726<br>0.407614<br>0.523996<br>0.119667<td> &mdash;
 <th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>icrs &#8594; ecliptic
 <td> &mdash;
-<td> &mdash;
 <td class="orange">0.920069<br>0.839921<br>1.070801<br>0.237463<td class="orange">0.732568<br>0.669962<br>0.850951<br>0.189853<td class="orange">0.468721<br>0.428837<br>0.552811<br>0.124006<td> &mdash;
 <td class="red">1.207238<br>1.086701<br>1.364857<br>0.297532<td> &mdash;
 <th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>icrs &#8594; fk5
-<td> &mdash;
 <td class="orange">0.449733<br>0.407614<br>0.523995<br>0.119667<td class="orange">0.449733<br>0.407614<br>0.523995<br>0.119667<td class="orange">0.449733<br>0.407614<br>0.523995<br>0.119667<td class="orange">0.449733<br>0.407614<br>0.523995<br>0.119667<td> &mdash;
 <td class="orange">0.449733<br>0.407614<br>0.523995<br>0.119667<td> &mdash;
 <th align="left">Median<br>Mean<br>Max<br>Std.Dev.
@@ -266,7 +192,6 @@
 <a name="palpy"></a><a class="anchor" href="#palpy"><h2>palpy</h2></a>
 <table align="center">
 <tr><th width="80">
-<th width="80">astrolib
 <th width="80">astropy
 <th width="80">kapteyn
 <th width="80">novas
@@ -275,87 +200,79 @@
 <th width="80">pyslalib
 <th width="80">pytpm
 <tr><th>ecliptic &#8594; fk4
-<td class="red">12249.776173<br>11054.737206<br>14042.840784<br>3093.907991<td> &mdash;
+<td> &mdash;
 <td class="red">4.151025<br>3.719352<br>4.790023<br>1.109462<td> &mdash;
 <td class="orange">1.049029<br>0.946358<br>1.201548<br>0.264302<td class="red">9.498694<br>9.685343<br>17.255302<br>4.267823<td class="orange">0.631546<br>0.574968<br>0.725327<br>0.155078<td class="red">12265.243092<br>11057.055853<br>14042.330518<br>3091.428650<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>ecliptic &#8594; fk5
-<td class="red">12249.772508<br>11054.737301<br>14042.822521<br>3093.907819<td> &mdash;
+<td> &mdash;
 <td class="red">1.099371<br>1.003593<br>1.293136<br>0.290912<td class="orange">0.991892<br>0.900809<br>1.151408<br>0.262468<td class="orange">1.049029<br>0.946358<br>1.201548<br>0.264302<td class="red">1.101772<br>1.007401<br>1.298060<br>0.291910<td class="orange">0.631547<br>0.574968<br>0.725323<br>0.155077<td class="red">12265.245702<br>11057.055948<br>14042.307984<br>3091.428477<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>ecliptic &#8594; galactic
-<td class="red">12249.499531<br>11054.343803<br>14042.428949<br>3093.904878<td> &mdash;
+<td> &mdash;
 <td class="orange">1.092319<br>0.995464<br>1.282630<br>0.288761<td> &mdash;
 <td class="orange">1.049026<br>0.946358<br>1.201548<br>0.264302<td class="orange">1.030433<br>0.935313<br>1.207063<br>0.274735<td class="orange">0.631548<br>0.574968<br>0.725323<br>0.155077<td class="red">12265.206406<br>11056.661565<br>14041.929635<br>3091.426552<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>ecliptic &#8594; icrs
-<td> &mdash;
 <td> &mdash;
 <td class="red">1.099369<br>1.003593<br>1.293136<br>0.290912<td class="orange">0.738304<br>0.676082<br>0.850953<br>0.184637<td class="orange">1.049030<br>0.946358<br>1.201548<br>0.264302<td> &mdash;
 <td class="orange">0.631547<br>0.574968<br>0.725323<br>0.155077<td> &mdash;
 <th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>fk4 &#8594; ecliptic
-<td class="red">37884.625712<br>34189.326220<br>43881.583885<br>10054.712438<td> &mdash;
+<td> &mdash;
 <td class="red">4.192927<br>3.759908<br>4.790691<br>1.078086<td> &mdash;
 <td class="orange">1.037621<br>0.936340<br>1.201547<br>0.275422<td class="red">37905.702552<br>34204.437270<br>43893.537961<br>10060.972586<td class="orange">0.635832<br>0.577217<br>0.725324<br>0.156233<td class="red">37878.165555<br>34190.737961<br>43881.347328<br>10055.557082<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>fk4 &#8594; fk5
-<td class="green">0.000149<br>0.000157<br>0.000246<br>0.000041<td class="orange">0.077748<br>0.073705<br>0.108141<br>0.023115<td class="orange">0.077842<br>0.073701<br>0.108203<br>0.023127<td> &mdash;
+<td class="orange">0.077748<br>0.073705<br>0.108141<br>0.023115<td class="orange">0.077842<br>0.073701<br>0.108203<br>0.023127<td> &mdash;
 <td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td class="red">9.877986<br>10.035822<br>17.795504<br>4.440537<td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td class="green">0.000149<br>0.000157<br>0.000246<br>0.000041<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>fk4 &#8594; galactic
-<td class="red">3.803644<br>3.423373<br>4.347082<br>0.973049<td class="red">3.803643<br>3.423373<br>4.347082<br>0.973049<td class="red">3.803668<br>3.423373<br>4.346999<br>0.973048<td> &mdash;
+<td class="red">3.803643<br>3.423373<br>4.347082<br>0.973049<td class="red">3.803668<br>3.423373<br>4.346999<br>0.973048<td> &mdash;
 <td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td class="red">9.830756<br>9.947553<br>17.663605<br>4.415710<td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td class="red">3.803644<br>3.423373<br>4.347082<br>0.973049<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>fk4 &#8594; icrs
-<td> &mdash;
 <td class="orange">0.077853<br>0.073708<br>0.108194<br>0.023125<td class="orange">0.077842<br>0.073701<br>0.108203<br>0.023127<td> &mdash;
 <td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td> &mdash;
 <td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td> &mdash;
 <th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>fk5 &#8594; ecliptic
-<td class="red">107.067862<br>96.142904<br>122.350086<br>27.715668<td> &mdash;
+<td> &mdash;
 <td class="red">1.105274<br>1.000137<br>1.293141<br>0.296768<td class="orange">0.987126<br>0.895449<br>1.151405<br>0.263512<td class="orange">1.037615<br>0.936342<br>1.201547<br>0.275420<td class="red">1.108673<br>1.003997<br>1.298059<br>0.297750<td class="orange">0.636029<br>0.577355<br>0.725327<br>0.155924<td class="red">1.105266<br>1.000131<br>1.293131<br>0.296767<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>fk5 &#8594; fk4
-<td class="green">0.000129<br>0.000130<br>0.000243<br>0.000059<td class="orange">0.077672<br>0.073597<br>0.108104<br>0.023071<td class="orange">0.077661<br>0.073590<br>0.108109<br>0.023073<td> &mdash;
+<td class="orange">0.077672<br>0.073597<br>0.108104<br>0.023071<td class="orange">0.077661<br>0.073590<br>0.108109<br>0.023073<td> &mdash;
 <td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td class="red">9.857568<br>10.033821<br>17.792237<br>4.441349<td class="green">0.000000<br>0.000002<br>0.000055<br>0.000004<td class="green">0.000129<br>0.000130<br>0.000243<br>0.000059<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>fk5 &#8594; galactic
-<td class="red">3.801027<br>3.422859<br>4.347022<br>0.973004<td class="orange">0.021554<br>0.019379<br>0.024676<br>0.005569<td class="orange">0.021561<br>0.019380<br>0.024680<br>0.005569<td> &mdash;
+<td class="orange">0.021554<br>0.019379<br>0.024676<br>0.005569<td class="orange">0.021561<br>0.019380<br>0.024680<br>0.005569<td> &mdash;
 <td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td class="orange">0.150391<br>0.135828<br>0.174328<br>0.039914<td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td class="red">3.801027<br>3.422859<br>4.347022<br>0.973004<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>fk5 &#8594; icrs
-<td> &mdash;
 <td class="green">0.000000<br>0.000000<br>0.000006<br>0.000000<td class="green">0.000000<br>0.000000<br>0.000006<br>0.000000<td class="orange">0.449726<br>0.407614<br>0.523996<br>0.119667<td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td> &mdash;
 <td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td> &mdash;
 <th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>galactic &#8594; ecliptic
-<td class="red">32066.262524<br>29070.838840<br>36860.859087<br>8259.041979<td> &mdash;
+<td> &mdash;
 <td class="red">1.124964<br>1.020745<br>1.282630<br>0.282091<td> &mdash;
 <td class="orange">1.049700<br>0.947475<br>1.201548<br>0.269210<td class="orange">1.058163<br>0.961791<br>1.207051<br>0.265420<td class="orange">0.626353<br>0.570802<br>0.725321<br>0.161329<td class="red">32103.627667<br>29069.546918<br>36860.564072<br>8258.952002<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>galactic &#8594; fk4
-<td class="red">3.789511<br>3.403949<br>4.346516<br>0.984042<td class="red">3.789511<br>3.403949<br>4.346516<br>0.984042<td class="red">3.789473<br>3.403948<br>4.346434<br>0.984042<td> &mdash;
+<td class="red">3.789511<br>3.403949<br>4.346516<br>0.984042<td class="red">3.789473<br>3.403948<br>4.346434<br>0.984042<td> &mdash;
 <td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td class="red">9.494340<br>9.776990<br>17.620241<br>4.221328<td class="green">0.000000<br>0.000002<br>0.000057<br>0.000004<td class="red">3.789511<br>3.403949<br>4.346516<br>0.984042<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>galactic &#8594; fk5
-<td class="red">3.789535<br>3.404020<br>4.346603<br>0.984064<td class="orange">0.021163<br>0.019167<br>0.024679<br>0.005693<td class="orange">0.021167<br>0.019168<br>0.024682<br>0.005693<td> &mdash;
+<td class="orange">0.021163<br>0.019167<br>0.024679<br>0.005693<td class="orange">0.021167<br>0.019168<br>0.024682<br>0.005693<td> &mdash;
 <td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td class="orange">0.149572<br>0.135792<br>0.174330<br>0.038817<td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td class="red">3.789535<br>3.404020<br>4.346603<br>0.984064<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>galactic &#8594; icrs
-<td> &mdash;
 <td class="orange">0.021166<br>0.019167<br>0.024679<br>0.005693<td class="orange">0.021166<br>0.019168<br>0.024683<br>0.005693<td> &mdash;
 <td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td> &mdash;
 <td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td> &mdash;
 <th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>icrs &#8594; ecliptic
 <td> &mdash;
-<td> &mdash;
 <td class="red">1.105271<br>1.000137<br>1.293136<br>0.296768<td class="orange">0.732568<br>0.669962<br>0.850951<br>0.189853<td class="orange">1.037618<br>0.936343<br>1.201547<br>0.275420<td> &mdash;
 <td class="orange">0.636029<br>0.577355<br>0.725321<br>0.155924<td> &mdash;
 <th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>icrs &#8594; fk4
-<td> &mdash;
 <td class="orange">0.077672<br>0.073597<br>0.108097<br>0.023071<td class="orange">0.077661<br>0.073590<br>0.108109<br>0.023073<td> &mdash;
 <td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td> &mdash;
 <td class="green">0.000000<br>0.000002<br>0.000051<br>0.000004<td> &mdash;
 <th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>icrs &#8594; fk5
-<td> &mdash;
 <td class="green">0.000000<br>0.000000<br>0.000006<br>0.000000<td class="green">0.000000<br>0.000000<br>0.000006<br>0.000000<td class="orange">0.449733<br>0.407614<br>0.523995<br>0.119667<td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td> &mdash;
 <td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td> &mdash;
 <th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>icrs &#8594; galactic
-<td> &mdash;
 <td class="orange">0.021553<br>0.019379<br>0.024677<br>0.005569<td class="orange">0.021559<br>0.019380<br>0.024676<br>0.005569<td> &mdash;
 <td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td> &mdash;
 <td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td> &mdash;
@@ -365,7 +282,6 @@
 <a name="pyast"></a><a class="anchor" href="#pyast"><h2>pyast</h2></a>
 <table align="center">
 <tr><th width="80">
-<th width="80">astrolib
 <th width="80">astropy
 <th width="80">kapteyn
 <th width="80">novas
@@ -374,87 +290,79 @@
 <th width="80">pyslalib
 <th width="80">pytpm
 <tr><th>ecliptic &#8594; fk4
-<td class="red">12250.826448<br>11055.683405<br>14044.042103<br>3094.172264<td> &mdash;
+<td> &mdash;
 <td class="red">4.150162<br>3.726882<br>4.769336<br>1.087979<td> &mdash;
 <td class="orange">1.049029<br>0.946358<br>1.201548<br>0.264302<td class="red">10.084611<br>10.317063<br>18.087295<br>4.400468<td class="red">1.325516<br>1.201113<br>1.505842<br>0.325226<td class="red">12266.291755<br>11058.002169<br>14043.532020<br>3091.692944<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>ecliptic &#8594; fk5
-<td class="red">12250.822782<br>11055.683501<br>14044.023859<br>3094.172093<td> &mdash;
+<td> &mdash;
 <td class="orange">0.631521<br>0.574956<br>0.725311<br>0.155075<td class="orange">0.349176<br>0.317468<br>0.403997<br>0.089391<td class="orange">1.049029<br>0.946358<br>1.201548<br>0.264302<td class="orange">0.639811<br>0.581953<br>0.734209<br>0.157112<td class="red">1.325516<br>1.201113<br>1.505844<br>0.325226<td class="red">12266.294368<br>11058.002264<br>14043.509482<br>3091.692771<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>ecliptic &#8594; galactic
-<td class="red">12250.549806<br>11055.290002<br>14043.630285<br>3094.169152<td> &mdash;
+<td> &mdash;
 <td class="orange">0.611887<br>0.558001<br>0.703853<br>0.150219<td> &mdash;
 <td class="orange">1.049026<br>0.946358<br>1.201548<br>0.264302<td class="orange">0.621538<br>0.568286<br>0.714618<br>0.150994<td class="red">1.325516<br>1.201113<br>1.505840<br>0.325226<td class="red">12266.257831<br>11057.607881<br>14043.131126<br>3091.690846<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>ecliptic &#8594; icrs
-<td> &mdash;
 <td> &mdash;
 <td class="orange">0.631516<br>0.574956<br>0.725313<br>0.155075<td class="orange">0.476996<br>0.430392<br>0.552813<br>0.123345<td class="orange">1.049030<br>0.946358<br>1.201548<br>0.264302<td> &mdash;
 <td class="red">1.325511<br>1.201113<br>1.505842<br>0.325225<td> &mdash;
 <th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>fk4 &#8594; ecliptic
-<td class="red">37885.662976<br>34190.262490<br>43882.785351<br>10054.987834<td> &mdash;
+<td> &mdash;
 <td class="red">4.191235<br>3.763229<br>4.769581<br>1.063588<td> &mdash;
 <td class="orange">1.037621<br>0.936340<br>1.201547<br>0.275422<td class="red">37906.740154<br>34205.373606<br>43894.739412<br>10061.248010<td class="red">1.314323<br>1.193018<br>1.505841<br>0.329898<td class="red">37879.202033<br>34191.674258<br>43882.548816<br>10055.832490<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>fk4 &#8594; fk5
-<td class="green">0.000149<br>0.000157<br>0.000246<br>0.000041<td class="orange">0.077748<br>0.073705<br>0.108141<br>0.023115<td class="orange">0.077842<br>0.073701<br>0.108203<br>0.023127<td> &mdash;
+<td class="orange">0.077748<br>0.073705<br>0.108141<br>0.023115<td class="orange">0.077842<br>0.073701<br>0.108203<br>0.023127<td> &mdash;
 <td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td class="red">9.877986<br>10.035822<br>17.795504<br>4.440537<td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td class="green">0.000149<br>0.000157<br>0.000246<br>0.000041<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>fk4 &#8594; galactic
-<td class="red">3.803644<br>3.423373<br>4.347082<br>0.973049<td class="red">3.803643<br>3.423373<br>4.347082<br>0.973049<td class="red">3.803668<br>3.423373<br>4.346999<br>0.973048<td> &mdash;
+<td class="red">3.803643<br>3.423373<br>4.347082<br>0.973049<td class="red">3.803668<br>3.423373<br>4.346999<br>0.973048<td> &mdash;
 <td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td class="red">9.830756<br>9.947553<br>17.663605<br>4.415710<td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td class="red">3.803644<br>3.423373<br>4.347082<br>0.973049<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>fk4 &#8594; icrs
-<td> &mdash;
 <td class="orange">0.077853<br>0.073708<br>0.108194<br>0.023125<td class="orange">0.077842<br>0.073701<br>0.108203<br>0.023127<td> &mdash;
 <td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td> &mdash;
 <td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td> &mdash;
 <th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>fk5 &#8594; ecliptic
-<td class="red">106.674440<br>96.109027<br>122.334135<br>27.725477<td> &mdash;
+<td> &mdash;
 <td class="orange">0.636028<br>0.577344<br>0.725310<br>0.155921<td class="orange">0.351246<br>0.318047<br>0.403996<br>0.090410<td class="orange">1.037615<br>0.936342<br>1.201547<br>0.275420<td class="orange">0.644025<br>0.584322<br>0.734211<br>0.158023<td class="red">1.313774<br>1.193078<br>1.505839<br>0.329864<td class="orange">0.636012<br>0.577333<br>0.725299<br>0.155917<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>fk5 &#8594; fk4
-<td class="green">0.000129<br>0.000130<br>0.000243<br>0.000059<td class="orange">0.077672<br>0.073597<br>0.108104<br>0.023071<td class="orange">0.077661<br>0.073590<br>0.108109<br>0.023073<td> &mdash;
+<td class="orange">0.077672<br>0.073597<br>0.108104<br>0.023071<td class="orange">0.077661<br>0.073590<br>0.108109<br>0.023073<td> &mdash;
 <td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td class="red">9.857568<br>10.033821<br>17.792237<br>4.441349<td class="green">0.000000<br>0.000002<br>0.000055<br>0.000004<td class="green">0.000129<br>0.000130<br>0.000243<br>0.000059<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>fk5 &#8594; galactic
-<td class="red">3.801027<br>3.422859<br>4.347022<br>0.973004<td class="orange">0.021554<br>0.019379<br>0.024676<br>0.005569<td class="orange">0.021561<br>0.019380<br>0.024680<br>0.005569<td> &mdash;
+<td class="orange">0.021554<br>0.019379<br>0.024676<br>0.005569<td class="orange">0.021561<br>0.019380<br>0.024680<br>0.005569<td> &mdash;
 <td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td class="orange">0.150391<br>0.135828<br>0.174328<br>0.039914<td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td class="red">3.801027<br>3.422859<br>4.347022<br>0.973004<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>fk5 &#8594; icrs
-<td> &mdash;
 <td class="green">0.000000<br>0.000000<br>0.000006<br>0.000000<td class="green">0.000000<br>0.000000<br>0.000006<br>0.000000<td class="orange">0.449726<br>0.407614<br>0.523996<br>0.119667<td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td> &mdash;
 <td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td> &mdash;
 <th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>galactic &#8594; ecliptic
-<td class="red">32067.306956<br>29071.786236<br>36862.060537<br>8259.311170<td> &mdash;
+<td> &mdash;
 <td class="orange">0.608407<br>0.553916<br>0.703854<br>0.156740<td> &mdash;
 <td class="orange">1.049700<br>0.947475<br>1.201548<br>0.269210<td class="orange">0.620402<br>0.562094<br>0.714617<br>0.160632<td class="red">1.293677<br>1.180851<br>1.505836<br>0.331262<td class="red">32104.677731<br>29070.494349<br>36861.765543<br>8259.221201<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>galactic &#8594; fk4
-<td class="red">3.789511<br>3.403949<br>4.346516<br>0.984042<td class="red">3.789511<br>3.403949<br>4.346516<br>0.984042<td class="red">3.789473<br>3.403948<br>4.346434<br>0.984042<td> &mdash;
+<td class="red">3.789511<br>3.403949<br>4.346516<br>0.984042<td class="red">3.789473<br>3.403948<br>4.346434<br>0.984042<td> &mdash;
 <td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td class="red">9.494340<br>9.776990<br>17.620241<br>4.221328<td class="green">0.000000<br>0.000002<br>0.000057<br>0.000004<td class="red">3.789511<br>3.403949<br>4.346516<br>0.984042<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>galactic &#8594; fk5
-<td class="red">3.789535<br>3.404020<br>4.346603<br>0.984064<td class="orange">0.021163<br>0.019167<br>0.024679<br>0.005693<td class="orange">0.021167<br>0.019168<br>0.024682<br>0.005693<td> &mdash;
+<td class="orange">0.021163<br>0.019167<br>0.024679<br>0.005693<td class="orange">0.021167<br>0.019168<br>0.024682<br>0.005693<td> &mdash;
 <td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td class="orange">0.149572<br>0.135792<br>0.174330<br>0.038817<td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td class="red">3.789535<br>3.404020<br>4.346603<br>0.984064<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>galactic &#8594; icrs
-<td> &mdash;
 <td class="orange">0.021166<br>0.019167<br>0.024679<br>0.005693<td class="orange">0.021166<br>0.019168<br>0.024683<br>0.005693<td> &mdash;
 <td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td> &mdash;
 <td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td> &mdash;
 <th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>icrs &#8594; ecliptic
 <td> &mdash;
-<td> &mdash;
 <td class="orange">0.636028<br>0.577344<br>0.725309<br>0.155921<td class="orange">0.468721<br>0.428837<br>0.552811<br>0.124006<td class="orange">1.037618<br>0.936343<br>1.201547<br>0.275420<td> &mdash;
 <td class="red">1.313771<br>1.193078<br>1.505842<br>0.329864<td> &mdash;
 <th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>icrs &#8594; fk4
-<td> &mdash;
 <td class="orange">0.077672<br>0.073597<br>0.108097<br>0.023071<td class="orange">0.077661<br>0.073590<br>0.108109<br>0.023073<td> &mdash;
 <td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td> &mdash;
 <td class="green">0.000000<br>0.000002<br>0.000051<br>0.000004<td> &mdash;
 <th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>icrs &#8594; fk5
-<td> &mdash;
 <td class="green">0.000000<br>0.000000<br>0.000006<br>0.000000<td class="green">0.000000<br>0.000000<br>0.000006<br>0.000000<td class="orange">0.449733<br>0.407614<br>0.523995<br>0.119667<td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td> &mdash;
 <td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td> &mdash;
 <th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>icrs &#8594; galactic
-<td> &mdash;
 <td class="orange">0.021553<br>0.019379<br>0.024677<br>0.005569<td class="orange">0.021559<br>0.019380<br>0.024676<br>0.005569<td> &mdash;
 <td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td> &mdash;
 <td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td> &mdash;
@@ -464,7 +372,6 @@
 <a name="pyephem"></a><a class="anchor" href="#pyephem"><h2>pyephem</h2></a>
 <table align="center">
 <tr><th width="80">
-<th width="80">astrolib
 <th width="80">astropy
 <th width="80">kapteyn
 <th width="80">novas
@@ -473,51 +380,50 @@
 <th width="80">pyslalib
 <th width="80">pytpm
 <tr><th>ecliptic &#8594; fk4
-<td class="red">12244.403802<br>11048.446082<br>14040.354438<br>3092.226184<td> &mdash;
+<td> &mdash;
 <td class="red">8.080089<br>8.065174<br>15.137341<br>4.073871<td> &mdash;
 <td class="red">9.498694<br>9.685343<br>17.255302<br>4.267823<td class="red">10.084611<br>10.317063<br>18.087295<br>4.400468<td class="red">9.293269<br>9.395232<br>16.932093<br>4.253821<td class="red">12258.720970<br>11050.759921<br>14039.791479<br>3089.745767<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>ecliptic &#8594; fk5
-<td class="red">12250.664286<br>11055.573937<br>14043.910830<br>3094.165972<td> &mdash;
+<td> &mdash;
 <td class="green">0.009143<br>0.008239<br>0.010493<br>0.002377<td class="orange">0.648272<br>0.584168<br>0.743528<br>0.168493<td class="red">1.101772<br>1.007401<br>1.298060<br>0.291910<td class="orange">0.639811<br>0.581953<br>0.734209<br>0.157112<td class="orange">1.049556<br>0.946139<br>1.201565<br>0.264513<td class="red">12266.236895<br>11057.888240<br>14043.390775<br>3091.685969<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>ecliptic &#8594; galactic
-<td class="red">12250.331381<br>11055.114246<br>14043.431832<br>3094.143898<td> &mdash;
+<td> &mdash;
 <td class="orange">0.132582<br>0.120682<br>0.153943<br>0.034472<td> &mdash;
 <td class="orange">1.030433<br>0.935313<br>1.207063<br>0.274735<td class="orange">0.621538<br>0.568286<br>0.714618<br>0.150994<td class="orange">0.979083<br>0.888502<br>1.127880<br>0.249024<td class="red">12266.159365<br>11057.428498<br>14042.929503<br>3091.665077<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>fk4 &#8594; ecliptic
-<td class="red">464.484987<br>418.006602<br>532.840056<br>120.393078<td> &mdash;
+<td> &mdash;
 <td class="red">37907.814139<br>34204.884129<br>43894.180259<br>10061.193641<td> &mdash;
 <td class="red">37905.702552<br>34204.437270<br>43893.537961<br>10060.972586<td class="red">37906.740154<br>34205.373606<br>43894.739412<br>10061.248010<td class="red">37905.618796<br>34204.326872<br>43893.406780<br>10060.944760<td class="red">356.399191<br>321.448422<br>409.932062<br>92.547840<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>fk4 &#8594; fk5
-<td class="red">9.877942<br>10.035825<br>17.795423<br>4.440543<td class="red">9.855793<br>10.031132<br>17.806029<br>4.449346<td class="red">9.855339<br>10.031017<br>17.805821<br>4.449293<td> &mdash;
+<td class="red">9.855793<br>10.031132<br>17.806029<br>4.449346<td class="red">9.855339<br>10.031017<br>17.805821<br>4.449293<td> &mdash;
 <td class="red">9.877986<br>10.035822<br>17.795504<br>4.440537<td class="red">9.877986<br>10.035822<br>17.795504<br>4.440537<td class="red">9.877986<br>10.035822<br>17.795504<br>4.440537<td class="red">9.877942<br>10.035825<br>17.795423<br>4.440543<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>fk4 &#8594; galactic
-<td class="red">8.019691<br>7.995893<br>15.012459<br>4.026064<td class="red">8.019694<br>7.995893<br>15.012462<br>4.026064<td class="red">8.019649<br>7.995866<br>15.012372<br>4.026025<td> &mdash;
+<td class="red">8.019694<br>7.995893<br>15.012462<br>4.026064<td class="red">8.019649<br>7.995866<br>15.012372<br>4.026025<td> &mdash;
 <td class="red">9.830756<br>9.947553<br>17.663605<br>4.415710<td class="red">9.830756<br>9.947553<br>17.663605<br>4.415710<td class="red">9.830756<br>9.947553<br>17.663605<br>4.415710<td class="red">8.019691<br>7.995893<br>15.012459<br>4.026064<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>fk5 &#8594; ecliptic
-<td class="red">107.206036<br>96.604954<br>122.958054<br>27.864046<td> &mdash;
+<td> &mdash;
 <td class="green">0.009142<br>0.008239<br>0.010493<br>0.002377<td class="orange">0.648273<br>0.584169<br>0.743527<br>0.168494<td class="red">1.108673<br>1.003997<br>1.298059<br>0.297750<td class="orange">0.644025<br>0.584322<br>0.734211<br>0.158023<td class="orange">1.036932<br>0.936226<br>1.201563<br>0.275345<td class="green">0.009158<br>0.008252<br>0.010508<br>0.002380<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>fk5 &#8594; fk4
-<td class="red">9.857609<br>10.033876<br>17.792414<br>4.441360<td class="red">9.856096<br>10.029079<br>17.802983<br>4.450121<td class="red">9.856079<br>10.029071<br>17.802912<br>4.450083<td> &mdash;
+<td class="red">9.856096<br>10.029079<br>17.802983<br>4.450121<td class="red">9.856079<br>10.029071<br>17.802912<br>4.450083<td> &mdash;
 <td class="red">9.857568<br>10.033821<br>17.792237<br>4.441349<td class="red">9.857568<br>10.033821<br>17.792237<br>4.441349<td class="red">9.857567<br>10.033821<br>17.792237<br>4.441349<td class="red">9.857609<br>10.033876<br>17.792414<br>4.441360<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>fk5 &#8594; galactic
-<td class="red">3.887598<br>3.503904<br>4.449748<br>0.995877<td class="orange">0.137884<br>0.124816<br>0.159905<br>0.036410<td class="orange">0.137897<br>0.124826<br>0.159915<br>0.036412<td> &mdash;
+<td class="orange">0.137884<br>0.124816<br>0.159905<br>0.036410<td class="orange">0.137897<br>0.124826<br>0.159915<br>0.036412<td> &mdash;
 <td class="orange">0.150391<br>0.135828<br>0.174328<br>0.039914<td class="orange">0.150391<br>0.135828<br>0.174328<br>0.039914<td class="orange">0.150391<br>0.135828<br>0.174328<br>0.039914<td class="red">3.887598<br>3.503904<br>4.449748<br>0.995877<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>galactic &#8594; ecliptic
-<td class="red">32067.294774<br>29071.636391<br>36861.859973<br>8259.270195<td> &mdash;
+<td> &mdash;
 <td class="orange">0.133731<br>0.119924<br>0.153946<br>0.034651<td> &mdash;
 <td class="orange">1.058163<br>0.961791<br>1.207051<br>0.265420<td class="orange">0.620402<br>0.562094<br>0.714617<br>0.160632<td class="orange">0.981018<br>0.888823<br>1.127879<br>0.253428<td class="red">32104.331915<br>29070.343094<br>36861.563422<br>8259.180121<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>galactic &#8594; fk4
-<td class="red">7.828024<br>7.853365<br>14.988437<br>3.953863<td class="red">7.828024<br>7.853365<br>14.988437<br>3.953863<td class="red">7.827997<br>7.853341<br>14.988349<br>3.953823<td> &mdash;
+<td class="red">7.828024<br>7.853365<br>14.988437<br>3.953863<td class="red">7.827997<br>7.853341<br>14.988349<br>3.953823<td> &mdash;
 <td class="red">9.494340<br>9.776990<br>17.620241<br>4.221328<td class="red">9.494340<br>9.776990<br>17.620241<br>4.221328<td class="red">9.494340<br>9.776990<br>17.620241<br>4.221329<td class="red">7.828024<br>7.853365<br>14.988437<br>3.953863<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>galactic &#8594; fk5
-<td class="red">3.860862<br>3.481722<br>4.448603<br>1.010236<td class="orange">0.137756<br>0.124580<br>0.159904<br>0.035822<td class="orange">0.137770<br>0.124589<br>0.159913<br>0.035825<td> &mdash;
+<td class="orange">0.137756<br>0.124580<br>0.159904<br>0.035822<td class="orange">0.137770<br>0.124589<br>0.159913<br>0.035825<td> &mdash;
 <td class="orange">0.149572<br>0.135792<br>0.174330<br>0.038817<td class="orange">0.149572<br>0.135792<br>0.174330<br>0.038817<td class="orange">0.149572<br>0.135792<br>0.174330<br>0.038817<td class="red">3.860862<br>3.481722<br>4.448603<br>1.010236<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 </tr>
 </table>
 <a name="pyslalib"></a><a class="anchor" href="#pyslalib"><h2>pyslalib</h2></a>
 <table align="center">
 <tr><th width="80">
-<th width="80">astrolib
 <th width="80">astropy
 <th width="80">kapteyn
 <th width="80">novas
@@ -526,87 +432,79 @@
 <th width="80">pyephem
 <th width="80">pytpm
 <tr><th>ecliptic &#8594; fk4
-<td class="red">12249.618659<br>11054.627746<br>14042.729306<br>3093.901637<td> &mdash;
+<td> &mdash;
 <td class="red">3.772070<br>3.416804<br>4.401806<br>1.017706<td> &mdash;
 <td class="orange">0.631546<br>0.574968<br>0.725327<br>0.155078<td class="red">1.325516<br>1.201113<br>1.505842<br>0.325226<td class="red">9.293269<br>9.395232<br>16.932093<br>4.253821<td class="red">12265.184822<br>11056.942006<br>14042.211751<br>3091.421629<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>ecliptic &#8594; fk5
-<td class="red">12249.614990<br>11054.627841<br>14042.709327<br>3093.901465<td> &mdash;
+<td> &mdash;
 <td class="orange">1.049091<br>0.946415<br>1.201618<br>0.264318<td class="red">1.241002<br>1.125180<br>1.413376<br>0.305267<td class="orange">0.631547<br>0.574968<br>0.725323<br>0.155077<td class="red">1.325516<br>1.201113<br>1.505844<br>0.325226<td class="orange">1.049556<br>0.946139<br>1.201565<br>0.264513<td class="red">12265.187434<br>11056.942101<br>14042.189212<br>3091.421455<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>ecliptic &#8594; galactic
-<td class="red">12249.341998<br>11054.234429<br>14042.315807<br>3093.898568<td> &mdash;
+<td> &mdash;
 <td class="orange">1.049493<br>0.948353<br>1.203404<br>0.264183<td> &mdash;
 <td class="orange">0.631548<br>0.574968<br>0.725323<br>0.155077<td class="red">1.325516<br>1.201113<br>1.505840<br>0.325226<td class="orange">0.979083<br>0.888502<br>1.127880<br>0.249024<td class="red">12265.125213<br>11056.547806<br>14041.812119<br>3091.419570<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>ecliptic &#8594; icrs
-<td> &mdash;
 <td> &mdash;
 <td class="orange">1.049091<br>0.946415<br>1.201618<br>0.264318<td class="red">1.194003<br>1.090723<br>1.364864<br>0.293446<td class="orange">0.631547<br>0.574968<br>0.725323<br>0.155077<td class="red">1.325511<br>1.201113<br>1.505842<br>0.325225<td> &mdash;
 <td> &mdash;
 <th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>fk4 &#8594; ecliptic
-<td class="red">37884.524760<br>34189.221733<br>43881.467476<br>10054.686590<td> &mdash;
+<td> &mdash;
 <td class="red">3.828435<br>3.448919<br>4.402386<br>0.994030<td> &mdash;
 <td class="orange">0.635832<br>0.577217<br>0.725324<br>0.156233<td class="red">1.314323<br>1.193018<br>1.505841<br>0.329898<td class="red">37905.618796<br>34204.326872<br>43893.406780<br>10060.944760<td class="red">37878.129120<br>34190.632129<br>43881.228552<br>10055.530740<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>fk4 &#8594; fk5
-<td class="green">0.000149<br>0.000157<br>0.000246<br>0.000041<td class="orange">0.077748<br>0.073705<br>0.108141<br>0.023115<td class="orange">0.077842<br>0.073701<br>0.108203<br>0.023127<td> &mdash;
+<td class="orange">0.077748<br>0.073705<br>0.108141<br>0.023115<td class="orange">0.077842<br>0.073701<br>0.108203<br>0.023127<td> &mdash;
 <td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td class="red">9.877986<br>10.035822<br>17.795504<br>4.440537<td class="green">0.000149<br>0.000157<br>0.000246<br>0.000041<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>fk4 &#8594; galactic
-<td class="red">3.803644<br>3.423373<br>4.347082<br>0.973049<td class="red">3.803643<br>3.423373<br>4.347082<br>0.973049<td class="red">3.803668<br>3.423373<br>4.346999<br>0.973048<td> &mdash;
+<td class="red">3.803643<br>3.423373<br>4.347082<br>0.973049<td class="red">3.803668<br>3.423373<br>4.346999<br>0.973048<td> &mdash;
 <td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td class="red">9.830756<br>9.947553<br>17.663605<br>4.415710<td class="red">3.803644<br>3.423373<br>4.347082<br>0.973049<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>fk4 &#8594; icrs
-<td> &mdash;
 <td class="orange">0.077853<br>0.073708<br>0.108194<br>0.023125<td class="orange">0.077842<br>0.073701<br>0.108203<br>0.023127<td> &mdash;
 <td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td> &mdash;
 <td> &mdash;
 <th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>fk5 &#8594; ecliptic
-<td class="red">107.651045<br>96.631359<br>122.964542<br>27.852647<td> &mdash;
+<td> &mdash;
 <td class="orange">1.037677<br>0.936398<br>1.201619<br>0.275437<td class="red">1.226238<br>1.116210<br>1.413377<br>0.311939<td class="orange">0.636029<br>0.577355<br>0.725327<br>0.155924<td class="red">1.313774<br>1.193078<br>1.505839<br>0.329864<td class="orange">1.036932<br>0.936226<br>1.201563<br>0.275345<td class="orange">1.037685<br>0.936399<br>1.201619<br>0.275437<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>fk5 &#8594; fk4
-<td class="green">0.000129<br>0.000129<br>0.000243<br>0.000059<td class="orange">0.077668<br>0.073596<br>0.108097<br>0.023071<td class="orange">0.077657<br>0.073589<br>0.108103<br>0.023073<td> &mdash;
+<td class="orange">0.077668<br>0.073596<br>0.108097<br>0.023071<td class="orange">0.077657<br>0.073589<br>0.108103<br>0.023073<td> &mdash;
 <td class="green">0.000000<br>0.000002<br>0.000055<br>0.000004<td class="green">0.000000<br>0.000002<br>0.000055<br>0.000004<td class="red">9.857567<br>10.033821<br>17.792237<br>4.441349<td class="green">0.000129<br>0.000129<br>0.000243<br>0.000059<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>fk5 &#8594; galactic
-<td class="red">3.801027<br>3.422859<br>4.347022<br>0.973004<td class="orange">0.021554<br>0.019379<br>0.024676<br>0.005569<td class="orange">0.021561<br>0.019380<br>0.024680<br>0.005569<td> &mdash;
+<td class="orange">0.021554<br>0.019379<br>0.024676<br>0.005569<td class="orange">0.021561<br>0.019380<br>0.024680<br>0.005569<td> &mdash;
 <td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td class="orange">0.150391<br>0.135828<br>0.174328<br>0.039914<td class="red">3.801027<br>3.422859<br>4.347022<br>0.973004<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>fk5 &#8594; icrs
-<td> &mdash;
 <td class="green">0.000000<br>0.000000<br>0.000006<br>0.000000<td class="green">0.000000<br>0.000000<br>0.000006<br>0.000000<td class="orange">0.449726<br>0.407614<br>0.523996<br>0.119667<td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td> &mdash;
 <td> &mdash;
 <th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>galactic &#8594; ecliptic
-<td class="red">32066.299711<br>29070.755842<br>36860.742973<br>8259.019180<td> &mdash;
+<td> &mdash;
 <td class="orange">1.049617<br>0.948653<br>1.203400<br>0.269597<td> &mdash;
 <td class="orange">0.626353<br>0.570802<br>0.725321<br>0.161329<td class="red">1.293677<br>1.180851<br>1.505836<br>0.331262<td class="orange">0.981018<br>0.888823<br>1.127879<br>0.253428<td class="red">32103.320955<br>29069.462249<br>36860.446394<br>8258.928974<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>galactic &#8594; fk4
-<td class="red">3.789511<br>3.403949<br>4.346516<br>0.984042<td class="red">3.789511<br>3.403949<br>4.346516<br>0.984042<td class="red">3.789473<br>3.403948<br>4.346434<br>0.984042<td> &mdash;
+<td class="red">3.789511<br>3.403949<br>4.346516<br>0.984042<td class="red">3.789473<br>3.403948<br>4.346434<br>0.984042<td> &mdash;
 <td class="green">0.000000<br>0.000002<br>0.000057<br>0.000004<td class="green">0.000000<br>0.000002<br>0.000057<br>0.000004<td class="red">9.494340<br>9.776990<br>17.620241<br>4.221329<td class="red">3.789511<br>3.403949<br>4.346516<br>0.984042<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>galactic &#8594; fk5
-<td class="red">3.789535<br>3.404020<br>4.346603<br>0.984064<td class="orange">0.021163<br>0.019167<br>0.024679<br>0.005693<td class="orange">0.021167<br>0.019168<br>0.024682<br>0.005693<td> &mdash;
+<td class="orange">0.021163<br>0.019167<br>0.024679<br>0.005693<td class="orange">0.021167<br>0.019168<br>0.024682<br>0.005693<td> &mdash;
 <td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td class="orange">0.149572<br>0.135792<br>0.174330<br>0.038817<td class="red">3.789535<br>3.404020<br>4.346603<br>0.984064<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>galactic &#8594; icrs
-<td> &mdash;
 <td class="orange">0.021166<br>0.019167<br>0.024679<br>0.005693<td class="orange">0.021166<br>0.019168<br>0.024683<br>0.005693<td> &mdash;
 <td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td> &mdash;
 <td> &mdash;
 <th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>icrs &#8594; ecliptic
 <td> &mdash;
-<td> &mdash;
 <td class="orange">1.037680<br>0.936398<br>1.201616<br>0.275436<td class="red">1.207238<br>1.086701<br>1.364857<br>0.297532<td class="orange">0.636029<br>0.577355<br>0.725321<br>0.155924<td class="red">1.313771<br>1.193078<br>1.505842<br>0.329864<td> &mdash;
 <td> &mdash;
 <th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>icrs &#8594; fk4
-<td> &mdash;
 <td class="orange">0.077668<br>0.073596<br>0.108091<br>0.023071<td class="orange">0.077657<br>0.073589<br>0.108103<br>0.023073<td> &mdash;
 <td class="green">0.000000<br>0.000002<br>0.000051<br>0.000004<td class="green">0.000000<br>0.000002<br>0.000051<br>0.000004<td> &mdash;
 <td> &mdash;
 <th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>icrs &#8594; fk5
-<td> &mdash;
 <td class="green">0.000000<br>0.000000<br>0.000006<br>0.000000<td class="green">0.000000<br>0.000000<br>0.000006<br>0.000000<td class="orange">0.449733<br>0.407614<br>0.523995<br>0.119667<td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td> &mdash;
 <td> &mdash;
 <th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>icrs &#8594; galactic
-<td> &mdash;
 <td class="orange">0.021553<br>0.019379<br>0.024677<br>0.005569<td class="orange">0.021559<br>0.019380<br>0.024676<br>0.005569<td> &mdash;
 <td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td> &mdash;
 <td> &mdash;
@@ -616,7 +514,6 @@
 <a name="pytpm"></a><a class="anchor" href="#pytpm"><h2>pytpm</h2></a>
 <table align="center">
 <tr><th width="80">
-<th width="80">astrolib
 <th width="80">astropy
 <th width="80">kapteyn
 <th width="80">novas
@@ -625,44 +522,44 @@
 <th width="80">pyephem
 <th width="80">pyslalib
 <tr><th>ecliptic &#8594; fk4
-<td class="red">107.196797<br>96.596700<br>122.947586<br>27.861664<td> &mdash;
+<td> &mdash;
 <td class="red">12266.185574<br>11057.495658<br>14043.001356<br>3091.683829<td> &mdash;
 <td class="red">12265.243092<br>11057.055853<br>14042.330518<br>3091.428650<td class="red">12266.291755<br>11058.002169<br>14043.532020<br>3091.692944<td class="red">12258.720970<br>11050.759921<br>14039.791479<br>3089.745767<td class="red">12265.184822<br>11056.942006<br>14042.211751<br>3091.421629<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>ecliptic &#8594; fk5
-<td class="red">107.196878<br>96.596702<br>122.947550<br>27.861666<td> &mdash;
+<td> &mdash;
 <td class="red">12266.236161<br>11057.888473<br>14043.390783<br>3091.685765<td class="red">12266.184872<br>11057.904822<br>14043.391325<br>3091.671509<td class="red">12265.245702<br>11057.055948<br>14042.307984<br>3091.428477<td class="red">12266.294368<br>11058.002264<br>14043.509482<br>3091.692771<td class="red">12266.236895<br>11057.888240<br>14043.390775<br>3091.685969<td class="red">12265.187434<br>11056.942101<br>14042.189212<br>3091.421455<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>ecliptic &#8594; galactic
-<td class="red">107.196879<br>96.596702<br>122.947553<br>27.861666<td> &mdash;
+<td> &mdash;
 <td class="red">12266.181959<br>11057.495734<br>14043.014869<br>3091.683653<td> &mdash;
 <td class="red">12265.206406<br>11056.661565<br>14041.929635<br>3091.426552<td class="red">12266.257831<br>11057.607881<br>14043.131126<br>3091.690846<td class="red">12266.159365<br>11057.428498<br>14042.929503<br>3091.665077<td class="red">12265.125213<br>11056.547806<br>14041.812119<br>3091.419570<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>fk4 &#8594; ecliptic
-<td class="red">107.196940<br>96.596705<br>122.947555<br>27.861667<td> &mdash;
+<td> &mdash;
 <td class="red">37879.184278<br>34191.191585<br>43882.019781<br>10055.777197<td> &mdash;
 <td class="red">37878.165555<br>34190.737961<br>43881.347328<br>10055.557082<td class="red">37879.202033<br>34191.674258<br>43882.548816<br>10055.832490<td class="red">356.399191<br>321.448422<br>409.932062<br>92.547840<td class="red">37878.129120<br>34190.632129<br>43881.228552<br>10055.530740<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>fk4 &#8594; fk5
-<td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td class="orange">0.077662<br>0.073588<br>0.107958<br>0.023081<td class="orange">0.077727<br>0.073584<br>0.108021<br>0.023092<td> &mdash;
+<td class="orange">0.077662<br>0.073588<br>0.107958<br>0.023081<td class="orange">0.077727<br>0.073584<br>0.108021<br>0.023092<td> &mdash;
 <td class="green">0.000149<br>0.000157<br>0.000246<br>0.000041<td class="green">0.000149<br>0.000157<br>0.000246<br>0.000041<td class="red">9.877942<br>10.035825<br>17.795423<br>4.440543<td class="green">0.000149<br>0.000157<br>0.000246<br>0.000041<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>fk4 &#8594; galactic
-<td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td class="green">0.000004<br>0.000004<br>0.000009<br>0.000003<td class="green">0.000076<br>0.000069<br>0.000095<br>0.000020<td> &mdash;
+<td class="green">0.000004<br>0.000004<br>0.000009<br>0.000003<td class="green">0.000076<br>0.000069<br>0.000095<br>0.000020<td> &mdash;
 <td class="red">3.803644<br>3.423373<br>4.347082<br>0.973049<td class="red">3.803644<br>3.423373<br>4.347082<br>0.973049<td class="red">8.019691<br>7.995893<br>15.012459<br>4.026064<td class="red">3.803644<br>3.423373<br>4.347082<br>0.973049<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>fk5 &#8594; ecliptic
-<td class="red">107.196878<br>96.596702<br>122.947549<br>27.861666<td> &mdash;
+<td> &mdash;
 <td class="green">0.000014<br>0.000013<br>0.000021<br>0.000004<td class="orange">0.639115<br>0.575916<br>0.733022<br>0.166113<td class="red">1.105266<br>1.000131<br>1.293131<br>0.296767<td class="orange">0.636012<br>0.577333<br>0.725299<br>0.155917<td class="green">0.009158<br>0.008252<br>0.010508<br>0.002380<td class="orange">1.037685<br>0.936399<br>1.201619<br>0.275437<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>fk5 &#8594; fk4
-<td class="green">0.000000<br>0.000000<br>0.000005<br>0.000000<td class="orange">0.077670<br>0.073604<br>0.108015<br>0.023078<td class="orange">0.077660<br>0.073598<br>0.108020<br>0.023080<td> &mdash;
+<td class="orange">0.077670<br>0.073604<br>0.108015<br>0.023078<td class="orange">0.077660<br>0.073598<br>0.108020<br>0.023080<td> &mdash;
 <td class="green">0.000129<br>0.000130<br>0.000243<br>0.000059<td class="green">0.000129<br>0.000130<br>0.000243<br>0.000059<td class="red">9.857609<br>10.033876<br>17.792414<br>4.441360<td class="green">0.000129<br>0.000129<br>0.000243<br>0.000059<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>fk5 &#8594; galactic
-<td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td class="red">3.798655<br>3.421350<br>4.345329<br>0.972642<td class="red">3.798638<br>3.421336<br>4.345310<br>0.972637<td> &mdash;
+<td class="red">3.798655<br>3.421350<br>4.345329<br>0.972642<td class="red">3.798638<br>3.421336<br>4.345310<br>0.972637<td> &mdash;
 <td class="red">3.801027<br>3.422859<br>4.347022<br>0.973004<td class="red">3.801027<br>3.422859<br>4.347022<br>0.973004<td class="red">3.887598<br>3.503904<br>4.449748<br>0.995877<td class="red">3.801027<br>3.422859<br>4.347022<br>0.973004<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>galactic &#8594; ecliptic
-<td class="red">106.142935<br>95.700136<br>122.947551<br>28.381054<td> &mdash;
+<td> &mdash;
 <td class="red">32104.380150<br>29070.410487<br>36861.649120<br>8259.198451<td> &mdash;
 <td class="red">32103.627667<br>29069.546918<br>36860.564072<br>8258.952002<td class="red">32104.677731<br>29070.494349<br>36861.765543<br>8259.221201<td class="red">32104.331915<br>29070.343094<br>36861.563422<br>8259.180121<td class="red">32103.320955<br>29069.462249<br>36860.446394<br>8258.928974<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>galactic &#8594; fk4
-<td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td class="green">0.000076<br>0.000069<br>0.000094<br>0.000020<td> &mdash;
+<td class="green">0.000000<br>0.000000<br>0.000000<br>0.000000<td class="green">0.000076<br>0.000069<br>0.000094<br>0.000020<td> &mdash;
 <td class="red">3.789511<br>3.403949<br>4.346516<br>0.984042<td class="red">3.789511<br>3.403949<br>4.346516<br>0.984042<td class="red">7.828024<br>7.853365<br>14.988437<br>3.953863<td class="red">3.789511<br>3.403949<br>4.346516<br>0.984042<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 <tr><th>galactic &#8594; fk5
-<td class="green">0.000000<br>0.000000<br>0.000006<br>0.000000<td class="red">3.778197<br>3.402357<br>4.344959<br>0.983954<td class="red">3.778180<br>3.402343<br>4.344939<br>0.983949<td> &mdash;
+<td class="red">3.778197<br>3.402357<br>4.344959<br>0.983954<td class="red">3.778180<br>3.402343<br>4.344939<br>0.983949<td> &mdash;
 <td class="red">3.789535<br>3.404020<br>4.346603<br>0.984064<td class="red">3.789535<br>3.404020<br>4.346603<br>0.984064<td class="red">3.860862<br>3.481722<br>4.448603<br>1.010236<td class="red">3.789535<br>3.404020<br>4.346603<br>0.984064<th align="left">Median<br>Mean<br>Max<br>Std.Dev.
 </tr>
 </table>
