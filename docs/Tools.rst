@@ -4,7 +4,6 @@ Tools
 The following Python packages for astronomy coordinate calculations are compared:
 
 * `astropy.coordinates <http://astropy.readthedocs.org/en/latest/coordinates/>`_: Uses `erfa <https://github.com/liberfa/erfa>`_ for some computations, but re-implements many things using Python / numpy.
-* `astrolib.coords <http://www.scipy.org/AstroLibCoordsHome>`_: A `Swig <http://www.swig.org>`_ wrapper for the `TPM <http://www.sal.wisc.edu/~jwp/astro/tpm/tpm.html>`_ C library with a high-level `Position` class. Unmaintained. We are using the last version `coords-0.37` from 2009.
 * `kapteyn.celestial <http://www.astro.rug.nl/software/kapteyn/celestial.html>`_: Part of the `Kapteyn <http://www.astro.rug.nl/software/kapteyn/>`_ package.
 * NOVAS (`PyPI <http://pypi.python.org/pypi/novas/>`_, `Official <http://www.usno.navy.mil/USNO/astronomical-applications/software-products/novas/novas-python>`_): A `ctypes <http://docs.python.org/library/ctypes.html>`_ wrapper for the NOVAS C library from the United States Naval observatory.
 * `pyast <http://dsberry.github.com/starlink/pyast.html>`_: A Python interface to the `Starlink AST <http://starlink.jach.hawaii.edu/starlink/AST>`_ C library.
@@ -28,7 +27,6 @@ Licenses and Features
 Package           License       Lib License   Array Alt/Az
 ================= ============= ============= ===== ======
 astropy           BSD           ---           No    No
-astrolib.coords   BSD           ???           No    No
 kapteyn.celestial BSD           ---           Yes   No
 novas             Public Domain Public Domain No    Yes
 palpy             GPL           GPL           Some  Yes
@@ -45,6 +43,14 @@ Notes:
 * The `SOFA License <http://www.iausofa.org/tandc.html>`_ is considered non-free (see discussion `here <https://groups.google.com/forum/?fromgroups=#!topic/astropy-dev/QVpMZFlsQUo>`_).
 
 Please report any inaccuracies, especially concerning the license status.
+
+The following packages have been removed from the ``coordinates-benchmark``:
+
+* `astrolib.coords <http://www.scipy.org/AstroLibCoordsHome>`_:
+  A `Swig <http://www.swig.org>`_ wrapper for the `TPM <http://www.sal.wisc.edu/~jwp/astro/tpm/tpm.html>`_ C library
+  with a high-level `Position` class. Unmaintained. We are using the last version `coords-0.37` from 2009.
+  We removed it because we ran into a small issue https://github.com/astropy/coordinates-benchmark/issues/44
+  and didn't feel it's worth tracking it down given that we have enough other packages in the benchmark to compare against.
 
 Methods
 -------
