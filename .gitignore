@@ -6,5 +6,5 @@
 *.html
 *.pyc
 *~
-output/plots/
+output
 env

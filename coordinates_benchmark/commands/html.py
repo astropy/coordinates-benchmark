@@ -178,8 +178,21 @@ def summary(txt_filename='summary.txt',
     logging.info('Writing output/%s' % html_matrix_filename)
 
 
+def copy_static():
+    """Copy static files to the output folder"""
+    import shutil
+    repo_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..')
+    www_dir = os.path.join(repo_dir, 'coordinates_benchmark', 'www')
+    output_dir = os.path.join(repo_dir, 'output')
+    filenames = ['style.css']
+    for filename in filenames:
+        shutil.copy(os.path.join(www_dir, filename),
+                    os.path.join(output_dir, filename))
+
+
 @click.command()
 def summary_celestial():
     """For now: summary and HTML page."""
     # """Summarize all results into a few stats"""
     summary()
+    copy_static()
