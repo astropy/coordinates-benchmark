@@ -6,6 +6,7 @@ from __future__ import (absolute_import, division, print_function,
 # TODO: set up logging with click and add verbosity option
 import logging
 logging.basicConfig(format='%(levelname)s: %(message)s', level=logging.INFO)
+import subprocess
 import click
 from .. import utils
 
@@ -47,3 +48,19 @@ def tool_info():
     """Print tool availability and version info"""
     print(utils.TOOL_INFO)
 cli.add_command(tool_info)
+
+
+@click.command()
+def clean():
+    """Remove output folder"""
+    logging.info('Removing `output` folder.')
+    subprocess.call('rm -r output', shell=True)
+cli.add_command(clean)
+
+
+@click.command()
+def preview():
+    """Open local results webpage in browser"""
+    logging.info('Opening `output/summary.html` in web browser.')
+    subprocess.call('open output/summary.html', shell=True)
+cli.add_command(preview)
