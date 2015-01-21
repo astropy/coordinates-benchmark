@@ -66,12 +66,9 @@ def _tool_check():
 TOOL_INFO = _tool_check()
 
 
-def select_tools(tools, include_idl=False):
+def select_tools(tools):
     """Select the sub-set of requested and available tools."""
     all = list(TOOL_INFO['tool_name'])
-
-    if include_idl:
-        all.add_row(['idl', True, 'N/A'])
 
     available = TOOL_INFO['tool_name'][TOOL_INFO['available']]
 

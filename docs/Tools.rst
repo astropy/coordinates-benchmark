@@ -12,7 +12,6 @@ The following Python packages for astronomy coordinate calculations are compared
 * `pyslalib <https://github.com/scottransom/pyslalib>`_: `f2py <http://www.scipy.org/F2py>`_ and `numpy <http://numpy.scipy.org/>`_ wrappers of the fortran version of the astro library `SLALIB <http://www.starlink.rl.ac.uk/docs/sun67.htx/sun67.html>`_
 * `pysofa <http://pypi.python.org/pypi/pysofa>`_ is a `ctypes <http://docs.python.org/library/ctypes.html>`_ wrapper for the `SOFA <http://www.iausofa.org>`_ `C library <http://www.iausofa.org/current_C.html>`_. It does use numpy for 3x3 matrices, but it does not support input numpy arrays of coordinates for it's functions.
 * `pytpm <http://phn.github.com/pytpm/>`_: A `Cython <http://cython.org>`_ interface to the `TPM <http://www.sal.wisc.edu/~jwp/astro/tpm/tpm.html>`_ C library with a high-level `convert.convertv6` function interface. Unmaintained. We are using the version from github master.
-* `idl euler <http://idlastro.gsfc.nasa.gov/ftp/pro/astro/euler.pro>`_: Part of the `IDL Astronomy User's Library <http://idlastro.gsfc.nasa.gov>`_.
 
 Licenses and Features
 ---------------------
@@ -35,7 +34,6 @@ pyephem           LGPL          LGPL          No    Yes
 pyslalib          GPL           GPL           No    Yes
 pysofa            MIT           SOFA          No    Yes
 pytpm             BSD           ???           No    Yes
-idl               Public Domain Commercial    ???   ???
 ================= ============= ============= ===== ======
 
 Notes:
@@ -49,8 +47,19 @@ The following packages have been removed from the ``coordinates-benchmark``:
 * `astrolib.coords <http://www.scipy.org/AstroLibCoordsHome>`_:
   A `Swig <http://www.swig.org>`_ wrapper for the `TPM <http://www.sal.wisc.edu/~jwp/astro/tpm/tpm.html>`_ C library
   with a high-level `Position` class. Unmaintained. We are using the last version `coords-0.37` from 2009.
+
   We removed it because we ran into a small issue https://github.com/astropy/coordinates-benchmark/issues/44
   and didn't feel it's worth tracking it down given that we have enough other packages in the benchmark to compare against.
+
+* `idl euler <http://idlastro.gsfc.nasa.gov/ftp/pro/astro/euler.pro>`_:
+  Part of the `IDL Astronomy User's Library <http://idlastro.gsfc.nasa.gov>`_.
+
+  We removed it because it was outdated and it didn't seem critical given that we have several other
+  Python coordinate packages to compare against with the same or more extensive functionality:
+  https://github.com/astropy/coordinates-benchmark/issues/36
+
+  If someone wants to see the comparison against IDL, pull requests are welcome!
+
 
 Methods
 -------
