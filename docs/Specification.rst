@@ -75,6 +75,16 @@ Notes:
 * Galactic coordinates are defined by (ra,dec) positions specified in the FK4 system, but since there is no other alternative (i.e. we are not free to change this definition), the reference system is not a free parameter.
 * For ecliptic, no reference system is needed. Kapteyn allows different reference systems to be associated with ecliptic coords, but looking at the code (function MatrixEq2Ecl in celestial.py) the only use it makes of the reference system is to decide if the supplied epoch is interpreted as Besselian or Julian. This is done differently in AST - you specify B or J when storing the epoch. So if you always make sure that that the Equinox and Epoch of Observation always include a B or J explicitly, the reference system should not be relevant to ecliptic.
 
+The coordinate systems used in the benchmarks are:
+
+* ``fk4``: FK4 system (with e-terms), equinox B1950 and observation epoch J2000
+* ``fk5``: FK5 system, equinox J2000
+* ``icrs``: ICRS system
+* ``galactic``: Galactic coordinate system
+* ``ecliptic``: Ecliptic coordinate system, observation epoch J2000
+* ``altaz``: Horizontal coordinate system
+
+
 ICRS -- AltAz Conversions
 +++++++++++++++++++++++++
 

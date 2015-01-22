@@ -1,9 +1,36 @@
 Notes
------
+=====
 
 This is a somewhat random collection of notes that summarize
 discussions in Github issues and mailing lists to understand
 differences in results seen in the benchmarks.
+
+Links
+-----
+
+Mailing list discussions:
+
+* https://groups.google.com/forum/?fromgroups#!topic/astropy-dev/tbcpMQ1rOcY
+* https://groups.google.com/forum/?fromgroups#!topic/astropy-dev/-ulzSY9qJKk
+* https://groups.google.com/forum/?fromgroups#!searchin/astropy-dev/benchmark
+
+Github issues with detailed discussion or results:
+
+* https://github.com/astropy/coordinates-benchmark/issues/37
+* ...
+
+History
+-------
+
+- 2012-11-20: Fixed ``kapteyn`` transforms to explicitly specify the epoch of observation for
+  the B1950 conversion, and the equinox for the ecliptic conversion
+
+- 2012-11-21: Explicitly precess astropy.coordinates fk4 result to B1950
+
+- 2015-01-14: Add first AltAz system benchmark
+
+- 2015-01-15: Re-structure ``coordinates-benchmark``
+  (see `GH #42 <https://github.com/astropy/coordinates-benchmark/pull/42>`_)
 
 
 David Berry on differences in celestial coordinate transforms
