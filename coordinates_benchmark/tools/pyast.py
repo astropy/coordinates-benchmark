@@ -44,45 +44,52 @@ def transform_celestial(coords, systems):
     out['lat'] = coords[:, 1]
     return out
 
+def _convert_radec_to_altaz(ra, dec, lon, lat, height, time):
 
-def altaz_radec_transform():
-    # TODO: rewrite
-    raise NotImplementedError
-    # Read in initial coordinates and the observers.
-    # For now just process one observer and 10 positions to compare against pyast
-    data_j2000 = np.loadtxt('../../input/initial_coords.txt')[:3]
-    observers = np.recfromcsv('../../input/observers.txt')[:2]
+    # Convert supplied UTC date string to a UTC MJD.
+    utc_frame = Ast.TimeFrame( 'TimeScale=UTC' )
+    (nc, utc_epoch) = utc_frame.unformat( 1, time )
 
-    # We'll store the results here
-    results = np.zeros(data_j2000.shape[0] * observers.shape[0], dtype=[('az', 'float64'), ('alt', 'float64')])
+    # Convert the UTC MJD to a TDB epoch (i.e. a decimal year).
+    tdb_frame = Ast.TimeFrame( 'System=JEPOCH,TimeScale=TDB' )
+    mapping = utc_frame.convert(tdb_frame)
+    tdb_epoch = mapping.tran(utc_epoch)
 
-    for ii, (lon, lat, altitude, time, time_mjd, time_tdb) in enumerate(observers):
-        for jj, (ra, dec) in enumerate(data_j2000):
+    # Create a Frame describing FK5 coords. Note we need to prefix the
+    # epoch with "J" to indicate that it is a Julian epoch. This is
+    # because values less than 1984.0 are interpreted as Besselian by
+    # default.
+    fk5_frame = Ast.SkyFrame('System=FK5,Epoch=J{0}'.format(tdb_epoch[0][0]))
 
-            fk5_frame = Ast.SkyFrame('System=FK5,Format(1)=hms.5,Format(2)=dms.5,Epoch=2000.0')
-            # TODO: Need to set fk5_frame.Epoch in tdb scale?
-            out_frame = Ast.SkyFrame('System=AZEL,Format(1)=hms.5,Format(2)=dms.5')
+    # Create a Frame describing AZEL (aka altaz) coords.
+    azel_frame = Ast.SkyFrame('System=AZEL,Epoch=J{0}'.format(tdb_epoch[0][0]))
+    azel_frame.ObsLon = lon
+    azel_frame.ObsLat = lat
+    azel_frame.ObsAlt = height*1000.0
 
-            # Set observation location and time
-            # http://www.starlink.rl.ac.uk/docs/sun211.htx/node612.html#System
-            out_frame.ObsLon = lon
-            out_frame.ObsLat = lat
-            out_frame.ObsAlt = altitude
-            # http://www.starlink.rl.ac.uk/docs/sun211.htx/node489.html#Epoch
-            epoch = Time(time, scale='utc').tdb.mjd
-            out_frame.Epoch = epoch
-            # http://www.starlink.rl.ac.uk/docs/sun211.htx/node486.html
-            # http://en.wikipedia.org/wiki/DUT1
-            # TODO: Set DUT1 correctly. But how to compute it?
-            out_frame.Dut1 = 0
+    # Get the mapping from fk5 to azel.
+    mapping = fk5_frame.convert(azel_frame)
 
-            # Compute alt / az
-            fk5_to_out = fk5_frame.convert( out_frame )
-            az, alt = np.degrees(fk5_to_out.tran([[ra], [dec]]))
+    # Use it to transform the supplied (ra,dec) values to (az,el) values.
+    coords = mapping.tran([ [np.radians(ra)], [np.radians(dec)] ])
+    az = np.degrees( coords[0][0] )
+    el = np.degrees( coords[1][0] )
+    return dict( az=az, alt=el )
 
-            # Store in results array
-            kk = ii * data_j2000.shape[0] + jj
-            results[kk]['az'] = az
-            results[kk]['alt'] = alt
+def convert_horizontal(positions, observers):
 
-    np.savetxt('coords_fk5_to_horizontal.txt', results, fmt="%20.15f")
+    results = []
+    for observer in observers:
+        for position in positions:
+
+            ra = position['lon']
+            dec = position['lat']
+            lon = observer['lon']
+            lat = observer['lat']
+            height = observer['height']
+            time = observer['time']
+            altaz = _convert_radec_to_altaz(ra, dec, lon, lat, height, time)
+            results.append(altaz)
+
+    out = Table(results)
+    return out
