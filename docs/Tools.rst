@@ -130,8 +130,8 @@ Skyfield
 * http://rhodesmill.org/skyfield/
 * https://github.com/brandon-rhodes/python-skyfield
 
-Might be useful to add once it can do AltAz to RaDec transforms:
-https://github.com/brandon-rhodes/python-skyfield/issues/13
+Note that Skyfield now can do AltAz to RaDec transforms:
+https://github.com/brandon-rhodes/python-skyfield/issues/13#issuecomment-72392700
 
 
 Methods
