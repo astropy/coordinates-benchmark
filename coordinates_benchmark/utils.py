@@ -163,8 +163,11 @@ def horizontal_filename(tool):
     return fmt.format(tool)
 
 
-def plot_filename(tool1, tool2, systems):
-    fmt = 'output/plots/{}_vs_{}_for_{}_to_{}.png'
+def plot_filename(tool1, tool2, systems, inc_root_dir=True):
+    root_dir = ""
+    if inc_root_dir:
+        root_dir = "output/"
+    fmt = root_dir + 'plots/{}_vs_{}_for_{}_to_{}.png'
     return fmt.format(tool1, tool2, systems['in'], systems['out'])
 
 
