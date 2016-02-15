@@ -23,7 +23,7 @@ install:
     - source ci-helpers/travis/setup_conda_$TRAVIS_OS_NAME.sh
     - pip install https://github.com/scottransom/pyslalib/archive/master.zip
     - if [[ $TRAVIS_PYTHON_VERSION == 2.* ]]; then
-        pip install http://www.astro.rug.nl/software/kapteyn/kapteyn-2.2.tar.gz;
+        pip install http://www.astro.rug.nl/software/kapteyn/kapteyn-2.3.tar.gz;
       fi
 
 script:
