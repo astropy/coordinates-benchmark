@@ -72,7 +72,7 @@ def _compare_celestial(tool1, tool2, systems, f_txt, f_html):
 
     # Write out to HTML
     color = _accuracy_color(mean)
-    plot_filename = utils.plot_filename(tool1, tool2, systems)
+    plot_filename = utils.plot_filename(tool1, tool2, systems, inc_root_dir=False)
 
     f_html.write("  <tr>\n")
     f_html.write("    <td align='center'>{tool1:10s}</td>\n".format(tool1=tool1))
