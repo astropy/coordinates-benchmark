@@ -5,7 +5,7 @@ pyephem
 https://github.com/scottransom/pyslalib/archive/master.zip
 starlink-pyast
 palpy
-http://www.astro.rug.nl/software/kapteyn/kapteyn-2.2.tar.gz
+http://www.astro.rug.nl/software/kapteyn/kapteyn-2.3.tar.gz
 click
 
 # This only works with a very recent pip:
