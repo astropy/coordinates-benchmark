@@ -12,7 +12,7 @@ from astropy import coordinates as coord
 from astropy.time import Time
 from astropy import units as u
 
-SUPPORTED_SYSTEMS = 'fk5 fk4 icrs galactic'.split()
+SUPPORTED_SYSTEMS = 'fk5 fk4 icrs galactic ecliptic'.split()
 
 
 def get_system(system):
@@ -22,6 +22,7 @@ def get_system(system):
     d['fk4'] = coord.FK4
     d['icrs'] = coord.ICRS
     d['galactic'] = coord.Galactic
+    d['ecliptic'] = coord.BarycentricTrueEcliptic
     return d[system]
 
 
