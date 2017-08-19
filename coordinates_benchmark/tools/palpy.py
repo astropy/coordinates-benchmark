@@ -4,8 +4,8 @@ Coordinate conversions with the palpy Python package.
 
 https://github.com/Starlink/palpy
 """
-from __future__ import (absolute_import, division, print_function,
-                        unicode_literals)
+from __future__ import absolute_import, division, print_function
+
 import numpy as np
 from astropy.table import Table
 import palpy as pal

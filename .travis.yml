@@ -2,11 +2,6 @@ language: c
 
 sudo: false
 
-env:
-    matrix:
-        - PYTHON_VERSION=2.7 REQUIREMENTS_FILE=requirements.txt
-        # - PYTHON_VERSION=3.6 REQUIREMENTS_FILE=requirements_python3.txt
-
 addons:
     apt:
         packages:
@@ -14,9 +9,12 @@ addons:
 
 env:
     global:
-        - ASTROPY_VERSION=dev
-        - CONDA_DEPENDENCIES='click matplotlib'
+        - ASTROPY_VERSION=stable
+        - CONDA_DEPENDENCIES='click numpy cython jinja2 matplotlib nomkl'
         - SETUP_XVFB=True
+    matrix:
+        - PYTHON_VERSION=2.7 REQUIREMENTS_FILE=requirements.txt
+        # - PYTHON_VERSION=3.6 REQUIREMENTS_FILE=requirements_python3.txt
 
 install:
     - git clone git://github.com/astropy/ci-helpers.git
@@ -31,6 +29,6 @@ script:
     - ./make.py benchmark_celestial
     - ./make.py benchmark_horizontal
     - ./make.py summary_celestial
-    # Making all plots is slow ... testing that plots work for two tools should be sufficient
-    - ./make.py plots --tools astropy,pyast
-    - ./make.py deploy
+    # Making plots is slow - make them only for comparisons with astropy as a test
+    - ./make.py plots --tools=astropy
+    - if [[ $PYTHON_VERSION == 2.7 && $TRAVIS_PULL_REQUEST == false && $TRAVIS_BRANCH == "master" ]]; then ./make.py deploy --token=$GITHUB_TOKEN; fi

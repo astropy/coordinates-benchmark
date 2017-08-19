@@ -1,7 +1,7 @@
 # Licensed under a 3-clause BSD style license - see LICENSE.rst
 """Create lists of sky coordinates."""
-from __future__ import (absolute_import, division, print_function,
-                        unicode_literals)
+from __future__ import absolute_import, division, print_function
+
 import logging
 import numpy as np
 import click
@@ -38,4 +38,4 @@ def make_skycoord_table_command():
 
     filename = 'input/skycoords.txt'
     logging.info('Writing {}'.format(filename))
-    table.write(filename, format=utils.TABLE_FORMAT)
+    table.write(filename, format=utils.TABLE_FORMAT, overwrite=True)

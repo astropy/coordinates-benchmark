@@ -1,7 +1,7 @@
 # Licensed under a 3-clause BSD style license - see LICENSE.rst
 """Run the coordinates benchmark"""
-from __future__ import (absolute_import, division, print_function,
-                        unicode_literals)
+from __future__ import absolute_import, division, print_function
+
 import logging
 import click
 from .. import utils
@@ -44,7 +44,7 @@ def benchmark_celestial(tools):
 
             filename = utils.celestial_filename(tool, systems)
             logging.info('Writing {}'.format(filename))
-            results.write(filename, format=utils.TABLE_FORMAT)
+            results.write(filename, format=utils.TABLE_FORMAT, overwrite=True)
 
 
 @click.command()
@@ -75,7 +75,7 @@ def benchmark_horizontal(tools):
 
         filename = utils.horizontal_filename(tool)
         logging.info('Writing {}'.format(filename))
-        results.write(filename, format=utils.TABLE_FORMAT)
+        results.write(filename, format=utils.TABLE_FORMAT, overwrite=True)
 
 
 @click.command()

@@ -1,7 +1,7 @@
 # Licensed under a 3-clause BSD style license - see LICENSE.rst
 """Create lists of observers."""
-from __future__ import (absolute_import, division, print_function,
-                        unicode_literals)
+from __future__ import absolute_import, division, print_function
+
 import logging
 import itertools
 import numpy as np
@@ -66,4 +66,4 @@ def make_observer_table_command():
     table = make_observer_table()
     filename = 'input/observers.txt'
     logging.info('Writing {}'.format(filename))
-    table.write(filename, format=utils.TABLE_FORMAT)
+    table.write(filename, format=utils.TABLE_FORMAT, overwrite=True)

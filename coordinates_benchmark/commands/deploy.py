@@ -1,40 +1,48 @@
 # Licensed under a 3-clause BSD style license - see LICENSE.rst
-from __future__ import (absolute_import, division, print_function,
-                        unicode_literals)
+from __future__ import absolute_import, division, print_function
+
 import os
+import sys
 import shutil
 import tempfile
 import subprocess
-import logging
 import click
 
 
-@click.command()
-def deploy():
-    """Deploy HTML output to Github pages."""
-    tmpdir = tempfile.mkdtemp()
-    shutil.copytree('output', os.path.join(tmpdir, 'output'))
+def run(cmd, verbose=False):
+    if verbose:
+        print("EXEC: {0}".format(cmd))
+        retcode = subprocess.call(cmd, shell=True)
+    else:
+        retcode = subprocess.call(cmd, shell=True,
+                                  stdout=subprocess.PIPE,
+                                  stderr=subprocess.PIPE)
+    assert retcode == 0
 
-    cmd = 'git checkout gh-pages'
-    logging.info('EXEC: {}'.format(cmd))
-    subprocess.call(cmd, shell=True)
+
+@click.command()
+@click.option('--token', help='Github token')
+@click.option('--verbose', is_flag=True, help='Whether to display the git commands and their output')
+def deploy(token, verbose):
+    """Deploy HTML output to Github pages."""
+
+    if not token:
+        print("Github token not set")
+        sys.exit(1)
+
+    tmpdir = tempfile.mkdtemp()
+    tmpout = os.path.join(tmpdir, 'output')
+    shutil.copytree('output', tmpout)
+    start_dir = os.path.abspath('.')
 
     try:
-        for root, dirnames, filenames in os.walk(os.path.join(tmpdir, 'output')):
-            for filename in filenames:
-                if filename.endswith('.png'):  # for now
-                    continue
-                filename = os.path.relpath(os.path.join(root, filename), os.path.join(tmpdir, 'output'))
-                shutil.copy(os.path.join(tmpdir, 'output', filename), filename)
-                cmd = 'git add ' + filename
-                logging.info('EXEC: {}'.format(cmd))
-                subprocess.call(cmd, shell=True)
-
-        cmd = 'git commit -m "Latest build"'
-        logging.info('EXEC: {}'.format(cmd))
-        subprocess.call(cmd, shell=True)
-
+        os.chdir(tmpout)
+        run('git init', verbose=verbose)
+        run('git remote add upstream "https://{0}@github.com/astrofrog/coordinates-benchmark.git"'.format(token), verbose=verbose)
+        run('git fetch upstream', verbose=verbose)
+        run('git reset upstream/gh-pages', verbose=verbose)
+        run('git add -A .', verbose=verbose)
+        run('git commit -m "Latest build"', verbose=verbose)
+        run('git push -q upstream HEAD:gh-pages', verbose=verbose)
     finally:
-        cmd = 'git checkout master'
-        logging.info('EXEC: {}'.format(cmd))
-        subprocess.call(cmd, shell=True)
+        os.chdir(start_dir)
