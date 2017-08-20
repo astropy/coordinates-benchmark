@@ -9,7 +9,7 @@ import filecmp
 
 import click
 from matplotlib.testing.compare import compare_images
-
+from matplotlib.testing.exceptions import ImageComparisonFailure
 
 def run(cmd):
     print("EXEC: {0}".format(cmd))
@@ -38,7 +38,7 @@ def deploy(repo):
         run('git init')
         run('git remote add upstream git@github.com:{0}'.format(repo))
         run('git fetch upstream')
-        run('git reset upstream/gh-pages')
+        run('git reset --hard upstream/gh-pages')
 
         # We check the files one by one because we want to minimize changes and
         # make sure we only upload plots that have really changed (otherwise
@@ -53,7 +53,11 @@ def deploy(repo):
                 new_file = os.path.relpath(original_file, output_dir)
                 if os.path.exists(new_file):
                     if filename.endswith('.png'):
-                        if compare_images(original_file, new_file, tol=0) is not None:
+                        try:
+                            result = compare_images(original_file, new_file, tol=0)
+                        except ImageComparisonFailure:
+                            result = 'failed'
+                        if result is not None:
                             copy_mkdir(original_file, new_file)
                             changed = True
                     else:

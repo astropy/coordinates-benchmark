@@ -22,13 +22,13 @@ def make_plot(tool1, tool2, systems,
     with np.errstate(divide='ignore'):
         diff = np.clip(np.log10(table['separation']), vmin, vmax)
 
-    fig = plt.figure()
+    fig = plt.figure(figsize=(7, 5))
     ax = fig.add_subplot(1, 1, 1, projection='aitoff')
     s = ax.scatter(np.radians(table['lon']), np.radians(table['lat']),
                    s=10, c=diff, vmin=vmin, vmax=vmax, lw=0, cmap=plt.cm.RdYlGn_r)
     ax.grid()
-    axc = fig.add_axes([0.925, 0.25, 0.025, 0.5])
-    cb = fig.colorbar(s, cax=axc)
+    axc = fig.add_axes([0.2, 0.1, 0.6, 0.03])
+    cb = fig.colorbar(s, cax=axc, orientation='horizontal')
     axc.set_yticklabels('')
     cb.set_ticks([-3, -2, -1, 0, 1])
     cb.set_label('Difference in arcsec')
@@ -40,7 +40,11 @@ def make_plot(tool1, tool2, systems,
 
     filename = utils.plot_filename(tool1, tool2, systems)
     logging.info('Writing {}'.format(filename))
-    fig.savefig(filename, bbox_inches='tight')
+
+    # We don't use bbox_inches='tight' here to make sure that the image size
+    # is the same for different versions of matplotlib, freetype, and different
+    # platforms (otherwise the image comparison when deploying fails).
+    fig.savefig(filename)
 
     plt.close(fig)
 
