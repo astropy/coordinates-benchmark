@@ -1,8 +1,4 @@
-language: python
-
-python:
-    - 2.7
-    # - 3.4
+language: c
 
 sudo: false
 
@@ -13,18 +9,17 @@ addons:
 
 env:
     global:
-        - ASTROPY_VERSION=dev
-        - CONDA_DEPENDENCIES='click matplotlib'
-        - PIP_DEPENDENCIES='pytpm novas pyephem starlink-pyast palpy'
+        - ASTROPY_VERSION=stable
+        - CONDA_DEPENDENCIES='click numpy cython jinja2 matplotlib nomkl'
         - SETUP_XVFB=True
+    matrix:
+        - PYTHON_VERSION=2.7 REQUIREMENTS_FILE=requirements.txt
+        # - PYTHON_VERSION=3.6 REQUIREMENTS_FILE=requirements_python3.txt
 
 install:
     - git clone git://github.com/astropy/ci-helpers.git
-    - source ci-helpers/travis/setup_conda_$TRAVIS_OS_NAME.sh
-    - pip install https://github.com/scottransom/pyslalib/archive/master.zip
-    - if [[ $TRAVIS_PYTHON_VERSION == 2.* ]]; then
-        pip install http://www.astro.rug.nl/software/kapteyn/kapteyn-2.3.tar.gz;
-      fi
+    - source ci-helpers/travis/setup_conda.sh
+    - pip install -r $REQUIREMENTS_FILE
 
 script:
     - ./make.py --help
@@ -34,5 +29,14 @@ script:
     - ./make.py benchmark_celestial
     - ./make.py benchmark_horizontal
     - ./make.py summary_celestial
-    # Making all plots is slow ... testing that plots work for two tools should be sufficient
-    - ./make.py plots --tools astropy,pyast
+    # Making plots is slow - make them only for comparisons with astropy as a test
+    - ./make.py plots --tools=astropy
+    - if [[ $PYTHON_VERSION == 2.7 && $TRAVIS_PULL_REQUEST == false && $TRAVIS_BRANCH == "master" ]]; then
+        git config --global user.name "astropy-bot";
+        git config --global user.email "astropy.team@gmail.com";
+        openssl aes-256-cbc -K $encrypted_ae4bff0a7007_key -iv $encrypted_ae4bff0a7007_iv -in github_deploy_key.enc -out ~/.ssh/publish-key -d;
+        chmod u=rw,og= ~/.ssh/publish-key;
+        echo "Host github.com" >> ~/.ssh/config;
+        echo "  IdentityFile ~/.ssh/publish-key" >> ~/.ssh/config;
+        ./make.py deploy --repo=astropy/coordinates-benchmark;
+      fi

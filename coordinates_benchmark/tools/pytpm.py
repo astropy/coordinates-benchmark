@@ -5,8 +5,8 @@ Coordinate conversions with the pytpm Python package.
 https://github.com/phn/pytpm
 http://phn.github.com/pytpm
 """
-from __future__ import (absolute_import, division, print_function,
-                        unicode_literals)
+from __future__ import absolute_import, division, print_function
+
 import numpy as np
 from astropy.table import Table
 import pytpm

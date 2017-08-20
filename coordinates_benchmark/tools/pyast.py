@@ -5,8 +5,8 @@ Coordinate conversions with the pyast Python package.
 https://github.com/timj/starlink-pyast
 http://dsberry.github.com/starlink/pyast.html
 """
-from __future__ import (absolute_import, division, print_function,
-                        unicode_literals)
+from __future__ import absolute_import, division, print_function
+
 import numpy as np
 from astropy.table import Table
 import starlink.Ast as Ast

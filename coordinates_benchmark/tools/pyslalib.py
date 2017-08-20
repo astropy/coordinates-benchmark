@@ -4,8 +4,8 @@ Coordinate conversions with the pyslalib Python package.
 
 https://github.com/scottransom/pyslalib
 """
-from __future__ import (absolute_import, division, print_function,
-                        unicode_literals)
+from __future__ import absolute_import, division, print_function
+
 import numpy as np
 from astropy.table import Table
 from pyslalib import slalib
@@ -32,7 +32,7 @@ def transform_celestial(coords, systems):
         elif systems['in'] == 'ecliptic':
             lon, lat = slalib.sla_ecleq(lon, lat, 51544)
 
-        # Now convert from FK5 J2000 to out system    
+        # Now convert from FK5 J2000 to out system
         if systems['out'] == 'fk4':
             # FK5 -> FK4 at BEPOCH 2000 assuming no proper motion or parallax
             lon, lat = slalib.sla_fk54z(lon, lat, 2000.0012775136652)[:2]
