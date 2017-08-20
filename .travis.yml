@@ -22,15 +22,22 @@ install:
     - pip install -r $REQUIREMENTS_FILE
 
 script:
+
     - ./make.py --help
     - ./make.py tool-info
+
     - ./make.py make_observer_table
     - ./make.py make_skycoord_table
     - ./make.py benchmark_celestial
     - ./make.py benchmark_horizontal
     - ./make.py summary_celestial
-    # Making plots is slow - make them only for comparisons with astropy as a test
-    - ./make.py plots --tools=astropy
+
+    # Making all plots is slow, but this is run rarely enough that it's fine to just do them all. However,
+    # if you are debugging, you could instead add the --tools=astropy flag to generate just some of the
+    # plots.
+    - ./make.py plots
+
+    # If on master, we deploy the results (only for one Python version)
     - if [[ $PYTHON_VERSION == 2.7 && $TRAVIS_PULL_REQUEST == false && $TRAVIS_BRANCH == "master" ]]; then
         git config --global user.name "astropy-bot";
         git config --global user.email "astropy.team@gmail.com";
