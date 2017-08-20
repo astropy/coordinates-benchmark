@@ -39,4 +39,4 @@ script:
     - ./make.py summary_celestial
     # Making plots is slow - make them only for comparisons with astropy as a test
     - ./make.py plots --tools=astropy
-    - if [[ $PYTHON_VERSION == 2.7 && $TRAVIS_PULL_REQUEST == false && $TRAVIS_BRANCH == "master" ]]; then ./make.py deploy --repo=astrofrog/coordinates-benchmark; fi
+    - if [[ $PYTHON_VERSION == 2.7 && $TRAVIS_PULL_REQUEST == false && $TRAVIS_BRANCH == "master" ]]; then ./make.py deploy --repo=astropy/coordinates-benchmark; fi
