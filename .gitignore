@@ -10,3 +10,9 @@ output
 env
 .ipynb_checkpoints
 *.ipynb
+
+# Files downloaded by Skyfield
+Leap_Second.dat
+de*.bsp
+deltat.data
+deltat.preds
