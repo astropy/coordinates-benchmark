@@ -10,7 +10,7 @@ addons:
 env:
     global:
         - ASTROPY_VERSION=stable
-        - CONDA_DEPENDENCIES='click numpy cython jinja2 matplotlib nomkl'
+        - CONDA_DEPENDENCIES='click numpy cython jinja2 matplotlib'
         - SETUP_XVFB=True
     matrix:
         - PYTHON_VERSION=2.7 REQUIREMENTS_FILE=requirements.txt
