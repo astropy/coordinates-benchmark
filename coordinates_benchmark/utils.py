@@ -44,9 +44,8 @@ def _tool_check():
     tools['tool_name'] = TOOLS
     tools['import_name'] = [_import_name(_) for _ in TOOLS]
     tools['available'] = False
-    # TODO: this is a temp workaround for this issue:
-    # https://github.com/astropy/astropy/issues/3321
-    tools['version'] = ['N/A' for _ in range(len(tools))]
+    tools['version'] = 'N/A'
+    tools['version'] = tools['version'].astype("U21")  # Avoid truncation
 
     for tool in tools:
         try:
