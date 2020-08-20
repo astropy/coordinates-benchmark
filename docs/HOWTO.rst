@@ -11,9 +11,6 @@ If you want to set up a virtual environment to run the benchmarks, you can do::
     pip install numpy Cython jinja2
     pip install -r requirements.txt
 
-Note: The ``kapteyn`` package doesn't support Python 3, so if you want to include
-it in the benchmark, you have to use Python 2.
-
 Running
 -------
 
