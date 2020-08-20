@@ -23,11 +23,11 @@ To print its help message which lists all sub-commands run::
 
 To run the benchmarks (output goes in ``output/tools``)::
 
-    ./make.py benchmark_all
+    ./make.py benchmark-celestial
 
 To generate a summary webpage (output goes in ``output``)::
 
-    ./make.py summary
+    ./make.py summary-celestial
 
 To generate a ton of plots for the webpage (optional) (output goes in ``output/plots``)::
 
