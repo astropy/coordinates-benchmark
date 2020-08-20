@@ -8,7 +8,7 @@ If you want to set up a virtual environment to run the benchmarks, you can do::
 
     virtualenv env
     source env/bin/activate
-    pip install numpy Cython jinja2
+    pip install "numpy<1.18" Cython jinja2
     pip install -r requirements.txt
 
 Running
