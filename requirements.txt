@@ -1,13 +1,12 @@
-pytpm
+pytpm; python_version < "3"
+https://github.com/cdeil/pytpm/archive/py3-fix.zip; python_version >= "3" and python_version < "3.7"
 git+http://github.com/astropy/astropy.git#egg=astropy
 novas
 pyephem
 https://github.com/scottransom/pyslalib/archive/master.zip
 starlink-pyast
 palpy
-http://www.astro.rug.nl/software/kapteyn/kapteyn-2.3.tar.gz
+kapteyn<=2.3; python_version < "3"
+http://www.astro.rug.nl/software/kapteyn/kapteyn-3.0.tar.gz; python_version >= "3"
 click
-
-# This only works with a very recent pip:
-# https://pip.pypa.io/en/latest/reference/pip_install.html#requirements-file-format
-# http://www.astro.rug.nl/software/kapteyn/kapteyn-2.2.tar.gz; python_version < '3.0'
+matplotlib

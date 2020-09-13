@@ -4,15 +4,12 @@ Astropy coordinates benchmark HOWTO
 Setting up an environment to run the benchmarks
 -----------------------------------------------
 
-If you want to set up a virtual environment to run the benchmarks, you can do:
+If you want to set up a virtual environment to run the benchmarks, you can do::
 
     virtualenv env
     source env/bin/activate
-    pip install numpy Cython jinja2
+    pip install "numpy<1.18" Cython jinja2
     pip install -r requirements.txt
-
-Note: The ``kapteyn`` package doesn't support Python 3, so if you want to include
-it in the benchmark, you have to use Python 2.
 
 Running
 -------
@@ -20,19 +17,19 @@ Running
 Go to the repository top-level folder (where the ``./make.py`` file is).
 The ``./make.py`` command line tool gives you access to all functionality.
 
-To print it's help message which lists all sub-commands run:
+To print its help message which lists all sub-commands run::
 
     ./make.py
 
-To run the benchmarks (output goes in ``output/tools``):
+To run the benchmarks (output goes in ``output/tools``)::
 
-    ./make.py benchmark_all
+    ./make.py benchmark-celestial
 
-To generate a summary webpage (output goes in ``output``):
+To generate a summary webpage (output goes in ``output``)::
 
-    ./make.py summary
+    ./make.py summary-celestial
 
-To generate a ton of plots for the webpage (optional) (output goes in ``output/plots``):
+To generate a ton of plots for the webpage (optional) (output goes in ``output/plots``)::
 
     ./make.py plots
 
@@ -54,10 +51,10 @@ b) should be the same on any 64-bit computer
 Deploying
 ---------
 
-To deploy the latest results to Github pages:
+To deploy the latest results to Github pages::
 
     ./make.py deploy
 
-and if there are no errors:
+and if there are no errors::
 
     git push upstream gh-pages

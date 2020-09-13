@@ -32,6 +32,8 @@ History
 - 2015-01-15: Re-structure ``coordinates-benchmark``
   (see `GH #42 <https://github.com/astropy/coordinates-benchmark/pull/42>`_)
 
+- 2020-08-20: Unify Python 2 and Python 3
+  (see `GH #63 <https://github.com/astropy/coordinates-benchmark/pull/63>`_)
 
 David Berry on differences in celestial coordinate transforms
 -------------------------------------------------------------
