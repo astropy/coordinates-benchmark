@@ -13,6 +13,9 @@ from astropy.time import Time
 from astropy.table import Table
 
 
+EPHEMERIS = 'https://naif.jpl.nasa.gov/pub/naif/generic_kernels/spk/planets/de430.bsp'
+
+
 def _convert_radec_to_altaz(ra, dec, lon, lat, height, time):
     """Convert a single position.
 
@@ -22,7 +25,7 @@ def _convert_radec_to_altaz(ra, dec, lon, lat, height, time):
 
     radec = Star(ra=Angle(degrees=ra), dec=Angle(degrees=dec))
 
-    earth = load('de430t.bsp')['earth']
+    earth = load(EPHEMERIS)['earth']
     location = earth + Topos(longitude_degrees=lon,
                              latitude_degrees=lat,
                              elevation_m=height * 1000.0)

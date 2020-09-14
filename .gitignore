@@ -12,7 +12,4 @@ env
 *.ipynb
 
 # Files downloaded by Skyfield
-Leap_Second.dat
-de*.bsp
-deltat.data
-deltat.preds
+de430.bsp

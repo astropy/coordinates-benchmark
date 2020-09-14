@@ -23,6 +23,8 @@ install:
 
     - source ci-helpers/travis/setup_conda.sh
     - pip install -r requirements.txt
+    # Prefetch as workaround for https://github.com/skyfielders/python-skyfield/issues/262
+    - wget -c "$(python -c 'from coordinates_benchmark.tools.skyfield import EPHEMERIS; print(EPHEMERIS)')"
 
 script:
 
