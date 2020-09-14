@@ -10,3 +10,6 @@ output
 env
 .ipynb_checkpoints
 *.ipynb
+
+# Files downloaded by Skyfield
+de430.bsp

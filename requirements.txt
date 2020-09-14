@@ -8,5 +8,6 @@ starlink-pyast
 palpy
 kapteyn<=2.3; python_version < "3"
 http://www.astro.rug.nl/software/kapteyn/kapteyn-3.0.tar.gz; python_version >= "3"
+skyfield
 click
 matplotlib
