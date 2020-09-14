@@ -29,10 +29,8 @@ def make_plot(tool1, tool2, systems,
     ax.grid()
     axc = fig.add_axes([0.2, 0.1, 0.6, 0.03])
     cb = fig.colorbar(s, cax=axc, orientation='horizontal')
-    axc.set_yticklabels('')
     cb.set_ticks([-3, -2, -1, 0, 1])
     cb.set_label('Difference in arcsec')
-    axc.set_yticklabels(["0.001", "0.01", "0.1", "1", "10"])
 
     fmt = '{} vs {} for conversion {} -> {}'
     title = fmt.format(tool1, tool2, systems['in'], systems['out'])
