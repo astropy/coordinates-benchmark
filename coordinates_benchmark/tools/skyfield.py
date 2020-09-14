@@ -22,7 +22,7 @@ def _convert_radec_to_altaz(ra, dec, lon, lat, height, time):
 
     radec = Star(ra=Angle(degrees=ra), dec=Angle(degrees=dec))
 
-    earth = load('de421.bsp')['earth']
+    earth = load('de430t.bsp')['earth']
     location = earth + Topos(longitude_degrees=lon,
                              latitude_degrees=lat,
                              elevation_m=height * 1000.0)
