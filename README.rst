@@ -10,9 +10,9 @@ For now we only compare precision, in the future we also want to compare speed.
 - Repository: https://github.com/astropy/coordinates-benchmark
 
 
-.. image:: https://travis-ci.org/astropy/coordinates-benchmark.svg?branch=master
-    :target: https://travis-ci.org/astropy/coordinates-benchmark
-    :alt: Test Status
+.. image:: https://github.com/astropy/coordinates-benchmark/workflows/Run%20benchmarks/badge.svg
+    :target: https://github.com/astropy/coordinates-benchmark/actions?query=workflow%3A%22Run+benchmarks%22
+    :alt: Benchmarks Status
 
 Documentation is in the `docs <https://github.com/astropy/coordinates-benchmark/blob/master/docs/>`__ folder:
 
