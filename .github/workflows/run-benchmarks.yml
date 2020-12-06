@@ -51,14 +51,24 @@ jobs:
         # if you are debugging, you could instead add the --tools=astropy flag to generate just some of the
         # plots.
         ./make.py plots
+    - name: Archive code coverage results
+      uses: actions/upload-artifact@v2
+      with:
+        name: benchmark-results
+        path: output/
 
   deploy:
     runs-on: ubuntu-latest
     needs: [benchmark]
     if: ${{ github.ref == 'refs/heads/master' }}
     steps:
+    - name: Download results
+      uses: actions/download-artifact@v2
+      with:
+        name: benchmark-results
+        path: output
     - name: Deploy results
-      run: |
-        # This is a placeholder because publishing is currently broken,
-        # see https://github.com/astropy/coordinates-benchmark/issues/69
-        echo 'Deploy time!'
+      uses: JamesIves/github-pages-deploy-action@3.7.1
+      with:
+        BRANCH: gh-pages
+        FOLDER: output

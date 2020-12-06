@@ -17,9 +17,6 @@ def cli():
     """Astropy coordinate benchmarks utility."""
     pass
 
-from .deploy import deploy
-cli.add_command(deploy)
-
 from .generate_skycoords import make_skycoord_table_command
 cli.add_command(make_skycoord_table_command)
 
