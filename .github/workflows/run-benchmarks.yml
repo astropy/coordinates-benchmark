@@ -14,8 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        astropy-version: [4.0.*]
-        python-version: [3.6]  # For Python 3.7+ see https://github.com/astropy/coordinates-benchmark/issues/67
+        astropy-version: [4.1.*]
+        python-version: [3.7]
         numpy-version: [1.17.4]
 
     steps:
