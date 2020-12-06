@@ -1,5 +1,4 @@
-pytpm; python_version < "3"
-https://github.com/cdeil/pytpm/archive/py3-fix.zip; python_version >= "3" and python_version < "3.7"
+https://github.com/astrojuanlu/pytpm/archive/master.zip; python_version >= "3"
 git+http://github.com/astropy/astropy.git#egg=astropy
 novas
 pyephem
