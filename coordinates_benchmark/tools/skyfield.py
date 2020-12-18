@@ -9,6 +9,7 @@ from __future__ import absolute_import, division, print_function
 
 from skyfield.units import Angle
 from skyfield.api import Star, Topos, load
+from skyfield.data import iers
 from astropy.time import Time
 from astropy.table import Table
 
@@ -30,7 +31,10 @@ def _convert_radec_to_altaz(ra, dec, lon, lat, height, time):
                              latitude_degrees=lat,
                              elevation_m=height * 1000.0)
 
-    ts = load.timescale()
+    ts = load.timescale(builtin=False)
+    with load.open('finals2000A.all') as f:
+        finals_data = iers.parse_x_y_dut1_from_finals_all(f)
+    iers.install_polar_motion_table(ts, finals_data)
     obstime = ts.from_astropy(Time(time, scale='utc'))
 
     alt, az, _ = location.at(obstime).observe(radec).apparent().altaz(pressure_mbar=0)
