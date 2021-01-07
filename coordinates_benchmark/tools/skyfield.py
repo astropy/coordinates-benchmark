@@ -8,7 +8,7 @@ https://rhodesmill.org/skyfield/
 from __future__ import absolute_import, division, print_function
 
 from skyfield.units import Angle
-from skyfield.api import Star, Topos, load
+from skyfield.api import Star, wgs84, load
 from skyfield.data import iers
 from astropy.time import Time
 from astropy.table import Table
@@ -27,9 +27,9 @@ def _convert_radec_to_altaz(ra, dec, lon, lat, height, time):
     radec = Star(ra=Angle(degrees=ra), dec=Angle(degrees=dec))
 
     earth = load(EPHEMERIS)['earth']
-    location = earth + Topos(longitude_degrees=lon,
-                             latitude_degrees=lat,
-                             elevation_m=height * 1000.0)
+    location = earth + wgs84.latlon(longitude_degrees=lon,
+                                    latitude_degrees=lat,
+                                    elevation_m=height * 1000.0)
 
     ts = load.timescale(builtin=False)
     with load.open('finals2000A.all') as f:
