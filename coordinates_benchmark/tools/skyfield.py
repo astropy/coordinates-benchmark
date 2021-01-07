@@ -32,7 +32,9 @@ def _convert_radec_to_altaz(ra, dec, lon, lat, height, time):
                                     elevation_m=height * 1000.0)
 
     ts = load.timescale(builtin=False)
-    with load.open('finals2000A.all') as f:
+    # Skyfield uses an FTP URL, but FTP doesn't work on Travis so we use an
+    # alternative HTTP URL.
+    with load.open('https://datacenter.iers.org/data/9/finals2000A.all') as f:
         finals_data = iers.parse_x_y_dut1_from_finals_all(f)
     iers.install_polar_motion_table(ts, finals_data)
     obstime = ts.from_astropy(Time(time, scale='utc'))
