@@ -8,7 +8,7 @@ https://rhodesmill.org/skyfield/
 from __future__ import absolute_import, division, print_function
 
 from skyfield.units import Angle
-from skyfield.api import Star, wgs84, load
+from skyfield.api import Star, wgs84, Loader
 from skyfield.data import iers
 from astropy.time import Time
 from astropy.table import Table
@@ -23,6 +23,13 @@ def _convert_radec_to_altaz(ra, dec, lon, lat, height, time):
     This is done for easy code sharing with other tools.
     Skyfield does support arrays of positions.
     """
+    load = Loader('.')
+    # Skyfield uses FTP URLs, but FTP doesn't work on Github Actions so
+    # we use alternative HTTP URLs.
+    load.urls['finals2000A.all'] = 'https://datacenter.iers.org/data/9/'
+    load.urls['.bsp'] = [
+        ('*.bsp', 'https://naif.jpl.nasa.gov/pub/naif/generic_kernels/spk/planets/')
+    ]
 
     radec = Star(ra=Angle(degrees=ra), dec=Angle(degrees=dec))
 
@@ -32,9 +39,7 @@ def _convert_radec_to_altaz(ra, dec, lon, lat, height, time):
                                     elevation_m=height * 1000.0)
 
     ts = load.timescale(builtin=False)
-    # Skyfield uses an FTP URL, but FTP doesn't work on Travis so we use an
-    # alternative HTTP URL.
-    with load.open('https://datacenter.iers.org/data/9/finals2000A.all') as f:
+    with load.open('finals2000A.all') as f:
         finals_data = iers.parse_x_y_dut1_from_finals_all(f)
     iers.install_polar_motion_table(ts, finals_data)
     obstime = ts.from_astropy(Time(time, scale='utc'))
