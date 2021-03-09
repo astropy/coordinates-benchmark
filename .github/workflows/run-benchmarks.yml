@@ -5,9 +5,9 @@ name: Run benchmarks
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   benchmark:
@@ -60,7 +60,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: [benchmark]
-    if: ${{ github.ref == 'refs/heads/master' }}
+    if: ${{ github.ref == 'refs/heads/main' }}
     steps:
     - name: Download results
       uses: actions/download-artifact@v2
