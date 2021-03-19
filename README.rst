@@ -14,9 +14,9 @@ For now we only compare precision, in the future we also want to compare speed.
     :target: https://github.com/astropy/coordinates-benchmark/actions?query=workflow%3A%22Run+benchmarks%22
     :alt: Benchmarks Status
 
-Documentation is in the `docs <https://github.com/astropy/coordinates-benchmark/blob/master/docs/>`__ folder:
+Documentation is in the `docs <https://github.com/astropy/coordinates-benchmark/blob/main/docs/>`__ folder:
 
-- `Specification.rst <https://github.com/astropy/coordinates-benchmark/blob/master/docs/Specification.rst>`_
-- `Notes.rst <https://github.com/astropy/coordinates-benchmark/blob/master/docs/Notes.rst>`_
-- `Tools.rst <https://github.com/astropy/coordinates-benchmark/blob/master/docs/Tools.rst>`_
-- `HOWTO.rst <https://github.com/astropy/coordinates-benchmark/blob/master/docs/HOWTO.rst>`_
+- `Specification.rst <https://github.com/astropy/coordinates-benchmark/blob/main/docs/Specification.rst>`_
+- `Notes.rst <https://github.com/astropy/coordinates-benchmark/blob/main/docs/Notes.rst>`_
+- `Tools.rst <https://github.com/astropy/coordinates-benchmark/blob/main/docs/Tools.rst>`_
+- `HOWTO.rst <https://github.com/astropy/coordinates-benchmark/blob/main/docs/HOWTO.rst>`_

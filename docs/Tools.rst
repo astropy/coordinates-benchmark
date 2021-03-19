@@ -66,7 +66,7 @@ PyTPM
 `TPM <http://www.sal.wisc.edu/~jwp/astro/tpm/tpm.html>`_ C library with a high-level
 ``convert.convertv6`` function interface. Unmaintained.
 
-We are using the version from github master.
+We are using the version from github main.
 
 Note that ``pytpm`` is unmaintained and is known to give incorrect results in this case:
 https://github.com/phn/pytpm/issues/2
