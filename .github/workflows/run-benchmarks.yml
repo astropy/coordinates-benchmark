@@ -68,7 +68,7 @@ jobs:
         name: benchmark-results
         path: output
     - name: Deploy results
-      uses: JamesIves/github-pages-deploy-action@a96ffa23204731ec64e3e1316072197d98bfbaea  # v4.6.6
+      uses: JamesIves/github-pages-deploy-action@881db5376404c5c8d621010bcbec0310b58d5e29  # v4.6.8
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         BRANCH: gh-pages
