@@ -75,14 +75,16 @@ def _convert_radec_to_altaz(ra, dec, lon, lat, height, time):
     obs_pos = mt.position('WGS84',
                           '{0}deg'.format(lon),
                           '{0}deg'.format(lat),
-                          '{0}m'.format(height * 1000.0))
+                          '{0}km'.format(height))
     mt.doframe(obs_pos)
 
     # Set observation epoch from UTC date string
+    #   Note: CASA requires a time, so we append midnight. When comparing to
+    #   other tools, make sure they are using the same time.
     mt.doframe(mt.epoch('UTC', '{0}/00:00:00'.format(time)))
 
     d = mt.direction('J2000', '{0}deg'.format(ra), '{0}deg'.format(dec))
-    d_azel = mt.measure(d, 'AZEL')
+    d_azel = mt.measure(d, 'AZELGEO')
 
     az = np.degrees(d_azel['m0']['value'])
     alt = np.degrees(d_azel['m1']['value'])
