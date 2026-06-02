@@ -19,16 +19,18 @@ jobs:
     steps:
     - uses: actions/checkout@v6
     - uses: actions/setup-python@v6
+      id: setup_python
       with:
         python-version: ${{ matrix.python-version }}
-    - name: Install dependencies
-      run: |
-        # Non declared build dependencies
-        python -m pip install Cython numpy
-        # Tools to benchmark
-        python -m pip install -r requirements.txt
-        # Prefetch as workaround for https://github.com/skyfielders/python-skyfield/issues/262
-        wget -c "$(python -c 'from coordinates_benchmark.tools.skyfield import EPHEMERIS; print(EPHEMERIS)')"
+        cache: 'pip'
+
+    - name: Install dependencies and tools to benchmark
+      if: steps.setup_python.outputs.cache-hit != 'true'
+      run: python -m pip install -r requirements.txt
+
+    # workaround for https://github.com/skyfielders/python-skyfield/issues/262
+    - name: Prefetch skyfield ephemeris
+      run: wget -c "$(python -c 'from coordinates_benchmark.tools.skyfield import EPHEMERIS; print(EPHEMERIS)')"
 
     # the following 3 CASA preparation steps adopted from https://github.com/r-xue/pipeline/blob/7b6ed11fe0d40a1e5a88cbbd8166bccb64cf8e3d/.github/workflows/env-setup-run-template.yml#L85-L105
     - name: Setup CASA environment
