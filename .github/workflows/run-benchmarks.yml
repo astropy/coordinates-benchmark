@@ -64,6 +64,7 @@ jobs:
         ./make.py benchmark-celestial
         ./make.py benchmark-horizontal
         ./make.py summary-celestial
+        ./make.py summary-horizontal
 
         # Making all plots is slow, but this is run rarely enough that it's fine to just do them all. However,
         # if you are debugging, you could instead add the --tools=astropy flag to generate just some of the
