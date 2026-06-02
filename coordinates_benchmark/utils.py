@@ -164,6 +164,22 @@ def horizontal_filename(tool):
     return fmt.format(tool)
 
 
+def horizontal_results(tool):
+    filename = horizontal_filename(tool)
+    table = Table.read(filename, format=TABLE_FORMAT)
+    az = table['az']
+    table['az'] = np.where(az > 180, az - 360, az)
+    return table
+
+
+def horizontal_separation_table(tool1, tool2):
+    c1 = horizontal_results(tool1)
+    c2 = horizontal_results(tool2)
+    table = c1.copy()
+    table['separation'] = angular_separation_deg_to_arcsec(c1['az'], c1['alt'], c2['az'], c2['alt'])
+    return table
+
+
 def plot_filename(tool1, tool2, systems, inc_root_dir=True):
     root_dir = ""
     if inc_root_dir:
