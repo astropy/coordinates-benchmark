@@ -196,3 +196,80 @@ def summary_celestial():
     # """Summarize all results into a few stats"""
     summary()
     copy_static()
+
+
+def _compare_horizontal(tool1, tool2, f_txt, f_html):
+    try:
+        table = utils.horizontal_separation_table(tool1, tool2)
+    except IOError as exc:
+        logging.debug(str(exc))
+        return
+
+    diff = table['separation']
+    median = np.median(diff)
+    mean = np.mean(diff)
+    max = np.max(diff)
+    std = np.std(diff)
+
+    fmt = '{tool1:10s} {tool2:10s} {median:12.6f} {mean:12.6f} {max:12.6f} {std:12.6f}'
+    f_txt.write(fmt.format(**locals()) + "\n")
+
+    color = _accuracy_color(mean)
+    f_html.write("  <tr>\n")
+    f_html.write("    <td align='center'>{tool1:10s}</td>\n".format(tool1=tool1))
+    f_html.write("    <td align='center'>{tool2:10s}</td>\n".format(tool2=tool2))
+    f_html.write("    <td align='right' class='{color}'>{median:12.6f}</td>\n".format(color=color, median=median))
+    f_html.write("    <td align='right' class='{color}'>{mean:12.6f}</td>\n".format(color=color, mean=mean))
+    f_html.write("    <td align='right' class='{color}'>{max:12.6f}</td>\n".format(color=color, max=max))
+    f_html.write("    <td align='right' class='{color}'>{std:12.6f}</td>\n".format(color=color, std=std))
+    f_html.write("  </tr>\n")
+
+
+def summary_horizontal_cmd(txt_filename='summary_horizontal.txt',
+                           html_filename='summary_horizontal.html'):
+    """Write txt and html summary for horizontal coordinate conversions"""
+    f_txt = open(os.path.join('output', txt_filename), 'w')
+    f_html = open(os.path.join('output', html_filename), 'w')
+
+    fmt = '{tool1:10s} {tool2:10s} {median:>12s} {mean:>12s} {max:>12s} {std:>12s}'
+    labels = dict(tool1="Tool 1", tool2="Tool 2",
+                  median='Median', mean='Mean', max='Max', std='Std.Dev.')
+    f_txt.write(fmt.format(**labels) + "\n")
+    f_txt.write('-' * 70 + "\n")
+
+    write_html_header(f_html)
+
+    systems = {'in': 'fk5', 'out': 'horizontal'}
+    write_html_table_header_horizontal(f_html)
+
+    for tool1, tool2 in utils.TOOL_PAIRS:
+        _compare_horizontal(tool1, tool2, f_txt, f_html)
+
+    f_html.write("   </table>\n")
+    write_html_footer(f_html)
+
+    f_html.close()
+    f_txt.close()
+
+    logging.info('Writing output/%s' % txt_filename)
+    logging.info('Writing output/%s' % html_filename)
+
+
+def write_html_table_header_horizontal(fh):
+    fh.write("<h2>FK5 to Horizontal</h2>\n")
+    fh.write("<table align='center'>\n")
+    fh.write("  <tr>\n")
+    fh.write("    <th width=80>Tool 1</th>\n")
+    fh.write("    <th width=80>Tool 2</th>\n")
+    fh.write("    <th width=80>Median</th>\n")
+    fh.write("    <th width=80>Mean</th>\n")
+    fh.write("    <th width=80>Max</th>\n")
+    fh.write("    <th width=80>Std. Dev.</th>\n")
+    fh.write("  </tr>\n")
+
+
+@click.command()
+def summary_horizontal():
+    """Summarize horizontal coordinate conversion results into a HTML page."""
+    summary_horizontal_cmd()
+    copy_static()

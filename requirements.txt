@@ -1,12 +1,10 @@
-https://github.com/astrojuanlu/pytpm/archive/master.zip; python_version >= "3"
-git+http://github.com/astropy/astropy.git#egg=astropy
+astropy
 novas
 pyephem
-https://github.com/scottransom/pyslalib/archive/master.zip
 starlink-pyast
 palpy
-kapteyn<=2.3; python_version < "3"
-http://www.astro.rug.nl/software/kapteyn/kapteyn-3.0.tar.gz; python_version >= "3"
 skyfield
+casatools
+casadata
 click
 matplotlib

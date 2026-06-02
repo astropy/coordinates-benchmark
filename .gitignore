@@ -3,6 +3,7 @@
 .pydevproject
 .settings
 .idea
+.vscode
 *.html
 *.pyc
 *~
@@ -14,3 +15,6 @@ env
 # Files downloaded by Skyfield
 de430.bsp
 finals2000A.all
+
+# CASA log files
+casa-*.log

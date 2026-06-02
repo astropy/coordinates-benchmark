@@ -25,7 +25,7 @@ CELESTIAL_CONVERSIONS = [dict(zip(['in', 'out'], _))
                          for _ in CELESTIAL_CONVERSIONS
                          if _[0] != _[1]]
 
-TOOLS = sorted('astropy kapteyn novas pyast palpy pyephem pyslalib pytpm skyfield'.split())
+TOOLS = sorted('astropy casa novas pyast palpy pyephem skyfield'.split())
 TOOL_PAIRS = [_ for _ in itertools.product(TOOLS, TOOLS)
               if _[0] < _[1]]
 
@@ -35,6 +35,8 @@ def _import_name(name):
         return 'starlink.Ast'
     elif name == 'pyephem':
         return 'ephem'
+    elif name == 'casa':
+        return 'casatools'
     else:
         return name
 
@@ -136,7 +138,7 @@ def celestial_results(tool, systems, symmetric=False):
 
 # TODO: switch internally to radians and get rid of this helper function!
 def angular_separation_deg_to_arcsec(lon1, lat1, lon2, lat2):
-    from astropy.coordinates.angle_utilities import angular_separation
+    from astropy.coordinates import angular_separation
     from astropy.coordinates import Angle
     lon1 = np.radians(lon1)
     lat1 = np.radians(lat1)
@@ -160,6 +162,22 @@ def celestial_separation_table(tool1, tool2, systems):
 def horizontal_filename(tool):
     fmt = 'output/tools/{}/coords_fk5_to_horizontal.txt'
     return fmt.format(tool)
+
+
+def horizontal_results(tool):
+    filename = horizontal_filename(tool)
+    table = Table.read(filename, format=TABLE_FORMAT)
+    az = table['az']
+    table['az'] = np.where(az > 180, az - 360, az)
+    return table
+
+
+def horizontal_separation_table(tool1, tool2):
+    c1 = horizontal_results(tool1)
+    c2 = horizontal_results(tool2)
+    table = c1.copy()
+    table['separation'] = angular_separation_deg_to_arcsec(c1['az'], c1['alt'], c2['az'], c2['alt'])
+    return table
 
 
 def plot_filename(tool1, tool2, systems, inc_root_dir=True):

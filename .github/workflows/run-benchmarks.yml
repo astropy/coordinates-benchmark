@@ -14,28 +14,46 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        astropy-version: [4.1.*]
-        python-version: [3.7]
-        numpy-version: [1.17.4]
+        python-version: [3.11]
 
     steps:
-    - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4.2.2
-    - uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38  # v5.4.0
+    - uses: actions/checkout@v6
+    - uses: actions/setup-python@v6
+      id: setup_python
       with:
         python-version: ${{ matrix.python-version }}
-    - name: Install dependencies
+
+    - name: Install dependencies and tools to benchmark
+      run: python -m pip install -r requirements.txt
+
+    # workaround for https://github.com/skyfielders/python-skyfield/issues/262
+    - name: Prefetch skyfield ephemeris
+      run: wget -c "$(python -c 'from coordinates_benchmark.tools.skyfield import EPHEMERIS; print(EPHEMERIS)')"
+
+    # the following 3 CASA preparation steps adopted from https://github.com/r-xue/pipeline/blob/7b6ed11fe0d40a1e5a88cbbd8166bccb64cf8e3d/.github/workflows/env-setup-run-template.yml#L85-L105
+    - name: Setup CASA environment
       run: |
-        python -m pip install "numpy==$NUMPY_VERSION"
-        python -m pip install "astropy==$ASTROPY_VERSION"
-        # Non declared build dependencies
-        python -m pip install Cython
-        # Tools to benchmark
-        python -m pip install -r requirements.txt
-        # Prefetch as workaround for https://github.com/skyfielders/python-skyfield/issues/262
-        wget -c "$(python -c 'from coordinates_benchmark.tools.skyfield import EPHEMERIS; print(EPHEMERIS)')"
-      env:
-        NUMPY_VERSION: ${{ matrix.numpy-version }}
-        ASTROPY_VERSION: ${{ matrix.astropy-version }}
+        mkdir -p ~/.casa
+        mkdir -p casarundata
+        # Configure CASA datapath in ~/.casa/config.py
+        # We use double quotes so the shell expands $HOME and $GITHUB_WORKSPACE
+        echo "measurespath = '$GITHUB_WORKSPACE/casarundata'" >> ~/.casa/config.py
+        echo "datapath = [ '$GITHUB_WORKSPACE/casarundata', ]" >> ~/.casa/config.py
+        echo "measures_auto_update = True" >> ~/.casa/config.py
+        echo "data_auto_update = True" >> ~/.casa/config.py
+
+    - name: Cache casarundata
+      uses: actions/cache@v5
+      with:
+        path: casarundata
+        key: casarundata
+
+    - name: Get casarundata
+      run: |
+        # Trigger casatools import to fetch or update casarundata under $GITHUB_WORKSPACE/casarundata.
+        # This may download or update measurement sets and related runtime data; fail explicitly if it does not succeed.
+        python -c "import casatools" || { echo 'casatools import failed; casarundata may be incomplete.' >&2; exit 1; }
+
     - name: Run benchmarks
       run: |
         ./make.py --help
@@ -46,30 +64,31 @@ jobs:
         ./make.py benchmark-celestial
         ./make.py benchmark-horizontal
         ./make.py summary-celestial
+        ./make.py summary-horizontal
 
         # Making all plots is slow, but this is run rarely enough that it's fine to just do them all. However,
         # if you are debugging, you could instead add the --tools=astropy flag to generate just some of the
         # plots.
         ./make.py plots
-    - name: Archive code coverage results
-      uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08  # v4.6.0
+  
+    - name: Upload static files as artifact
+      id: deployment
+      uses: actions/upload-pages-artifact@v5
       with:
-        name: benchmark-results
         path: output/
 
   deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}/summary.html
     runs-on: ubuntu-latest
     needs: [benchmark]
+    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
+    permissions:
+      pages: write      # to deploy to Pages
+      id-token: write   # to verify the deployment originates from an appropriate source
     if: ${{ github.ref == 'refs/heads/main' }}
     steps:
-    - name: Download results
-      uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16  # v4.1.8
-      with:
-        name: benchmark-results
-        path: output
     - name: Deploy results
-      uses: JamesIves/github-pages-deploy-action@15de0f09300eea763baee31dff6c6184995c5f6a  # v4.7.2
-      with:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        BRANCH: gh-pages
-        FOLDER: output
+      id: deployment
+      uses: actions/deploy-pages@v5
